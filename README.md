@@ -3355,6 +3355,8 @@ await sock.clearMessage(jid, key, timestamps)
 ```ts
 const [result] = await sock.onWhatsApp(jid)
 if (result.exists) console.log (`${jid} exists on WhatsApp, as jid: ${result.jid}`)
+// You can also pass LID users (e.g. xxxxx@lid) to onWhatsApp, and it will return a lid field in the result:
+// { jid: 'xxxxx@lid', exists: true, lid: 'xxxxx@lid' }
 ```
 
 ### Query Chat History (groups too)
