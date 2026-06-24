@@ -1,9 +1,9 @@
-﻿<div align="center">
+<div align="center">
   <img src="https://raw.githubusercontent.com/innovatorssoft/Baileys/main/assets/media/logo.png" width="150" height="150" />
 
   # INNOVATORS SOFT
-  ## Baileys — WhatsApp Web API
-  **TypeScript / JavaScript WhatsApp Web API — Modified by [Innovators Soft](https://innovatorssoftpk.com/)**
+  ## Baileys - WhatsApp Web API
+  **Typescript/Javascript WhatsApp Web API Modificatios by [Innovators Soft](https://innovatorssoftpk.com/)**
 </div>
 
 <p align="center">
@@ -14,244 +14,17 @@
 <a href="https://github.com/innovatorssoft/Baileys/blob/main/LICENSE"><img src="https://img.shields.io/github/license/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="license" /></a>
 </p>
 
----
+### Important Note
 
-## ⚠️ Important Notice
+This library was originally a project for **CS-2362 at Ashoka University** and is in no way affiliated with or endorsed by WhatsApp. Use at your own discretion. Do not spam people with this. We discourage any stalkerware, bulk or automated messaging usage. 
 
-This library was originally a project for **CS-2362 at Ashoka University** and is in no way affiliated with or endorsed by WhatsApp. Use at your own discretion. Do not spam people with this. We discourage any stalkerware, bulk or automated messaging usage.
-
-**Liability & License:** Baileys and its maintainers cannot be held liable for misuse of this application, as stated in the [MIT license](https://github.com/WhiskeySockets/Baileys/blob/master/LICENSE). The maintainers of Baileys do not in any way condone the use of this application in practices that violate the Terms of Service of WhatsApp. Use this application fairly — as it is intended to be used.
-
-> ## **[IMPORTANT]**
+#### Liability and License Notice
+Baileys and its maintainers cannot be held liable for misuse of this application, as stated in the [MIT license](https://github.com/WhiskeySockets/Baileys/blob/master/LICENSE).
+The maintainers of Baileys do not in any way condone the use of this application in practices that violate the Terms of Service of WhatsApp. The maintainers of this application call upon the personal responsibility of its users to use this application in a fair way, as it is intended to be used.
+##
+> [!IMPORTANT]
 > This is the only official repository and is maintained by the community.
-> # **[Join the Discord](https://discord.gg/G3RfM6FDHS) and be a part of community**
-
----
-
-## 🚀 Quick Start
-
-### Install
-
-```bash
-npm install @innovatorssoft/baileys
-# or
-yarn add @innovatorssoft/baileys
-```
-
-### Minimal Working Example
-
-Connect, listen for messages, and auto-reply — in under 15 lines:
-
-```ts
-import makeWASocket, { useMultiFileAuthState, DisconnectReason } from '@innovatorssoft/baileys'
-import { Boom } from '@hapi/boom'
-
-async function connect() {
-  const { state, saveCreds } = await useMultiFileAuthState('auth')
-  const sock = makeWASocket({ auth: state, printQRInTerminal: true })
-  sock.ev.on('connection.update', ({ connection, lastDisconnect }) => {
-    if (connection === 'close') {
-      const shouldReconnect = (lastDisconnect.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut
-      if (shouldReconnect) connect()
-    } else if (connection === 'open') console.log('✅ Connected!')
-  })
-  sock.ev.on('messages.upsert', ({ messages }) => {
-    for (const m of messages) !m.key.fromMe && sock.sendMessage(m.key.remoteJid!, { text: 'Hello!' })
-  })
-  sock.ev.on('creds.update', saveCreds)
-}
-connect()
-```
-
-> 💡 Scan the QR code printed in your terminal with WhatsApp on your phone to log in.
-
----
-
-## 📋 Real Examples (Copy–Paste Ready)
-
-### 1️⃣ Basic sendMessage
-
-```ts
-await sock.sendMessage(jid, { text: 'Hello World!' })
-```
-
----
-
-### 2️⃣ Auto-Reply with Typing Simulation
-
-Keyword/pattern-based automatic replies with a human-like typing indicator:
-
-```ts
-import { createAutoReply } from '@innovatorssoft/baileys'
-
-const autoReply = createAutoReply(
-  (jid, content, opts) => sock.sendMessage(jid, content, opts),
-  (jid, presence) => sock.sendPresenceUpdate(presence, jid),
-  { simulateTyping: true, typingDuration: 1500 }
-)
-
-autoReply.addRule({
-  keywords: ['hi', 'hello', 'hey'],
-  response: { text: 'Hello! How can I help? 👋' },
-  quoted: true
-})
-
-autoReply.addRule({
-  pattern: /^!weather (.+)$/i,
-  response: async (msg, match) => ({ text: `Weather for *${match[1]}*: ☀️ 28°C` })
-})
-
-sock.ev.on('messages.upsert', async ({ messages }) => {
-  for (const msg of messages) {
-    if (!msg.key.fromMe) await autoReply.processMessage(msg)
-  }
-})
-```
-
----
-
-### 3️⃣ Message Scheduler
-
-Schedule messages to be sent at a specific time or after a delay:
-
-```ts
-import { createMessageScheduler } from '@innovatorssoft/baileys'
-
-const scheduler = createMessageScheduler(
-  (jid, content) => sock.sendMessage(jid, content),
-  { onSent: (s) => console.log('✅ Sent', s.id), onFailed: (s, e) => console.error('❌', e.message) }
-)
-
-// Send at a specific time
-scheduler.schedule('6281234567890@s.whatsapp.net', { text: 'Happy Birthday! 🎂' }, new Date('2026-12-25T09:00:00'))
-
-// Send after a delay
-scheduler.scheduleDelay(jid, { text: 'Reminder ⏰' }, 30 * 60 * 1000)
-```
-
----
-
-### 4️⃣ Rich AI–Style Response
-
-Send Meta AI–style rich responses with code blocks, tables, LaTeX, and more:
-
-```ts
-// Text + syntax-highlighted code block
-await sock.sendMessage(jid, {
-  richResponse: {
-    text: 'Here is a JavaScript example:',
-    code: `const greet = (name) => console.log('Hello, ' + name)`,
-    language: 'javascript'
-  }
-})
-
-// Formatted table
-await sock.sendTable(jid, 'Price List', ['Item', 'Qty', 'Price'], [
-  ['Apple', '3', '$1.50'],
-  ['Banana', '6', '$0.90']
-])
-
-// Syntax-highlighted code block
-await sock.sendCodeBlock(jid, 'console.log("Hello World")', null, { title: 'Example', language: 'javascript' })
-
-// LaTeX expression as image
-await sock.sendLatexImage(jid, null, 'E=mc^2')
-
-// Markdown formatted natively
-await sock.sendMarkdown(jid, '# H1\n## H2\n==Highlighted==\n_Italics_ and **Bold**!')
-```
-
----
-
-## ✨ Core Features
-
-### Automation
-| Feature | Description |
-|---------|-------------|
-| 🤖 **Auto-Reply System** | Keyword/regex pattern matching with typing simulation, cooldowns, JID allowlists |
-| ⏰ **Message Scheduler** | Schedule messages at specific times or delays — no external dependencies |
-| 🛡️ **Anti-Delete System** | Store & recover messages deleted by the sender |
-
-### Messaging
-| Feature | Description |
-|---------|-------------|
-| 💬 **All Message Types** | Text, image, video, audio, gif, document, location, contacts, polls, stickers |
-| 🎨 **Rich AI Responses** | sendTable, sendList, sendCodeBlock, sendLatexImage, sendMarkdown, sendRichMessage |
-| 🔘 **Interactive Messages** | Buttons, lists, URL CTAs, Copy CTAs, carousels, native flows |
-| 🧩 **Message Templates** | Variable interpolation with built-in invoice/greeting/support templates |
-| 📦 **Shop & Collection** | Send product catalogs, collection messages, payment requests |
-
-### Interactive UI
-| Feature | Description |
-|---------|-------------|
-| 🔄 **Carousel & Native Flow** | Multi-card carousels with interactive buttons and offer codes |
-| 📋 **Buttons + Sections** | Mixed buttons & section lists with images/video |
-| 💳 **PIX / PAY Buttons** | Brazil PIX static code & global payment interactive buttons |
-| 🏪 **Product Lists & Cards** | Catalog products, card-based layouts |
-
-### Utilities
-| Feature | Description |
-|---------|-------------|
-| 🔍 **Message Search** | Fast client-side indexing with relevance scoring |
-| 📖 **Read Receipt Controller** | Programmatic blue-tick management with delays & JID exclusions |
-| ⌨️ **Typing Indicator** | Standalone typing simulation without auto-reply |
-| 🆔 **JID Plotting & LID** | Convert between phone numbers, LIDs, and JIDs |
-| 👤 **vCard Generator** | Quick contact cards with multi-field support |
-| 📸 **Panoramic Profile Pic** | Full-width banner profile pictures without square cropping |
-| 📡 **StatusHelper** | Rich text/image/video/audio status posting |
-
-### 👥 Groups & Social
-| Feature | Description |
-|---------|-------------|
-| 👥 **Full Group Management** | Create, invite, promote, demote, settings, labels |
-| 🔒 **Privacy Controls** | Last seen, online, profile pic, read receipts, group add |
-| 📢 **Broadcast & Stories** | Multi-recipient status posting with backgrounds & fonts |
-
----
-
-### Feature Comparison: Original Baileys vs This Fork
-
-| Feature | Original Baileys | This Fork |
-|---------|:----------------:|:---------:|
-| WhatsApp Multi-Device API | ✅ | ✅ |
-| QR Code / Pairing Code Auth | ✅ | ✅ |
-| Session Management | ✅ | ✅ |
-| Event Handling | ✅ | ✅ |
-| Sending Messages (text, media) | ✅ | ✅ |
-| Group Management | ✅ | ✅ |
-| Privacy & Profile | ✅ | ✅ |
-| **Auto-Reply System** | ❌ | ✅ |
-| **Message Scheduler** | ❌ | ✅ |
-| **Anti-Delete System** | ❌ | ✅ |
-| **Rich AI Responses** (tables, code, LaTeX) | ❌ | ✅ |
-| **Interactive Message Generators** | ❌ | ✅ |
-| **Carousel & Native Flow** | ❌ | ✅ |
-| **Message Templates** (variable interpolation) | ❌ | ✅ |
-| **vCard Contact Builder** | ❌ | ✅ |
-| **Message Search** (client-side indexing) | ❌ | ✅ |
-| **Read Receipt Controller** | ❌ | ✅ |
-| **Typing Indicator Utility** | ❌ | ✅ |
-| **JID Plotting & LID Support** | ❌ | ✅ |
-| **Panoramic Profile Picture** | ❌ | ✅ |
-| **StatusHelper** (rich text statuses) | ❌ | ✅ |
-| **PIX / PAY Interactive Buttons** | ❌ | ✅ |
-| **Shop & Collection Messages** | ❌ | ✅ |
-| **Group Status & interactiveAsTemplate** | ❌ | ✅ |
-
----
-
-## 🔗 Links & Community
-
-- [📖 Baileys Guide](https://innovatorssoftpk.com/)
-- [💬 Discord Community](https://discord.gg/G3RfM6FDHS)
-- [🐙 GitHub Repository](https://github.com/innovatorssoft/Baileys)
-- [📦 npm Package](https://www.npmjs.com/package/@innovatorssoft/baileys)
-- [📚 Original Guide](https://guide.whiskeysockets.io/)
-- [📘 Deep Wiki](https://deepwiki.com/innovatorssoft/Baileys)
----
-
-<details>
-<summary>📚 Full Documentation</summary>
+> # **[Join the Discord](https://discord.gg/G3RfM6FDHS)**
  
 ## Install
 
@@ -270,39 +43,188 @@ Then import your code using:
 import makeWASocket from '@innovatorssoft/baileys'
 ```
 
+# Links
+- [Innovators](https://discord.gg/G3RfM6FDHS)    
+- [Itsukichan](https://discord.gg/nqssuNjjSH)
+- [Original Guide](https://guide.whiskeysockets.io/)
+- [Baileys Guide](https://innovatorssoftpk.com/)
+- [Deep Wiki](https://deepwiki.com/innovatorssoft/Baileys)
+
 # Index
 
-| Section | Topics |
-| :--- | :--- |
-| 🔌 **[Connecting Account](#connecting-account)** | [QR Code](#starting-socket-with-qr-code) · [Pairing Code](#starting-socket-with-pairing-code) · [Full History](#receive-full-history) |
-| ⚙️ **[Important Notes](#important-notes-about-socket-config)** | [Caching Group Metadata](#caching-group-metadata-recommended) · [Retry System & Poll Votes](#improve-retry-system--decrypt-poll-votes) · [Notifications](#receive-notifications-in-whatsapp-app) |
-| 💾 **[Saving & Restoring Sessions](#saving--restoring-sessions)** | — |
-| ⚡ **[Handling Events](#handling-events)** | [Auto-Reply System](#auto-reply-system) · [Example to Start](#example-to-start) · [Decrypt Poll Votes](#decrypt-poll-votes) · [Summary of Events](#summary-of-events-on-first-connection) |
-| 🗄️ **[Implementing a Data Store](#implementing-a-data-store)** | — |
-| 🆔 **[WhatsApp IDs Explain](#whatsapp-ids-explain)** | — |
-| 🛠️ **[Utility Functions](#utility-functions)** | [Message Scheduler](#message-scheduler) |
-| 🛡️ **[Anti-Delete System](#anti-delete-system)** | — |
-| 🗺️ **[JID Plotting & LID Support](#jid-plotting--lid-support)** | — |
-| 💬 **[Sending Messages](#sending-messages)** | **Basic Types:**<br>[Text](#text-message) · [Templates](#message-templates) · [Quote](#quote-message-works-with-all-types) · [Mention](#mention-user-works-with-most-types) · [Forward](#forward-messages) · [Location](#location-message) · [Live Location](#live-location-message) · [Contact](#contact-message) · [vCard](#vcard--contact-cards) · [Reaction](#reaction-message) · [Pin](#pin-message) · [Keep](#keep-message) · [Poll](#poll-message) · [Poll Result](#poll-result-message) · [Call](#call-message) · [Event](#event-message) · [Order](#order-message) · [Product](#product-message) · [Payment](#payment-message) · [Decrypt Event](#decrypt-event-response) · [Payment Invite](#payment-invite-message) · [Admin Invite](#invite-admin-message) · [Group Invite](#group-invite-message) · [Sticker Pack](#sticker-pack-message)<br><br>**Rich AI Responses:**<br>[Rich Response](#rich-response-message) · [sendTable](#sendtable) · [sendList](#sendlist) · [sendCodeBlock](#sendcodeblock) · [sendLatexImage](#sendlateximage) · [sendLatexInlineImage](#sendlatexinlineimage) · [sendMarkdown](#sendmarkdown) · [sendRichMessage](#sendrichmessage) · [captureUnifiedResponse](#captureunifiedresponse--sendunifiedresponse)<br><br>**Interactive & Buttons:**<br>[Share Phone](#share-phone-number-message) · [Request Phone](#request-phone-number-message) · [Button Reply](#buttons-reply-message) · [Buttons](#buttons-message) · [Interactive](#interactive-messages) · [Buttons List](#buttons-list-message) · [Product List](#buttons-product-list-message) · [Cards](#buttons-cards-message) · [Template](#buttons-template-message) · [Interactive Msg](#buttons-interactive-message) · [PIX](#buttons-interactive-message-pix) · [PAY](#buttons-interactive-message-PAY)<br><br>**Other:**<br>[Status Mentions](#status-mentions-message) · [Shop](#shop-message) · [Collection](#collection-message) · [AI Icon](#ai-icon-feature) · [Link Preview](#sending-messages-with-link-previews) |
-| 🖼️ **[Media Messages](#media-messages)** | [GIF](#gif-message) · [Video](#video-message) · [Audio](#audio-message) · [Image](#image-message) · [HD Image](#hd-image-message) · [HD Video](#hd-video-message) · [Album](#album-message) · [PTV](#ptv-video-message) · [ViewOnce](#view-once-message) |
-| ✏️ **[Modify Messages](#modify-messages)** | [Delete](#deleting-messages-for-everyone) · [Edit](#editing-messages) |
-| 📥 **[Manipulating Media](#manipulating-media-messages)** | [Thumbnail](#thumbnail-in-media-messages) · [Download](#downloading-media-messages) · [Re-upload](#re-upload-media-message-to-whatsapp) |
-| 📞 **[Initiate Voice Call](#initiate-voice-call)** | — |
-| 🚫 **[Reject Call](#reject-call)** | — |
-| ⌨️ **[Send States in Chat](#send-states-in-chat)** | [Reading Messages](#reading-messages) · [Update Presence](#update-presence) · [Typing Indicator](#typing-indicator) · [Read Receipt Control](#read-receipt-control) |
-| 📁 **[Modifying Chats](#modifying-chats)** | [Archive](#archive-a-chat) · [Mute/Unmute](#muteunmute-a-chat) · [Read/Unread](#mark-a-chat-readunread) · [Delete for Me](#delete-a-message-for-me) · [Delete Chat](#delete-a-chat) · [Pin/Unpin](#pin-a-chat) · [Star/Unstar](#starunstar-a-message) · [Disappearing](#disappearing-messages) · [Clear](#clear-messages) |
-| 🔍 **[User Queries](#user-querys)** | [Check ID](#check-if-id-exists-in-whatsapp) · [Chat History](#query-chat-history-groups-too) · [Fetch Status](#fetch-status) · [Profile Picture](#fetch-profile-picture-groups-too) · [Business Profile](#fetch-bussines-profile-such-as-description-or-category) · [Presence](#fetch-someones-presence-if-theyre-typing-or-online) · [Message Search](#message-search) |
-| 👤 **[Change Profile](#change-profile)** | [Status](#change-profile-status) · [Name](#change-profile-name) · [Display Picture](#change-display-picture-groups-too) · [Panoramic](#panoramic-wide-profile-picture) · [Remove Picture](#remove-display-picture-groups-too) |
-| 👥 **[Groups](#groups)** | [Create](#create-a-group) · [Add/Remove](#addremove-or-demotepromote) · [Subject](#change-subject-name) · [Description](#change-description) · [Settings](#change-settings) · [Leave](#leave-a-group) · [Invite Code](#get-invite-code) · [Revoke](#revoke-invite-code) · [Join Code](#join-using-invitation-code) · [Info by Code](#get-group-info-by-invite-code) · [Metadata](#query-metadata-participants-name-description) · [Join V4](#join-using-groupinvitemessage) · [Request Join](#get-request-join-list) · [Approve/Reject](#approvereject-request-join) · [All Groups](#get-all-participating-groups-metadata) · [Ephemeral](#toggle-ephemeral) · [Add Mode](#change-add-mode) · [Member Label](#update-member-label) |
-| 🔒 **[Privacy](#privacy)** | [Block/Unblock](#blockunblock-user) · [Settings](#get-privacy-settings) · [BlockList](#get-blocklist) · [LastSeen](#update-lastseen-privacy) · [Online](#update-online-privacy) · [Profile Pic](#update-profile-picture-privacy) · [Status](#update-status-privacy) · [Read Receipts](#update-read-receipts-privacy) · [Groups Add](#update-groups-add-privacy) · [Disappearing Mode](#update-default-disappearing-mode) |
-| 📢 **[Broadcast & Stories](#broadcast-lists--stories)** | [Send](#send-broadcast--stories) · [Query List](#query-a-broadcast-lists-recipients--name) · [Story Posting](#status--story-posting) |
-| 💻 **[Custom Functionality](#writing-custom-functionality)** | [Debug Logs](#enabling-debug-level-in-baileys-logs) · [How WA Communicates](#how-whatsapp-communicate-with-us) · [Websocket Callbacks](#register-a-callback-for-websocket-events) |
+- [Connecting Account](#connecting-account)
+    - [Connect with QR-CODE](#starting-socket-with-qr-code)
+    - [Connect with Pairing Code](#starting-socket-with-pairing-code)
+    - [Receive Full History](#receive-full-history)
+- [Important Notes About Socket Config](#important-notes-about-socket-config)
+    - [Caching Group Metadata (Recommended)](#caching-group-metadata-recommended)
+    - [Improve Retry System & Decrypt Poll Votes](#improve-retry-system--decrypt-poll-votes)
+    - [Receive Notifications in Whatsapp App](#receive-notifications-in-whatsapp-app)
 
-## 🔌 Connecting Account
+- [Save Auth Info](#saving--restoring-sessions)
+- [Handling Events](#handling-events)
+    - [Auto-Reply System](#auto-reply-system)
+    - [Example to Start](#example-to-start)
+    - [Decrypt Poll Votes](#decrypt-poll-votes)
+    - [Summary of Events on First Connection](#summary-of-events-on-first-connection)
+- [Implementing a Data Store](#implementing-a-data-store)
+- [Whatsapp IDs Explain](#whatsapp-ids-explain)
+- [Utility Functions](#utility-functions)
+    - [Message Scheduler](#message-scheduler)
+- [Anti-Delete System](#anti-delete-system)
+- [JID Plotting & LID Support](#jid-plotting--lid-support)
+- [Sending Messages](#sending-messages)
+    - [Non-Media Messages](#non-media-messages)
+        - [Text Message](#text-message)
+        - [Message Templates](#message-templates)
+        - [Quote Message](#quote-message-works-with-all-types)
+        - [Mention User](#mention-user-works-with-most-types)
+        - [Forward Messages](#forward-messages)
+        - [Location Message](#location-message)
+        - [Live Location Message](#live-location-message) 
+        - [Contact Message](#contact-message)
+        - [vCard / Contact Cards](#vcard--contact-cards)
+        - [Reaction Message](#reaction-message)
+        - [Pin Message](#pin-message)
+        - [Keep Message](#keep-message) 
+        - [Poll Message](#poll-message)
+        - [Poll Result Message](#poll-result-message) 
+        - [Call Message](#call-message) 
+        - [Event Message](#event-message) 
+        - [Order Message](#order-message) 
+        - [Product Message](#product-message)
+        - [Payment Message](#payment-message)
+        - [Decrypt Event Response](#decrypt-event-response) 
+        - [Payment Invite Message](#payment-invite-message) 
+        - [Admin Invite Message](#invite-admin-message) 
+        - [Group Invite Message](#group-invite-message)
+        - [Sticker Pack Message](#sticker-pack-message) 
+        - [Rich Response Message](#rich-response-message)
+        - [sendTable](#sendtable)
+        - [sendList](#sendlist)
+        - [sendCodeBlock](#sendcodeblock)
+        - [sendLatexImage](#sendlateximage)
+        - [sendLatexInlineImage](#sendlatexinlineimage)
+        - [sendMarkdown](#sendmarkdown)
+        - [sendRichMessage](#sendrichmessage)
+        - [captureUnifiedResponse / sendUnifiedResponse](#captureunifiedresponse--sendunifiedresponse)
+    - [Share Phone Number Message](#share-phone-number-message) 
+    - [Request Phone Number Message](#request-phone-number-message) 
+    - [Buttons Reply Message](#buttons-reply-message) 
+    - [Buttons Message](#buttons-message)
+    - [Interactive Messages](#interactive-messages) 
+    - [Buttons List Message](#buttons-list-message) 
+    - [Buttons Product List Message](#buttons-product-list-message) 
+    - [Buttons Cards Message](#buttons-cards-message) 
+    - [Buttons Template Message](#buttons-template-message) 
+    - [Buttons Interactive Message](#buttons-interactive-message) 
+    - [Buttons Interactive Message PIX](#buttons-interactive-message-pix) 
+    - [Buttons Interactive Message PAY](#buttons-interactive-message-PAY) 
+    - [Status Mentions Message](#status-mentions-message) 
+    - [Shop Message](#shop-message) 
+    - [Collection Message](#collection-message) 
+    - [AI Icon Feature](#ai-icon-feature) 
+    - [Sending with Link Preview](#sending-messages-with-link-previews)
+    - [Media Messages](#media-messages)
+        - [Gif Message](#gif-message)
+        - [Video Message](#video-message)
+        - [Audio Message](#audio-message)
+        - [Image Message](#image-message)
+        - [HD Image Message](#hd-image-message)
+        - [HD Video Message](#hd-video-message)
+        - [Album Message](#album-message) 
+        - [Ptv Video Message](#ptv-video-message) 
+        - [ViewOnce Message](#view-once-message)
+- [Modify Messages](#modify-messages)
+    - [Delete Messages (for everyone)](#deleting-messages-for-everyone)
+    - [Edit Messages](#editing-messages)
+- [Manipulating Media Messages](#manipulating-media-messages)
+    - [Thumbnail in Media Messages](#thumbnail-in-media-messages)
+    - [Downloading Media Messages](#downloading-media-messages)
+    - [Re-upload Media Message to Whatsapp](#re-upload-media-message-to-whatsapp)
+- [Initiate Voice Call](#initiate-voice-call)
+- [Reject Call](#reject-call)
+- [Send States in Chat](#send-states-in-chat)
+    - [Reading Messages](#reading-messages)
+    - [Update Presence](#update-presence)
+    - [Typing Indicator](#typing-indicator)
+    - [Read Receipt Control](#read-receipt-control)
+- [Modifying Chats](#modifying-chats)
+    - [Archive a Chat](#archive-a-chat)
+    - [Mute/Unmute a Chat](#muteunmute-a-chat)
+    - [Mark a Chat Read/Unread](#mark-a-chat-readunread)
+    - [Delete a Message for Me](#delete-a-message-for-me)
+    - [Delete a Chat](#delete-a-chat)
+    - [Star/Unstar a Message](#starunstar-a-message)
+    - [Disappearing Messages](#disappearing-messages)
+    - [Clear Messages](#clear-messages) 
+- [User Querys](#user-querys)
+    - [Check If ID Exists in Whatsapp](#check-if-id-exists-in-whatsapp)
+    - [Query Chat History (groups too)](#query-chat-history-groups-too)
+    - [Fetch Status](#fetch-status)
+    - [Fetch Profile Picture (groups too)](#fetch-profile-picture-groups-too)
+    - [Fetch Bussines Profile (such as description or category)](#fetch-bussines-profile-such-as-description-or-category)
+    - [Fetch Someone's Presence (if they're typing or online)](#fetch-someones-presence-if-theyre-typing-or-online)
+    - [Message Search](#message-search)
+- [Change Profile](#change-profile)
+    - [Change Profile Status](#change-profile-status)
+    - [Change Profile Name](#change-profile-name)
+    - [Change Display Picture (groups too)](#change-display-picture-groups-too)
+    - [Panoramic (Wide) Profile Picture](#panoramic-wide-profile-picture)
+    - [Remove display picture (groups too)](#remove-display-picture-groups-too)
+- [Groups](#groups)
+    - [Create a Group](#create-a-group)
+    - [Add/Remove or Demote/Promote](#addremove-or-demotepromote)
+    - [Change Subject (name)](#change-subject-name)
+    - [Change Description](#change-description)
+    - [Change Settings](#change-settings)
+    - [Leave a Group](#leave-a-group)
+    - [Get Invite Code](#get-invite-code)
+    - [Revoke Invite Code](#revoke-invite-code)
+    - [Join Using Invitation Code](#join-using-invitation-code)
+    - [Get Group Info by Invite Code](#get-group-info-by-invite-code)
+    - [Query Metadata (participants, name, description...)](#query-metadata-participants-name-description)
+    - [Join using groupInviteMessage](#join-using-groupinvitemessage)
+    - [Get Request Join List](#get-request-join-list)
+    - [Approve/Reject Request Join](#approvereject-request-join)
+    - [Get All Participating Groups Metadata](#get-all-participating-groups-metadata)
+    - [Toggle Ephemeral](#toggle-ephemeral)
+    - [Change Add Mode](#change-add-mode)
+    - [Update Member Label](#update-member-label)
+- [Privacy](#privacy)
+    - [Block/Unblock User](#blockunblock-user)
+    - [Get Privacy Settings](#get-privacy-settings)
+    - [Get BlockList](#get-blocklist)
+    - [Update LastSeen Privacy](#update-lastseen-privacy)
+    - [Update Online Privacy](#update-online-privacy)
+    - [Update Profile Picture Privacy](#update-profile-picture-privacy)
+    - [Update Status Privacy](#update-status-privacy)
+    - [Update Read Receipts Privacy](#update-read-receipts-privacy)
+    - [Update Groups Add Privacy](#update-groups-add-privacy)
+    - [Update Default Disappearing Mode](#update-default-disappearing-mode)
+- [Broadcast Lists & Stories](#broadcast-lists--stories)
+    - [Send Broadcast & Stories](#send-broadcast--stories)
+    - [Query a Broadcast List's Recipients & Name](#query-a-broadcast-lists-recipients--name)
+    - [Status / Story Posting](#status--story-posting)
+- [Writing Custom Functionality](#writing-custom-functionality)
+    - [Enabling Debug Level in Baileys Logs](#enabling-debug-level-in-baileys-logs)
+    - [How Whatsapp Communicate With Us](#how-whatsapp-communicate-with-us)
+    - [Register a Callback for Websocket Events](#register-a-callback-for-websocket-events)
+
+## Connecting Account
 
 WhatsApp provides a multi-device API that allows Baileys to be authenticated as a second WhatsApp client by scanning a **QR code** or **Pairing Code** with WhatsApp on your phone.
 
+> [!NOTE]
+> **[Here](#example-to-start) is a simple example of event handling**
+
+> [!TIP]
+> **You can see all supported socket configs [here](https://innovatorssoftpk.com/docs/important-notes-about-socket-config) (Recommended)**
+
 ### Starting socket with **QR-CODE**
+
+> [!TIP]
+> You can customize browser name if you connect with **QR-CODE**, with `Browser` constant, we have some browsers config, **see [here](https://innovatorssoftpk.com/docs/important-notes-about-socket-config)**
 
 ```ts
 import makeWASocket from '@innovatorssoft/baileys'
@@ -354,7 +276,7 @@ const sock = makeWASocket({
 })
 ```
 
-## ⚙️ Important Notes About Socket Config
+## Important Notes About Socket Config
 
 ### Caching Group Metadata (Recommended)
 - If you use baileys for groups, we recommend you to set `cachedGroupMetadata` in socket config, you need to implement a cache like this:
@@ -392,7 +314,7 @@ const sock = makeWASocket({
         markOnlineOnConnect: false
     })
     ```
-## 💾 Saving & Restoring Sessions
+## Saving & Restoring Sessions
 
 You obviously don't want to keep scanning the QR code every time you want to connect. 
 
@@ -416,10 +338,13 @@ sock.ev.on('creds.update', saveCreds)
 > [!NOTE]
 > When a message is received/sent, due to signal sessions needing updating, the auth keys (`authState.keys`) will update. Whenever that happens, you must save the updated keys (`authState.keys.set()` is called). Not doing so will prevent your messages from reaching the recipient & cause other unexpected consequences. The `useMultiFileAuthState` function automatically takes care of that, but for any other serious implementation -- you will need to be very careful with the key state management.
 
-## ⚡ Handling Events
+## Handling Events
 
 - Baileys uses the EventEmitter syntax for events. 
 They're all nicely typed up, so you shouldn't have any issues with an Intellisense editor like VS Code.
+
+> [!IMPORTANT]
+> **The events are [these](https://innovatorssoftpk.com/docs/handling-events)**, it's important you see all events
 
 You can listen to these events like this:
 ```ts
@@ -673,7 +598,7 @@ autoReply.clearRules()
 ---
 
 
-## 🗄️ Implementing a Data Store
+## Implementing a Data Store
 
 - Baileys does not come with a defacto storage for chats, contacts, or messages. However, a simple in-memory implementation has been provided. The store listens for chat updates, new messages, message updates, etc., to always have an up-to-date version of the data.
 
@@ -713,7 +638,7 @@ sock.ev.on('contacts.upsert', () => {
 
 The store also provides some simple functions such as `loadMessages` that utilize the store to speed up data retrieval.
 
-## 🆔 Whatsapp IDs Explain
+## Whatsapp IDs Explain
 
 - `id` is the WhatsApp ID, called `jid` too, of the person or group you're sending the message to. 
     - It must be in the format ```[country code][phone number]@s.whatsapp.net```
@@ -722,7 +647,7 @@ The store also provides some simple functions such as `loadMessages` that utiliz
     - For broadcast lists, it's `[timestamp of creation]@broadcast`.
     - For stories, the ID is `status@broadcast`.
 
-## 🛠️ Utility Functions
+## Utility Functions
 
 - `getContentType`, returns the content type for any message
 - `getDevice`, returns the device from message
@@ -864,7 +789,7 @@ Every `schedule()` / `scheduleDelay()` call returns a `ScheduledMessage`:
 ---
 
 
-## 🛡️ Anti-Delete System
+## Anti-Delete System
 The Anti-Delete system allows you to store messages and recover them if they are revoked (deleted for everyone) by the sender.
 
 ```ts
@@ -894,7 +819,7 @@ sock.ev.on('messages.update', (updates) => {
 ```
 
 
-## 💬 Sending Messages
+## Sending Messages
 
 - Send all types of messages with a single function
     - **[Here](https://innovatorssoftpk.com/docs/sending-messages) you can see all message contents supported, like text message**
@@ -2178,34 +2103,6 @@ await sock.sendMessage(
 )
  ```
 
-### Interactive as Template (`interactiveAsTemplate`)
-
-Wrap an `interactiveMessage` inside a `templateMessage` envelope. This is needed for platforms or clients that only render template-wrapped interactive content.
-
-| Parameter               | Type      | Required | Description                                                |
-|------------------------|-----------|----------|------------------------------------------------------------|
-| `interactiveAsTemplate`| `boolean` | No       | Set to `true` to rewrap the interactive message.           |
-| `id`                   | `string`  | No       | Custom `templateId`. Defaults to `'template-' + Date.now()`. |
-
-**Returns:** The standard `WAMessage` object, with `interactiveMessage` nested under `templateMessage.interactiveMessageTemplate`.
-
-**Throws:** `Boom` (400) if the built message does not contain an `interactiveMessage`.
-
-**Example:**
-```ts
-await sock.sendMessage(jid, {
-    interactiveMessage: {
-        nativeFlowMessage: {
-            buttons: [{ name: 'quick_reply', buttonParamsJson: '{"display_text":"Click"}' }]
-        },
-        body: { text: 'Hello!' }
-    },
-    interactiveAsTemplate: true,
-    id: 'my-template-001'   // optional custom templateId
-})
-```
-
-
 ### Status Mentions Message
 ```ts
 const jidat = [
@@ -2258,7 +2155,7 @@ await sock.sendStatusMentions(
 
 ---
 
-## 🎨 Rich AI Response Messages
+## Rich AI Response Messages
 
 These methods generate Meta AI–style rich response messages using the `botForwardedMessage → richResponseMessage` proto chain. All methods are available directly on the `sock` object.
 
@@ -2815,6 +2712,16 @@ await sock.sendMessage(jid, {
 })
 ```
 
+#### 🧑‍🧑‍🧒 Group Status
+Set group status on messages (only works in group chats).
+```javascript
+await sock.sendMessage(jid, {
+   image: { url: './path/to/image.jpg' },
+   caption: '👥 Group Status!',
+   groupStatus: true
+})
+```
+
 #### 🐱 Lottie Sticker
 Mark a sticker as a Lottie sticker.
 ```javascript
@@ -3102,7 +3009,7 @@ await sock.sendMessage(
 )
 ```
 
-## ✏️ Modify Messages
+## Modify Messages
 
 ### Deleting Messages (for everyone)
 
@@ -3123,7 +3030,7 @@ await sock.sendMessage(jid, {
     })
 ```
 
-## 📥 Manipulating Media Messages
+## Manipulating Media Messages
 
 ### Thumbnail in Media Messages
 - For media messages, the thumbnail can be generated automatically for images & stickers provided you add `jimp` or `sharp` as a dependency in your project using `yarn add jimp` or `yarn add sharp`.
@@ -3168,7 +3075,7 @@ sock.ev.on('messages.upsert', async ({ [m] }) => {
 await sock.updateMediaMessage(msg)
 ```
 
-## 📞 Initiate Voice Call
+## Initiate Voice Call
 > [!WARNING]
 > **This Function has been depreceated**
 
@@ -3188,7 +3095,7 @@ const { callId } = await sock.initiateCall(jid, { isVideo: true })
 await sock.cancelCall(callId, jid)
 ```
 
-## 🚫 Reject Call
+## Reject Call
 
 - You can obtain `callId` and `callFrom` from `call` event
 
@@ -3196,7 +3103,7 @@ await sock.cancelCall(callId, jid)
 await sock.rejectCall(callId, callFrom)
 ```
 
-## ⌨️ Send States in Chat
+## Send States in Chat
 
 ### Reading Messages
 - A set of message keys must be explicitly marked read now.
@@ -3313,7 +3220,7 @@ readReceipts.setConfig({
 ---
 
 
-## 📁 Modifying Chats
+## Modifying Chats
 
 WA uses an encrypted form of communication to send chat/app updates. This has been implemented mostly and you can send the following updates:
 
@@ -3442,7 +3349,7 @@ await sock.sendMessage(
 await sock.clearMessage(jid, key, timestamps) 
 ```
 
-## 🔍 User Querys
+## User Querys
 
 ### Check If ID Exists in Whatsapp
 ```ts
@@ -3537,7 +3444,7 @@ const quickResults = searchMessages(
 ---
 
 
-## 👤 Change Profile
+## Change Profile
 
 ### Change Profile Status
 ```ts
@@ -3716,36 +3623,7 @@ await sock.updateMemberLabel(
 )
 ```
 
-## 👥 Group Status (`groupStatus`)
-Post a message as a **group status update**. When `groupStatus: true` is set, the library:
-
-1. Sets `contextInfo.isGroupStatus = true` on the inner message.
-2. Wraps the entire message inside a `groupStatusMessageV2` envelope.
-
-| Parameter      | Type      | Required | Description                        |
-|---------------|-----------|----------|------------------------------------|
-| `groupStatus` | `boolean` | No       | Set to `true` to post as a group status. |
-
-**Returns:** The standard `WAMessage` object, with the content wrapped in `groupStatusMessageV2`.
-
-**Text Status**
-```ts
-await sock.sendMessage(groupJid, {
-    text: 'Hello World!',
-    groupStatus: true
-})
-```
-
-**Image Status**
-```ts
-await sock.sendMessage(groupJid, {
-    image: { url: './photo.jpg' },
-    caption: '👥 Group Status Update!',
-    groupStatus: true
-})
-```
-
-## 🔒 Privacy
+## Privacy
 
 ### Block/Unblock User
 ```ts
@@ -3808,7 +3686,7 @@ const ephemeral = 86400
 await sock.updateDefaultDisappearingMode(ephemeral)
 ```
 
-## 📢 Broadcast Lists & Stories
+## Broadcast Lists & Stories
 
 ### Send Broadcast & Stories
 - Messages can be sent to broadcasts & stories. You need to add the following message options in sendMessage, like this:
@@ -3907,9 +3785,11 @@ await StatusHelper.send(sock, StatusHelper.gif(gifBuffer, 'Animated! 🎭'), jid
 await StatusHelper.send(sock, StatusHelper.voiceNote(audioBuffer), jidList)
 ```
 
-## 💻 Writing Custom Functionality
-Baileys is written with custom functionality in mind.
-Instead of forking the project & re-writing the internals, you can simply write your own extensions.
+---
+
+
+## Writing Custom Functionality
+Baileys is written with custom functionality in mind. Instead of forking the project & re-writing the internals, you can simply write your own extensions.
 
 ### Enabling Debug Level in Baileys Logs
 First, enable the logging of unhandled messages from WhatsApp by setting:
@@ -3918,6 +3798,131 @@ const sock = makeWASocket({
     logger: P({ level: 'debug' }),
 })
 ```
+This will enable you to see all sorts of messages WhatsApp sends in the console. 
+
+### How Whatsapp Communicate With Us
+
+> [!TIP]
+> If you want to learn whatsapp protocol, we recommend to study about Libsignal Protocol and Noise Protocol
+
+- **Example:** Functionality to track the battery percentage of your phone. You enable logging and you'll see a message about your battery pop up in the console: 
+    ```
+    {
+        "level": 10,
+        "fromMe": false,
+        "frame": {
+            "tag": "ib",
+            "attrs": {
+                "from": "@s.whatsapp.net"
+            },
+            "content": [
+                {
+                    "tag": "edge_routing",
+                    "attrs": {},
+                    "content": [
+                        {
+                            "tag": "routing_info",
+                            "attrs": {},
+                            "content": {
+                                "type": "Buffer",
+                                "data": [8,2,8,5]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "msg":"communication"
+    }
+    ``` 
+
+The `'frame'` is what the message received is, it has three components:
+- `tag` -- what this frame is about (eg. message will have 'message')
+- `attrs` -- a string key-value pair with some metadata (contains ID of the message usually)
+- `content` -- the actual data (eg. a message node will have the actual message content in it)
+- read more about this format [here](/src/WABinary/readme.md)
+
+### Register a Callback for Websocket Events
+
+> [!TIP]
+> Recommended to see `onMessageReceived` function in `socket.ts` file to understand how websockets events are fired
+
+```ts
+// for any message with tag 'edge_routing'
+sock.ws.on('CB:edge_routing', (node: BinaryNode) => { })
+
+// for any message with tag 'edge_routing' and id attribute = abcd
+sock.ws.on('CB:edge_routing,id:abcd', (node: BinaryNode) => { })
+
+// for any message with tag 'edge_routing', id attribute = abcd & first content node routing_info
+sock.ws.on('CB:edge_routing,id:abcd,routing_info', (node: BinaryNode) => { })
+```
+
+> [!NOTE]
+> Also, this repo is now licenced under GPL 3 since it uses [libsignal-node](https://github.com/signalapp/libsignal)
+
+## Additional Message Utilities
+
+### Group Status (`groupStatus`)
+
+Post a message as a **group status update**. When `groupStatus: true` is set, the library:
+
+1. Sets `contextInfo.isGroupStatus = true` on the inner message.
+2. Wraps the entire message inside a `groupStatusMessageV2` envelope.
+
+| Parameter      | Type      | Required | Description                        |
+|---------------|-----------|----------|------------------------------------|
+| `groupStatus` | `boolean` | No       | Set to `true` to post as a group status. |
+
+**Returns:** The standard `WAMessage` object, with the content wrapped in `groupStatusMessageV2`.
+
+**Example:**
+
+**Text Status**
+```ts
+await sock.sendMessage(groupJid, {
+    text: 'Hello World!',
+    groupStatus: true
+})
+```
+
+**Image Status**
+```ts
+await sock.sendMessage(groupJid, {
+    image: { url: './photo.jpg' },
+    caption: '👥 Group Status Update!',
+    groupStatus: true
+})
+```
+
+### Interactive as Template (`interactiveAsTemplate`)
+
+Wrap an `interactiveMessage` inside a `templateMessage` envelope. This is needed for platforms or clients that only render template-wrapped interactive content.
+
+| Parameter               | Type      | Required | Description                                                |
+|------------------------|-----------|----------|------------------------------------------------------------|
+| `interactiveAsTemplate`| `boolean` | No       | Set to `true` to rewrap the interactive message.           |
+| `id`                   | `string`  | No       | Custom `templateId`. Defaults to `'template-' + Date.now()`. |
+
+**Returns:** The standard `WAMessage` object, with `interactiveMessage` nested under `templateMessage.interactiveMessageTemplate`.
+
+**Throws:** `Boom` (400) if the built message does not contain an `interactiveMessage`.
+
+**Example:**
+```ts
+await sock.sendMessage(jid, {
+    interactiveMessage: {
+        nativeFlowMessage: {
+            buttons: [{ name: 'quick_reply', buttonParamsJson: '{"display_text":"Click"}' }]
+        },
+        body: { text: 'Hello!' }
+    },
+    interactiveAsTemplate: true,
+    id: 'my-template-001'   // optional custom templateId
+})
+```
+
+---
 
 ## Acknowledgements
 
@@ -3926,27 +3931,6 @@ const sock = makeWASocket({
 - [Follow Innovators Soft](https://facebook.com/innovatorssoft)
 
 ---
-# Support the Project
-
-> **NOTE**
->
-> **This project is completely free and open-source. If it saved you time or helped your business, consider supporting us!**
-
-[![Support on Patreon](https://img.shields.io/badge/Support-Patreon-FF424D?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/innovatorssoft7)
-
-
-</details>
-
----
-
-## 🙏 Acknowledgements
-
-- [Original Baileys](https://github.com/WhiskeySockets/baileys)
-- [Special thanks to](https://github.com/Itsukichann/Baileys)
-- [Follow Innovators Soft](https://facebook.com/innovatorssoft)
-
----
-
 # Support the Project
 
 > **NOTE**
