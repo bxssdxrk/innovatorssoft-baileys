@@ -18,6 +18,520 @@ $root.AICommon = (function() {
      */
     var AICommon = {};
 
+    AICommon.AIProvenance = (function() {
+
+        /**
+         * Properties of a AIProvenance.
+         * @memberof AICommon
+         * @interface IAIProvenance
+         * @property {AICommon.AIProvenance.IMetadata|null} [c2PaMetadata] AIProvenance c2PaMetadata
+         * @property {AICommon.AIProvenance.IMetadata|null} [iptcMetadata] AIProvenance iptcMetadata
+         */
+
+        /**
+         * Constructs a new AIProvenance.
+         * @memberof AICommon
+         * @classdesc Represents a AIProvenance.
+         * @implements IAIProvenance
+         * @constructor
+         * @param {AICommon.IAIProvenance=} [properties] Properties to set
+         */
+        function AIProvenance(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AIProvenance c2PaMetadata.
+         * @member {AICommon.AIProvenance.IMetadata|null|undefined} c2PaMetadata
+         * @memberof AICommon.AIProvenance
+         * @instance
+         */
+        AIProvenance.prototype.c2PaMetadata = null;
+
+        /**
+         * AIProvenance iptcMetadata.
+         * @member {AICommon.AIProvenance.IMetadata|null|undefined} iptcMetadata
+         * @memberof AICommon.AIProvenance
+         * @instance
+         */
+        AIProvenance.prototype.iptcMetadata = null;
+
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(AIProvenance.prototype, "_c2PaMetadata", {
+            get: $util.oneOfGetter($oneOfFields = ["c2PaMetadata"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(AIProvenance.prototype, "_iptcMetadata", {
+            get: $util.oneOfGetter($oneOfFields = ["iptcMetadata"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        /**
+         * Creates a new AIProvenance instance using the specified properties.
+         * @function create
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {AICommon.IAIProvenance=} [properties] Properties to set
+         * @returns {AICommon.AIProvenance} AIProvenance instance
+         */
+        AIProvenance.create = function create(properties) {
+            return new AIProvenance(properties);
+        };
+
+        /**
+         * Encodes the specified AIProvenance message. Does not implicitly {@link AICommon.AIProvenance.verify|verify} messages.
+         * @function encode
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {AICommon.IAIProvenance} message AIProvenance message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AIProvenance.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.c2PaMetadata != null && Object.hasOwnProperty.call(message, "c2PaMetadata"))
+                $root.AICommon.AIProvenance.Metadata.encode(message.c2PaMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.iptcMetadata != null && Object.hasOwnProperty.call(message, "iptcMetadata"))
+                $root.AICommon.AIProvenance.Metadata.encode(message.iptcMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AIProvenance message, length delimited. Does not implicitly {@link AICommon.AIProvenance.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {AICommon.IAIProvenance} message AIProvenance message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AIProvenance.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a AIProvenance message from the specified reader or buffer.
+         * @function decode
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {AICommon.AIProvenance} AIProvenance
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AIProvenance.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AICommon.AIProvenance();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                if (tag === error)
+                    break;
+                switch (tag >>> 3) {
+                case 1: {
+                        message.c2PaMetadata = $root.AICommon.AIProvenance.Metadata.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 2: {
+                        message.iptcMetadata = $root.AICommon.AIProvenance.Metadata.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a AIProvenance message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {AICommon.AIProvenance} AIProvenance
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AIProvenance.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a AIProvenance message.
+         * @function verify
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AIProvenance.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            var properties = {};
+            if (message.c2PaMetadata != null && message.hasOwnProperty("c2PaMetadata")) {
+                properties._c2PaMetadata = 1;
+                {
+                    var error = $root.AICommon.AIProvenance.Metadata.verify(message.c2PaMetadata);
+                    if (error)
+                        return "c2PaMetadata." + error;
+                }
+            }
+            if (message.iptcMetadata != null && message.hasOwnProperty("iptcMetadata")) {
+                properties._iptcMetadata = 1;
+                {
+                    var error = $root.AICommon.AIProvenance.Metadata.verify(message.iptcMetadata);
+                    if (error)
+                        return "iptcMetadata." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a AIProvenance message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {AICommon.AIProvenance} AIProvenance
+         */
+        AIProvenance.fromObject = function fromObject(object) {
+            if (object instanceof $root.AICommon.AIProvenance)
+                return object;
+            var message = new $root.AICommon.AIProvenance();
+            if (object.c2PaMetadata != null) {
+                if (typeof object.c2PaMetadata !== "object")
+                    throw TypeError(".AICommon.AIProvenance.c2PaMetadata: object expected");
+                message.c2PaMetadata = $root.AICommon.AIProvenance.Metadata.fromObject(object.c2PaMetadata);
+            }
+            if (object.iptcMetadata != null) {
+                if (typeof object.iptcMetadata !== "object")
+                    throw TypeError(".AICommon.AIProvenance.iptcMetadata: object expected");
+                message.iptcMetadata = $root.AICommon.AIProvenance.Metadata.fromObject(object.iptcMetadata);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a AIProvenance message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {AICommon.AIProvenance} message AIProvenance
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AIProvenance.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (message.c2PaMetadata != null && message.hasOwnProperty("c2PaMetadata")) {
+                object.c2PaMetadata = $root.AICommon.AIProvenance.Metadata.toObject(message.c2PaMetadata, options);
+                if (options.oneofs)
+                    object._c2PaMetadata = "c2PaMetadata";
+            }
+            if (message.iptcMetadata != null && message.hasOwnProperty("iptcMetadata")) {
+                object.iptcMetadata = $root.AICommon.AIProvenance.Metadata.toObject(message.iptcMetadata, options);
+                if (options.oneofs)
+                    object._iptcMetadata = "iptcMetadata";
+            }
+            return object;
+        };
+
+        /**
+         * Converts this AIProvenance to JSON.
+         * @function toJSON
+         * @memberof AICommon.AIProvenance
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AIProvenance.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for AIProvenance
+         * @function getTypeUrl
+         * @memberof AICommon.AIProvenance
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        AIProvenance.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/AICommon.AIProvenance";
+        };
+
+        AIProvenance.Metadata = (function() {
+
+            /**
+             * Properties of a Metadata.
+             * @memberof AICommon.AIProvenance
+             * @interface IMetadata
+             * @property {boolean|null} [createdWithGenAi] Metadata createdWithGenAi
+             * @property {boolean|null} [editedWithGenAi] Metadata editedWithGenAi
+             */
+
+            /**
+             * Constructs a new Metadata.
+             * @memberof AICommon.AIProvenance
+             * @classdesc Represents a Metadata.
+             * @implements IMetadata
+             * @constructor
+             * @param {AICommon.AIProvenance.IMetadata=} [properties] Properties to set
+             */
+            function Metadata(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Metadata createdWithGenAi.
+             * @member {boolean|null|undefined} createdWithGenAi
+             * @memberof AICommon.AIProvenance.Metadata
+             * @instance
+             */
+            Metadata.prototype.createdWithGenAi = null;
+
+            /**
+             * Metadata editedWithGenAi.
+             * @member {boolean|null|undefined} editedWithGenAi
+             * @memberof AICommon.AIProvenance.Metadata
+             * @instance
+             */
+            Metadata.prototype.editedWithGenAi = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Metadata.prototype, "_createdWithGenAi", {
+                get: $util.oneOfGetter($oneOfFields = ["createdWithGenAi"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Metadata.prototype, "_editedWithGenAi", {
+                get: $util.oneOfGetter($oneOfFields = ["editedWithGenAi"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new Metadata instance using the specified properties.
+             * @function create
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {AICommon.AIProvenance.IMetadata=} [properties] Properties to set
+             * @returns {AICommon.AIProvenance.Metadata} Metadata instance
+             */
+            Metadata.create = function create(properties) {
+                return new Metadata(properties);
+            };
+
+            /**
+             * Encodes the specified Metadata message. Does not implicitly {@link AICommon.AIProvenance.Metadata.verify|verify} messages.
+             * @function encode
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {AICommon.AIProvenance.IMetadata} message Metadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Metadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.createdWithGenAi != null && Object.hasOwnProperty.call(message, "createdWithGenAi"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.createdWithGenAi);
+                if (message.editedWithGenAi != null && Object.hasOwnProperty.call(message, "editedWithGenAi"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.editedWithGenAi);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Metadata message, length delimited. Does not implicitly {@link AICommon.AIProvenance.Metadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {AICommon.AIProvenance.IMetadata} message Metadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Metadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a Metadata message from the specified reader or buffer.
+             * @function decode
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {AICommon.AIProvenance.Metadata} Metadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Metadata.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AICommon.AIProvenance.Metadata();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.createdWithGenAi = reader.bool();
+                            break;
+                        }
+                    case 2: {
+                            message.editedWithGenAi = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a Metadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {AICommon.AIProvenance.Metadata} Metadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Metadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Metadata message.
+             * @function verify
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Metadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.createdWithGenAi != null && message.hasOwnProperty("createdWithGenAi")) {
+                    properties._createdWithGenAi = 1;
+                    if (typeof message.createdWithGenAi !== "boolean")
+                        return "createdWithGenAi: boolean expected";
+                }
+                if (message.editedWithGenAi != null && message.hasOwnProperty("editedWithGenAi")) {
+                    properties._editedWithGenAi = 1;
+                    if (typeof message.editedWithGenAi !== "boolean")
+                        return "editedWithGenAi: boolean expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {AICommon.AIProvenance.Metadata} Metadata
+             */
+            Metadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.AICommon.AIProvenance.Metadata)
+                    return object;
+                var message = new $root.AICommon.AIProvenance.Metadata();
+                if (object.createdWithGenAi != null)
+                    message.createdWithGenAi = Boolean(object.createdWithGenAi);
+                if (object.editedWithGenAi != null)
+                    message.editedWithGenAi = Boolean(object.editedWithGenAi);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {AICommon.AIProvenance.Metadata} message Metadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Metadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.createdWithGenAi != null && message.hasOwnProperty("createdWithGenAi")) {
+                    object.createdWithGenAi = message.createdWithGenAi;
+                    if (options.oneofs)
+                        object._createdWithGenAi = "createdWithGenAi";
+                }
+                if (message.editedWithGenAi != null && message.hasOwnProperty("editedWithGenAi")) {
+                    object.editedWithGenAi = message.editedWithGenAi;
+                    if (options.oneofs)
+                        object._editedWithGenAi = "editedWithGenAi";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this Metadata to JSON.
+             * @function toJSON
+             * @memberof AICommon.AIProvenance.Metadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Metadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Metadata
+             * @function getTypeUrl
+             * @memberof AICommon.AIProvenance.Metadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Metadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/AICommon.AIProvenance.Metadata";
+            };
+
+            return Metadata;
+        })();
+
+        return AIProvenance;
+    })();
+
     AICommon.BotAgentDeepLinkMetadata = (function() {
 
         /**
@@ -25,6 +539,7 @@ $root.AICommon = (function() {
          * @memberof AICommon
          * @interface IBotAgentDeepLinkMetadata
          * @property {string|null} [token] BotAgentDeepLinkMetadata token
+         * @property {Uint8Array|null} [clientPublicKey] BotAgentDeepLinkMetadata clientPublicKey
          */
 
         /**
@@ -50,12 +565,26 @@ $root.AICommon = (function() {
          */
         BotAgentDeepLinkMetadata.prototype.token = null;
 
+        /**
+         * BotAgentDeepLinkMetadata clientPublicKey.
+         * @member {Uint8Array|null|undefined} clientPublicKey
+         * @memberof AICommon.BotAgentDeepLinkMetadata
+         * @instance
+         */
+        BotAgentDeepLinkMetadata.prototype.clientPublicKey = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
         // Virtual OneOf for proto3 optional field
         Object.defineProperty(BotAgentDeepLinkMetadata.prototype, "_token", {
             get: $util.oneOfGetter($oneOfFields = ["token"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(BotAgentDeepLinkMetadata.prototype, "_clientPublicKey", {
+            get: $util.oneOfGetter($oneOfFields = ["clientPublicKey"]),
             set: $util.oneOfSetter($oneOfFields)
         });
 
@@ -85,6 +614,8 @@ $root.AICommon = (function() {
                 writer = $Writer.create();
             if (message.token != null && Object.hasOwnProperty.call(message, "token"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.token);
+            if (message.clientPublicKey != null && Object.hasOwnProperty.call(message, "clientPublicKey"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.clientPublicKey);
             return writer;
         };
 
@@ -123,6 +654,10 @@ $root.AICommon = (function() {
                 switch (tag >>> 3) {
                 case 1: {
                         message.token = reader.string();
+                        break;
+                    }
+                case 2: {
+                        message.clientPublicKey = reader.bytes();
                         break;
                     }
                 default:
@@ -166,6 +701,11 @@ $root.AICommon = (function() {
                 if (!$util.isString(message.token))
                     return "token: string expected";
             }
+            if (message.clientPublicKey != null && message.hasOwnProperty("clientPublicKey")) {
+                properties._clientPublicKey = 1;
+                if (!(message.clientPublicKey && typeof message.clientPublicKey.length === "number" || $util.isString(message.clientPublicKey)))
+                    return "clientPublicKey: buffer expected";
+            }
             return null;
         };
 
@@ -183,6 +723,11 @@ $root.AICommon = (function() {
             var message = new $root.AICommon.BotAgentDeepLinkMetadata();
             if (object.token != null)
                 message.token = String(object.token);
+            if (object.clientPublicKey != null)
+                if (typeof object.clientPublicKey === "string")
+                    $util.base64.decode(object.clientPublicKey, message.clientPublicKey = $util.newBuffer($util.base64.length(object.clientPublicKey)), 0);
+                else if (object.clientPublicKey.length >= 0)
+                    message.clientPublicKey = object.clientPublicKey;
             return message;
         };
 
@@ -203,6 +748,11 @@ $root.AICommon = (function() {
                 object.token = message.token;
                 if (options.oneofs)
                     object._token = "token";
+            }
+            if (message.clientPublicKey != null && message.hasOwnProperty("clientPublicKey")) {
+                object.clientPublicKey = options.bytes === String ? $util.base64.encode(message.clientPublicKey, 0, message.clientPublicKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.clientPublicKey) : message.clientPublicKey;
+                if (options.oneofs)
+                    object._clientPublicKey = "clientPublicKey";
             }
             return object;
         };
@@ -6957,6 +7507,232 @@ $root.AICommon = (function() {
         return BotRenderingConfigMetadata;
     })();
 
+    AICommon.BotHistoryShareMetadata = (function() {
+
+        /**
+         * Properties of a BotHistoryShareMetadata.
+         * @memberof AICommon
+         * @interface IBotHistoryShareMetadata
+         * @property {Array.<AICommon.IBotGroupParticipantMetadata>|null} [participantsMetadata] BotHistoryShareMetadata participantsMetadata
+         */
+
+        /**
+         * Constructs a new BotHistoryShareMetadata.
+         * @memberof AICommon
+         * @classdesc Represents a BotHistoryShareMetadata.
+         * @implements IBotHistoryShareMetadata
+         * @constructor
+         * @param {AICommon.IBotHistoryShareMetadata=} [properties] Properties to set
+         */
+        function BotHistoryShareMetadata(properties) {
+            this.participantsMetadata = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BotHistoryShareMetadata participantsMetadata.
+         * @member {Array.<AICommon.IBotGroupParticipantMetadata>} participantsMetadata
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @instance
+         */
+        BotHistoryShareMetadata.prototype.participantsMetadata = $util.emptyArray;
+
+        /**
+         * Creates a new BotHistoryShareMetadata instance using the specified properties.
+         * @function create
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {AICommon.IBotHistoryShareMetadata=} [properties] Properties to set
+         * @returns {AICommon.BotHistoryShareMetadata} BotHistoryShareMetadata instance
+         */
+        BotHistoryShareMetadata.create = function create(properties) {
+            return new BotHistoryShareMetadata(properties);
+        };
+
+        /**
+         * Encodes the specified BotHistoryShareMetadata message. Does not implicitly {@link AICommon.BotHistoryShareMetadata.verify|verify} messages.
+         * @function encode
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {AICommon.IBotHistoryShareMetadata} message BotHistoryShareMetadata message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BotHistoryShareMetadata.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.participantsMetadata != null && message.participantsMetadata.length)
+                for (var i = 0; i < message.participantsMetadata.length; ++i)
+                    $root.AICommon.BotGroupParticipantMetadata.encode(message.participantsMetadata[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BotHistoryShareMetadata message, length delimited. Does not implicitly {@link AICommon.BotHistoryShareMetadata.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {AICommon.IBotHistoryShareMetadata} message BotHistoryShareMetadata message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BotHistoryShareMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BotHistoryShareMetadata message from the specified reader or buffer.
+         * @function decode
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {AICommon.BotHistoryShareMetadata} BotHistoryShareMetadata
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BotHistoryShareMetadata.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AICommon.BotHistoryShareMetadata();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                if (tag === error)
+                    break;
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.participantsMetadata && message.participantsMetadata.length))
+                            message.participantsMetadata = [];
+                        message.participantsMetadata.push($root.AICommon.BotGroupParticipantMetadata.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BotHistoryShareMetadata message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {AICommon.BotHistoryShareMetadata} BotHistoryShareMetadata
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BotHistoryShareMetadata.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BotHistoryShareMetadata message.
+         * @function verify
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BotHistoryShareMetadata.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.participantsMetadata != null && message.hasOwnProperty("participantsMetadata")) {
+                if (!Array.isArray(message.participantsMetadata))
+                    return "participantsMetadata: array expected";
+                for (var i = 0; i < message.participantsMetadata.length; ++i) {
+                    var error = $root.AICommon.BotGroupParticipantMetadata.verify(message.participantsMetadata[i]);
+                    if (error)
+                        return "participantsMetadata." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a BotHistoryShareMetadata message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {AICommon.BotHistoryShareMetadata} BotHistoryShareMetadata
+         */
+        BotHistoryShareMetadata.fromObject = function fromObject(object) {
+            if (object instanceof $root.AICommon.BotHistoryShareMetadata)
+                return object;
+            var message = new $root.AICommon.BotHistoryShareMetadata();
+            if (object.participantsMetadata) {
+                if (!Array.isArray(object.participantsMetadata))
+                    throw TypeError(".AICommon.BotHistoryShareMetadata.participantsMetadata: array expected");
+                message.participantsMetadata = [];
+                for (var i = 0; i < object.participantsMetadata.length; ++i) {
+                    if (typeof object.participantsMetadata[i] !== "object")
+                        throw TypeError(".AICommon.BotHistoryShareMetadata.participantsMetadata: object expected");
+                    message.participantsMetadata[i] = $root.AICommon.BotGroupParticipantMetadata.fromObject(object.participantsMetadata[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BotHistoryShareMetadata message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {AICommon.BotHistoryShareMetadata} message BotHistoryShareMetadata
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BotHistoryShareMetadata.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.participantsMetadata = [];
+            if (message.participantsMetadata && message.participantsMetadata.length) {
+                object.participantsMetadata = [];
+                for (var j = 0; j < message.participantsMetadata.length; ++j)
+                    object.participantsMetadata[j] = $root.AICommon.BotGroupParticipantMetadata.toObject(message.participantsMetadata[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this BotHistoryShareMetadata to JSON.
+         * @function toJSON
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BotHistoryShareMetadata.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for BotHistoryShareMetadata
+         * @function getTypeUrl
+         * @memberof AICommon.BotHistoryShareMetadata
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        BotHistoryShareMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/AICommon.BotHistoryShareMetadata";
+        };
+
+        return BotHistoryShareMetadata;
+    })();
+
     AICommon.BotGroupMetadata = (function() {
 
         /**
@@ -7477,6 +8253,7 @@ $root.AICommon = (function() {
          * @property {AICommon.IBotResolvedToolCallMetadata|null} [resolvedToolCallMetadata] BotMetadata resolvedToolCallMetadata
          * @property {AICommon.IAISubscriptionUpsellMetadata|null} [subscriptionUpsellMetadata] BotMetadata subscriptionUpsellMetadata
          * @property {AICommon.IBotPttPromptMetadata|null} [pttPromptMetadata] BotMetadata pttPromptMetadata
+         * @property {AICommon.IBotHistoryShareMetadata|null} [botHistoryShareMetadata] BotMetadata botHistoryShareMetadata
          * @property {Uint8Array|null} [internalMetadata] BotMetadata internalMetadata
          */
 
@@ -7824,6 +8601,14 @@ $root.AICommon = (function() {
         BotMetadata.prototype.pttPromptMetadata = null;
 
         /**
+         * BotMetadata botHistoryShareMetadata.
+         * @member {AICommon.IBotHistoryShareMetadata|null|undefined} botHistoryShareMetadata
+         * @memberof AICommon.BotMetadata
+         * @instance
+         */
+        BotMetadata.prototype.botHistoryShareMetadata = null;
+
+        /**
          * BotMetadata internalMetadata.
          * @member {Uint8Array|null|undefined} internalMetadata
          * @memberof AICommon.BotMetadata
@@ -8081,6 +8866,12 @@ $root.AICommon = (function() {
         });
 
         // Virtual OneOf for proto3 optional field
+        Object.defineProperty(BotMetadata.prototype, "_botHistoryShareMetadata", {
+            get: $util.oneOfGetter($oneOfFields = ["botHistoryShareMetadata"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
         Object.defineProperty(BotMetadata.prototype, "_internalMetadata", {
             get: $util.oneOfGetter($oneOfFields = ["internalMetadata"]),
             set: $util.oneOfSetter($oneOfFields)
@@ -8192,6 +8983,8 @@ $root.AICommon = (function() {
                 $root.AICommon.AISubscriptionUpsellMetadata.encode(message.subscriptionUpsellMetadata, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
             if (message.pttPromptMetadata != null && Object.hasOwnProperty.call(message, "pttPromptMetadata"))
                 $root.AICommon.BotPttPromptMetadata.encode(message.pttPromptMetadata, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+            if (message.botHistoryShareMetadata != null && Object.hasOwnProperty.call(message, "botHistoryShareMetadata"))
+                $root.AICommon.BotHistoryShareMetadata.encode(message.botHistoryShareMetadata, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
             if (message.internalMetadata != null && Object.hasOwnProperty.call(message, "internalMetadata"))
                 writer.uint32(/* id 999, wireType 2 =*/7994).bytes(message.internalMetadata);
             return writer;
@@ -8392,6 +9185,10 @@ $root.AICommon = (function() {
                     }
                 case 42: {
                         message.pttPromptMetadata = $root.AICommon.BotPttPromptMetadata.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 43: {
+                        message.botHistoryShareMetadata = $root.AICommon.BotHistoryShareMetadata.decode(reader, reader.uint32());
                         break;
                     }
                 case 999: {
@@ -8741,6 +9538,14 @@ $root.AICommon = (function() {
                         return "pttPromptMetadata." + error;
                 }
             }
+            if (message.botHistoryShareMetadata != null && message.hasOwnProperty("botHistoryShareMetadata")) {
+                properties._botHistoryShareMetadata = 1;
+                {
+                    var error = $root.AICommon.BotHistoryShareMetadata.verify(message.botHistoryShareMetadata);
+                    if (error)
+                        return "botHistoryShareMetadata." + error;
+                }
+            }
             if (message.internalMetadata != null && message.hasOwnProperty("internalMetadata")) {
                 properties._internalMetadata = 1;
                 if (!(message.internalMetadata && typeof message.internalMetadata.length === "number" || $util.isString(message.internalMetadata)))
@@ -8947,6 +9752,11 @@ $root.AICommon = (function() {
                 if (typeof object.pttPromptMetadata !== "object")
                     throw TypeError(".AICommon.BotMetadata.pttPromptMetadata: object expected");
                 message.pttPromptMetadata = $root.AICommon.BotPttPromptMetadata.fromObject(object.pttPromptMetadata);
+            }
+            if (object.botHistoryShareMetadata != null) {
+                if (typeof object.botHistoryShareMetadata !== "object")
+                    throw TypeError(".AICommon.BotMetadata.botHistoryShareMetadata: object expected");
+                message.botHistoryShareMetadata = $root.AICommon.BotHistoryShareMetadata.fromObject(object.botHistoryShareMetadata);
             }
             if (object.internalMetadata != null)
                 if (typeof object.internalMetadata === "string")
@@ -9173,6 +9983,11 @@ $root.AICommon = (function() {
                 object.pttPromptMetadata = $root.AICommon.BotPttPromptMetadata.toObject(message.pttPromptMetadata, options);
                 if (options.oneofs)
                     object._pttPromptMetadata = "pttPromptMetadata";
+            }
+            if (message.botHistoryShareMetadata != null && message.hasOwnProperty("botHistoryShareMetadata")) {
+                object.botHistoryShareMetadata = $root.AICommon.BotHistoryShareMetadata.toObject(message.botHistoryShareMetadata, options);
+                if (options.oneofs)
+                    object._botHistoryShareMetadata = "botHistoryShareMetadata";
             }
             if (message.internalMetadata != null && message.hasOwnProperty("internalMetadata")) {
                 object.internalMetadata = options.bytes === String ? $util.base64.encode(message.internalMetadata, 0, message.internalMetadata.length) : options.bytes === Array ? Array.prototype.slice.call(message.internalMetadata) : message.internalMetadata;
@@ -17118,6 +17933,7 @@ $root.AICommon = (function() {
                     case 63:
                     case 64:
                     case 65:
+                    case 66:
                         break;
                     }
             }
@@ -17411,6 +18227,10 @@ $root.AICommon = (function() {
                     case 65:
                         message.capabilities[i] = 65;
                         break;
+                    case "RICH_RESPONSE_SPORTS_WIDGET_ENABLED":
+                    case 66:
+                        message.capabilities[i] = 66;
+                        break;
                     }
             }
             return message;
@@ -17535,6 +18355,7 @@ $root.AICommon = (function() {
          * @property {number} UNIFIED_RESPONSE_MARKDOWN_LINKS_ENABLED=63 UNIFIED_RESPONSE_MARKDOWN_LINKS_ENABLED value
          * @property {number} AI_RICH_RESPONSE_MAPS_V2_ENABLED=64 AI_RICH_RESPONSE_MAPS_V2_ENABLED value
          * @property {number} AI_SUBSCRIPTION_METERING_ENABLED=65 AI_SUBSCRIPTION_METERING_ENABLED value
+         * @property {number} RICH_RESPONSE_SPORTS_WIDGET_ENABLED=66 RICH_RESPONSE_SPORTS_WIDGET_ENABLED value
          */
         BotCapabilityMetadata.BotCapabilityType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -17604,6 +18425,7 @@ $root.AICommon = (function() {
             values[valuesById[63] = "UNIFIED_RESPONSE_MARKDOWN_LINKS_ENABLED"] = 63;
             values[valuesById[64] = "AI_RICH_RESPONSE_MAPS_V2_ENABLED"] = 64;
             values[valuesById[65] = "AI_SUBSCRIPTION_METERING_ENABLED"] = 65;
+            values[valuesById[66] = "RICH_RESPONSE_SPORTS_WIDGET_ENABLED"] = 66;
             return values;
         })();
 

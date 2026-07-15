@@ -1102,6 +1102,7 @@ $root.SyncAction = (function() {
          * @property {SyncAction.SyncActionValue.IBizAISettingsNudgeAction|null} [bizAiSettingsNudgeAction] SyncActionValue bizAiSettingsNudgeAction
          * @property {SyncAction.SyncActionValue.ICoexV2VersionAction|null} [coexV2VersionAction] SyncActionValue coexV2VersionAction
          * @property {SyncAction.SyncActionValue.IWASARootSecretAction|null} [wasaRootSecretAction] SyncActionValue wasaRootSecretAction
+         * @property {SyncAction.SyncActionValue.IBubbleLockMessageAction|null} [bubbleLockMessageAction] SyncActionValue bubbleLockMessageAction
          */
 
         /**
@@ -1759,6 +1760,14 @@ $root.SyncAction = (function() {
          */
         SyncActionValue.prototype.wasaRootSecretAction = null;
 
+        /**
+         * SyncActionValue bubbleLockMessageAction.
+         * @member {SyncAction.SyncActionValue.IBubbleLockMessageAction|null|undefined} bubbleLockMessageAction
+         * @memberof SyncAction.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.bubbleLockMessageAction = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
@@ -2242,6 +2251,12 @@ $root.SyncAction = (function() {
             set: $util.oneOfSetter($oneOfFields)
         });
 
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(SyncActionValue.prototype, "_bubbleLockMessageAction", {
+            get: $util.oneOfGetter($oneOfFields = ["bubbleLockMessageAction"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
         /**
          * Creates a new SyncActionValue instance using the specified properties.
          * @function create
@@ -2426,6 +2441,8 @@ $root.SyncAction = (function() {
                 $root.SyncAction.SyncActionValue.CoexV2VersionAction.encode(message.coexV2VersionAction, writer.uint32(/* id 88, wireType 2 =*/706).fork()).ldelim();
             if (message.wasaRootSecretAction != null && Object.hasOwnProperty.call(message, "wasaRootSecretAction"))
                 $root.SyncAction.SyncActionValue.WASARootSecretAction.encode(message.wasaRootSecretAction, writer.uint32(/* id 89, wireType 2 =*/714).fork()).ldelim();
+            if (message.bubbleLockMessageAction != null && Object.hasOwnProperty.call(message, "bubbleLockMessageAction"))
+                $root.SyncAction.SyncActionValue.BubbleLockMessageAction.encode(message.bubbleLockMessageAction, writer.uint32(/* id 90, wireType 2 =*/722).fork()).ldelim();
             return writer;
         };
 
@@ -2780,6 +2797,10 @@ $root.SyncAction = (function() {
                     }
                 case 89: {
                         message.wasaRootSecretAction = $root.SyncAction.SyncActionValue.WASARootSecretAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 90: {
+                        message.bubbleLockMessageAction = $root.SyncAction.SyncActionValue.BubbleLockMessageAction.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -3455,6 +3476,14 @@ $root.SyncAction = (function() {
                         return "wasaRootSecretAction." + error;
                 }
             }
+            if (message.bubbleLockMessageAction != null && message.hasOwnProperty("bubbleLockMessageAction")) {
+                properties._bubbleLockMessageAction = 1;
+                {
+                    var error = $root.SyncAction.SyncActionValue.BubbleLockMessageAction.verify(message.bubbleLockMessageAction);
+                    if (error)
+                        return "bubbleLockMessageAction." + error;
+                }
+            }
             return null;
         };
 
@@ -3874,6 +3903,11 @@ $root.SyncAction = (function() {
                     throw TypeError(".SyncAction.SyncActionValue.wasaRootSecretAction: object expected");
                 message.wasaRootSecretAction = $root.SyncAction.SyncActionValue.WASARootSecretAction.fromObject(object.wasaRootSecretAction);
             }
+            if (object.bubbleLockMessageAction != null) {
+                if (typeof object.bubbleLockMessageAction !== "object")
+                    throw TypeError(".SyncAction.SyncActionValue.bubbleLockMessageAction: object expected");
+                message.bubbleLockMessageAction = $root.SyncAction.SyncActionValue.BubbleLockMessageAction.fromObject(object.bubbleLockMessageAction);
+            }
             return message;
         };
 
@@ -4292,6 +4326,11 @@ $root.SyncAction = (function() {
                 object.wasaRootSecretAction = $root.SyncAction.SyncActionValue.WASARootSecretAction.toObject(message.wasaRootSecretAction, options);
                 if (options.oneofs)
                     object._wasaRootSecretAction = "wasaRootSecretAction";
+            }
+            if (message.bubbleLockMessageAction != null && message.hasOwnProperty("bubbleLockMessageAction")) {
+                object.bubbleLockMessageAction = $root.SyncAction.SyncActionValue.BubbleLockMessageAction.toObject(message.bubbleLockMessageAction, options);
+                if (options.oneofs)
+                    object._bubbleLockMessageAction = "bubbleLockMessageAction";
             }
             return object;
         };
@@ -6654,6 +6693,224 @@ $root.SyncAction = (function() {
             return BroadcastListParticipant;
         })();
 
+        SyncActionValue.BubbleLockMessageAction = (function() {
+
+            /**
+             * Properties of a BubbleLockMessageAction.
+             * @memberof SyncAction.SyncActionValue
+             * @interface IBubbleLockMessageAction
+             * @property {boolean|null} [locked] BubbleLockMessageAction locked
+             */
+
+            /**
+             * Constructs a new BubbleLockMessageAction.
+             * @memberof SyncAction.SyncActionValue
+             * @classdesc Represents a BubbleLockMessageAction.
+             * @implements IBubbleLockMessageAction
+             * @constructor
+             * @param {SyncAction.SyncActionValue.IBubbleLockMessageAction=} [properties] Properties to set
+             */
+            function BubbleLockMessageAction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * BubbleLockMessageAction locked.
+             * @member {boolean|null|undefined} locked
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @instance
+             */
+            BubbleLockMessageAction.prototype.locked = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(BubbleLockMessageAction.prototype, "_locked", {
+                get: $util.oneOfGetter($oneOfFields = ["locked"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new BubbleLockMessageAction instance using the specified properties.
+             * @function create
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {SyncAction.SyncActionValue.IBubbleLockMessageAction=} [properties] Properties to set
+             * @returns {SyncAction.SyncActionValue.BubbleLockMessageAction} BubbleLockMessageAction instance
+             */
+            BubbleLockMessageAction.create = function create(properties) {
+                return new BubbleLockMessageAction(properties);
+            };
+
+            /**
+             * Encodes the specified BubbleLockMessageAction message. Does not implicitly {@link SyncAction.SyncActionValue.BubbleLockMessageAction.verify|verify} messages.
+             * @function encode
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {SyncAction.SyncActionValue.IBubbleLockMessageAction} message BubbleLockMessageAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BubbleLockMessageAction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.locked != null && Object.hasOwnProperty.call(message, "locked"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.locked);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified BubbleLockMessageAction message, length delimited. Does not implicitly {@link SyncAction.SyncActionValue.BubbleLockMessageAction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {SyncAction.SyncActionValue.IBubbleLockMessageAction} message BubbleLockMessageAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BubbleLockMessageAction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a BubbleLockMessageAction message from the specified reader or buffer.
+             * @function decode
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {SyncAction.SyncActionValue.BubbleLockMessageAction} BubbleLockMessageAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            BubbleLockMessageAction.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.BubbleLockMessageAction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.locked = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a BubbleLockMessageAction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {SyncAction.SyncActionValue.BubbleLockMessageAction} BubbleLockMessageAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            BubbleLockMessageAction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a BubbleLockMessageAction message.
+             * @function verify
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            BubbleLockMessageAction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.locked != null && message.hasOwnProperty("locked")) {
+                    properties._locked = 1;
+                    if (typeof message.locked !== "boolean")
+                        return "locked: boolean expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a BubbleLockMessageAction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {SyncAction.SyncActionValue.BubbleLockMessageAction} BubbleLockMessageAction
+             */
+            BubbleLockMessageAction.fromObject = function fromObject(object) {
+                if (object instanceof $root.SyncAction.SyncActionValue.BubbleLockMessageAction)
+                    return object;
+                var message = new $root.SyncAction.SyncActionValue.BubbleLockMessageAction();
+                if (object.locked != null)
+                    message.locked = Boolean(object.locked);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a BubbleLockMessageAction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {SyncAction.SyncActionValue.BubbleLockMessageAction} message BubbleLockMessageAction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            BubbleLockMessageAction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.locked != null && message.hasOwnProperty("locked")) {
+                    object.locked = message.locked;
+                    if (options.oneofs)
+                        object._locked = "locked";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this BubbleLockMessageAction to JSON.
+             * @function toJSON
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            BubbleLockMessageAction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for BubbleLockMessageAction
+             * @function getTypeUrl
+             * @memberof SyncAction.SyncActionValue.BubbleLockMessageAction
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            BubbleLockMessageAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/SyncAction.SyncActionValue.BubbleLockMessageAction";
+            };
+
+            return BubbleLockMessageAction;
+        })();
+
         SyncActionValue.BusinessBroadcastAssociationAction = (function() {
 
             /**
@@ -7789,6 +8046,7 @@ $root.SyncAction = (function() {
              * @property {string|null} [listName] BusinessBroadcastListAction listName
              * @property {Array.<string>|null} [labelIds] BusinessBroadcastListAction labelIds
              * @property {string|null} [audienceExpression] BusinessBroadcastListAction audienceExpression
+             * @property {string|null} [customAudienceFbid] BusinessBroadcastListAction customAudienceFbid
              */
 
             /**
@@ -7848,6 +8106,14 @@ $root.SyncAction = (function() {
              */
             BusinessBroadcastListAction.prototype.audienceExpression = null;
 
+            /**
+             * BusinessBroadcastListAction customAudienceFbid.
+             * @member {string|null|undefined} customAudienceFbid
+             * @memberof SyncAction.SyncActionValue.BusinessBroadcastListAction
+             * @instance
+             */
+            BusinessBroadcastListAction.prototype.customAudienceFbid = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
@@ -7866,6 +8132,12 @@ $root.SyncAction = (function() {
             // Virtual OneOf for proto3 optional field
             Object.defineProperty(BusinessBroadcastListAction.prototype, "_audienceExpression", {
                 get: $util.oneOfGetter($oneOfFields = ["audienceExpression"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(BusinessBroadcastListAction.prototype, "_customAudienceFbid", {
+                get: $util.oneOfGetter($oneOfFields = ["customAudienceFbid"]),
                 set: $util.oneOfSetter($oneOfFields)
             });
 
@@ -7905,6 +8177,8 @@ $root.SyncAction = (function() {
                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.labelIds[i]);
                 if (message.audienceExpression != null && Object.hasOwnProperty.call(message, "audienceExpression"))
                     writer.uint32(/* id 5, wireType 2 =*/42).string(message.audienceExpression);
+                if (message.customAudienceFbid != null && Object.hasOwnProperty.call(message, "customAudienceFbid"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.customAudienceFbid);
                 return writer;
             };
 
@@ -7963,6 +8237,10 @@ $root.SyncAction = (function() {
                         }
                     case 5: {
                             message.audienceExpression = reader.string();
+                            break;
+                        }
+                    case 6: {
+                            message.customAudienceFbid = reader.string();
                             break;
                         }
                     default:
@@ -8032,6 +8310,11 @@ $root.SyncAction = (function() {
                     if (!$util.isString(message.audienceExpression))
                         return "audienceExpression: string expected";
                 }
+                if (message.customAudienceFbid != null && message.hasOwnProperty("customAudienceFbid")) {
+                    properties._customAudienceFbid = 1;
+                    if (!$util.isString(message.customAudienceFbid))
+                        return "customAudienceFbid: string expected";
+                }
                 return null;
             };
 
@@ -8070,6 +8353,8 @@ $root.SyncAction = (function() {
                 }
                 if (object.audienceExpression != null)
                     message.audienceExpression = String(object.audienceExpression);
+                if (object.customAudienceFbid != null)
+                    message.customAudienceFbid = String(object.customAudienceFbid);
                 return message;
             };
 
@@ -8114,6 +8399,11 @@ $root.SyncAction = (function() {
                     object.audienceExpression = message.audienceExpression;
                     if (options.oneofs)
                         object._audienceExpression = "audienceExpression";
+                }
+                if (message.customAudienceFbid != null && message.hasOwnProperty("customAudienceFbid")) {
+                    object.customAudienceFbid = message.customAudienceFbid;
+                    if (options.oneofs)
+                        object._customAudienceFbid = "customAudienceFbid";
                 }
                 return object;
             };
@@ -31600,6 +31890,7 @@ $root.SyncAction = (function() {
      * @property {number} BIZ_AI_SETTINGS_NUDGE_ACTION=87 BIZ_AI_SETTINGS_NUDGE_ACTION value
      * @property {number} COEX_V2_VERSION_ACTION=88 COEX_V2_VERSION_ACTION value
      * @property {number} WASA_ROOT_SECRET_ACTION=89 WASA_ROOT_SECRET_ACTION value
+     * @property {number} BUBBLE_LOCK_MESSAGE_ACTION=90 BUBBLE_LOCK_MESSAGE_ACTION value
      * @property {number} SHARE_OWN_PN=10001 SHARE_OWN_PN value
      * @property {number} BUSINESS_BROADCAST_ACTION=10002 BUSINESS_BROADCAST_ACTION value
      * @property {number} AI_THREAD_DELETE_ACTION=10003 AI_THREAD_DELETE_ACTION value
@@ -31689,6 +31980,7 @@ $root.SyncAction = (function() {
         values[valuesById[87] = "BIZ_AI_SETTINGS_NUDGE_ACTION"] = 87;
         values[valuesById[88] = "COEX_V2_VERSION_ACTION"] = 88;
         values[valuesById[89] = "WASA_ROOT_SECRET_ACTION"] = 89;
+        values[valuesById[90] = "BUBBLE_LOCK_MESSAGE_ACTION"] = 90;
         values[valuesById[10001] = "SHARE_OWN_PN"] = 10001;
         values[valuesById[10002] = "BUSINESS_BROADCAST_ACTION"] = 10002;
         values[valuesById[10003] = "AI_THREAD_DELETE_ACTION"] = 10003;
@@ -32939,6 +33231,7 @@ $root.DeviceCapabilities = (function() {
          * @property {DeviceCapabilities.DeviceCapabilities.IUserHasAvatar|null} [userHasAvatar] DeviceCapabilities userHasAvatar
          * @property {DeviceCapabilities.DeviceCapabilities.MemberNameTagPrimarySupport|null} [memberNameTagPrimarySupport] DeviceCapabilities memberNameTagPrimarySupport
          * @property {DeviceCapabilities.DeviceCapabilities.IAiThread|null} [aiThread] DeviceCapabilities aiThread
+         * @property {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration|null} [aiFbidMigration] DeviceCapabilities aiFbidMigration
          */
 
         /**
@@ -33004,6 +33297,14 @@ $root.DeviceCapabilities = (function() {
          */
         DeviceCapabilities.prototype.aiThread = null;
 
+        /**
+         * DeviceCapabilities aiFbidMigration.
+         * @member {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration|null|undefined} aiFbidMigration
+         * @memberof DeviceCapabilities.DeviceCapabilities
+         * @instance
+         */
+        DeviceCapabilities.prototype.aiFbidMigration = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
@@ -33043,6 +33344,12 @@ $root.DeviceCapabilities = (function() {
             set: $util.oneOfSetter($oneOfFields)
         });
 
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeviceCapabilities.prototype, "_aiFbidMigration", {
+            get: $util.oneOfGetter($oneOfFields = ["aiFbidMigration"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
         /**
          * Creates a new DeviceCapabilities instance using the specified properties.
          * @function create
@@ -33079,6 +33386,8 @@ $root.DeviceCapabilities = (function() {
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.memberNameTagPrimarySupport);
             if (message.aiThread != null && Object.hasOwnProperty.call(message, "aiThread"))
                 $root.DeviceCapabilities.DeviceCapabilities.AiThread.encode(message.aiThread, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.aiFbidMigration != null && Object.hasOwnProperty.call(message, "aiFbidMigration"))
+                $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.encode(message.aiFbidMigration, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             return writer;
         };
 
@@ -33137,6 +33446,10 @@ $root.DeviceCapabilities = (function() {
                     }
                 case 6: {
                         message.aiThread = $root.DeviceCapabilities.DeviceCapabilities.AiThread.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 7: {
+                        message.aiFbidMigration = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -33229,6 +33542,14 @@ $root.DeviceCapabilities = (function() {
                         return "aiThread." + error;
                 }
             }
+            if (message.aiFbidMigration != null && message.hasOwnProperty("aiFbidMigration")) {
+                properties._aiFbidMigration = 1;
+                {
+                    var error = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.verify(message.aiFbidMigration);
+                    if (error)
+                        return "aiFbidMigration." + error;
+                }
+            }
             return null;
         };
 
@@ -33304,6 +33625,11 @@ $root.DeviceCapabilities = (function() {
                     throw TypeError(".DeviceCapabilities.DeviceCapabilities.aiThread: object expected");
                 message.aiThread = $root.DeviceCapabilities.DeviceCapabilities.AiThread.fromObject(object.aiThread);
             }
+            if (object.aiFbidMigration != null) {
+                if (typeof object.aiFbidMigration !== "object")
+                    throw TypeError(".DeviceCapabilities.DeviceCapabilities.aiFbidMigration: object expected");
+                message.aiFbidMigration = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.fromObject(object.aiFbidMigration);
+            }
             return message;
         };
 
@@ -33350,6 +33676,11 @@ $root.DeviceCapabilities = (function() {
                 if (options.oneofs)
                     object._aiThread = "aiThread";
             }
+            if (message.aiFbidMigration != null && message.hasOwnProperty("aiFbidMigration")) {
+                object.aiFbidMigration = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.toObject(message.aiFbidMigration, options);
+                if (options.oneofs)
+                    object._aiFbidMigration = "aiFbidMigration";
+            }
             return object;
         };
 
@@ -33378,6 +33709,234 @@ $root.DeviceCapabilities = (function() {
             }
             return typeUrlPrefix + "/DeviceCapabilities.DeviceCapabilities";
         };
+
+        DeviceCapabilities.AiFbidMigration = (function() {
+
+            /**
+             * Properties of an AiFbidMigration.
+             * @memberof DeviceCapabilities.DeviceCapabilities
+             * @interface IAiFbidMigration
+             * @property {number|Long|null} [chatDbMigrationTimestamp] AiFbidMigration chatDbMigrationTimestamp
+             */
+
+            /**
+             * Constructs a new AiFbidMigration.
+             * @memberof DeviceCapabilities.DeviceCapabilities
+             * @classdesc Represents an AiFbidMigration.
+             * @implements IAiFbidMigration
+             * @constructor
+             * @param {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration=} [properties] Properties to set
+             */
+            function AiFbidMigration(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * AiFbidMigration chatDbMigrationTimestamp.
+             * @member {number|Long|null|undefined} chatDbMigrationTimestamp
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @instance
+             */
+            AiFbidMigration.prototype.chatDbMigrationTimestamp = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(AiFbidMigration.prototype, "_chatDbMigrationTimestamp", {
+                get: $util.oneOfGetter($oneOfFields = ["chatDbMigrationTimestamp"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new AiFbidMigration instance using the specified properties.
+             * @function create
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration=} [properties] Properties to set
+             * @returns {DeviceCapabilities.DeviceCapabilities.AiFbidMigration} AiFbidMigration instance
+             */
+            AiFbidMigration.create = function create(properties) {
+                return new AiFbidMigration(properties);
+            };
+
+            /**
+             * Encodes the specified AiFbidMigration message. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.AiFbidMigration.verify|verify} messages.
+             * @function encode
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration} message AiFbidMigration message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AiFbidMigration.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.chatDbMigrationTimestamp != null && Object.hasOwnProperty.call(message, "chatDbMigrationTimestamp"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).uint64(message.chatDbMigrationTimestamp);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified AiFbidMigration message, length delimited. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.AiFbidMigration.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration} message AiFbidMigration message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            AiFbidMigration.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an AiFbidMigration message from the specified reader or buffer.
+             * @function decode
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {DeviceCapabilities.DeviceCapabilities.AiFbidMigration} AiFbidMigration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AiFbidMigration.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.chatDbMigrationTimestamp = reader.uint64();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an AiFbidMigration message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {DeviceCapabilities.DeviceCapabilities.AiFbidMigration} AiFbidMigration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            AiFbidMigration.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an AiFbidMigration message.
+             * @function verify
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            AiFbidMigration.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.chatDbMigrationTimestamp != null && message.hasOwnProperty("chatDbMigrationTimestamp")) {
+                    properties._chatDbMigrationTimestamp = 1;
+                    if (!$util.isInteger(message.chatDbMigrationTimestamp) && !(message.chatDbMigrationTimestamp && $util.isInteger(message.chatDbMigrationTimestamp.low) && $util.isInteger(message.chatDbMigrationTimestamp.high)))
+                        return "chatDbMigrationTimestamp: integer|Long expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates an AiFbidMigration message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {DeviceCapabilities.DeviceCapabilities.AiFbidMigration} AiFbidMigration
+             */
+            AiFbidMigration.fromObject = function fromObject(object) {
+                if (object instanceof $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration)
+                    return object;
+                var message = new $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration();
+                if (object.chatDbMigrationTimestamp != null)
+                    if ($util.Long)
+                        (message.chatDbMigrationTimestamp = $util.Long.fromValue(object.chatDbMigrationTimestamp)).unsigned = true;
+                    else if (typeof object.chatDbMigrationTimestamp === "string")
+                        message.chatDbMigrationTimestamp = parseInt(object.chatDbMigrationTimestamp, 10);
+                    else if (typeof object.chatDbMigrationTimestamp === "number")
+                        message.chatDbMigrationTimestamp = object.chatDbMigrationTimestamp;
+                    else if (typeof object.chatDbMigrationTimestamp === "object")
+                        message.chatDbMigrationTimestamp = new $util.LongBits(object.chatDbMigrationTimestamp.low >>> 0, object.chatDbMigrationTimestamp.high >>> 0).toNumber(true);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an AiFbidMigration message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.AiFbidMigration} message AiFbidMigration
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            AiFbidMigration.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.chatDbMigrationTimestamp != null && message.hasOwnProperty("chatDbMigrationTimestamp")) {
+                    if (typeof message.chatDbMigrationTimestamp === "number")
+                        object.chatDbMigrationTimestamp = options.longs === String ? String(message.chatDbMigrationTimestamp) : message.chatDbMigrationTimestamp;
+                    else
+                        object.chatDbMigrationTimestamp = options.longs === String ? $util.Long.prototype.toString.call(message.chatDbMigrationTimestamp) : options.longs === Number ? new $util.LongBits(message.chatDbMigrationTimestamp.low >>> 0, message.chatDbMigrationTimestamp.high >>> 0).toNumber(true) : message.chatDbMigrationTimestamp;
+                    if (options.oneofs)
+                        object._chatDbMigrationTimestamp = "chatDbMigrationTimestamp";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this AiFbidMigration to JSON.
+             * @function toJSON
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            AiFbidMigration.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for AiFbidMigration
+             * @function getTypeUrl
+             * @memberof DeviceCapabilities.DeviceCapabilities.AiFbidMigration
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            AiFbidMigration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/DeviceCapabilities.DeviceCapabilities.AiFbidMigration";
+            };
+
+            return AiFbidMigration;
+        })();
 
         DeviceCapabilities.AiThread = (function() {
 

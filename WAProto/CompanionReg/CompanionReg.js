@@ -2953,6 +2953,7 @@ $root.CompanionReg = (function() {
              * @property {boolean|null} [supportHatchHistory] HistorySyncConfig supportHatchHistory
              * @property {Array.<string>|null} [supportedBotChannelFbids] HistorySyncConfig supportedBotChannelFbids
              * @property {boolean|null} [supportInlineContacts] HistorySyncConfig supportInlineContacts
+             * @property {boolean|null} [supportNewsletter] HistorySyncConfig supportNewsletter
              */
 
             /**
@@ -3163,6 +3164,14 @@ $root.CompanionReg = (function() {
              */
             HistorySyncConfig.prototype.supportInlineContacts = null;
 
+            /**
+             * HistorySyncConfig supportNewsletter.
+             * @member {boolean|null|undefined} supportNewsletter
+             * @memberof CompanionReg.DeviceProps.HistorySyncConfig
+             * @instance
+             */
+            HistorySyncConfig.prototype.supportNewsletter = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
@@ -3304,6 +3313,12 @@ $root.CompanionReg = (function() {
                 set: $util.oneOfSetter($oneOfFields)
             });
 
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(HistorySyncConfig.prototype, "_supportNewsletter", {
+                get: $util.oneOfGetter($oneOfFields = ["supportNewsletter"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
             /**
              * Creates a new HistorySyncConfig instance using the specified properties.
              * @function create
@@ -3377,6 +3392,8 @@ $root.CompanionReg = (function() {
                         writer.uint32(/* id 23, wireType 2 =*/186).string(message.supportedBotChannelFbids[i]);
                 if (message.supportInlineContacts != null && Object.hasOwnProperty.call(message, "supportInlineContacts"))
                     writer.uint32(/* id 24, wireType 0 =*/192).bool(message.supportInlineContacts);
+                if (message.supportNewsletter != null && Object.hasOwnProperty.call(message, "supportNewsletter"))
+                    writer.uint32(/* id 25, wireType 0 =*/200).bool(message.supportNewsletter);
                 return writer;
             };
 
@@ -3509,6 +3526,10 @@ $root.CompanionReg = (function() {
                         }
                     case 24: {
                             message.supportInlineContacts = reader.bool();
+                            break;
+                        }
+                    case 25: {
+                            message.supportNewsletter = reader.bool();
                             break;
                         }
                     default:
@@ -3669,6 +3690,11 @@ $root.CompanionReg = (function() {
                     if (typeof message.supportInlineContacts !== "boolean")
                         return "supportInlineContacts: boolean expected";
                 }
+                if (message.supportNewsletter != null && message.hasOwnProperty("supportNewsletter")) {
+                    properties._supportNewsletter = 1;
+                    if (typeof message.supportNewsletter !== "boolean")
+                        return "supportNewsletter: boolean expected";
+                }
                 return null;
             };
 
@@ -3737,6 +3763,8 @@ $root.CompanionReg = (function() {
                 }
                 if (object.supportInlineContacts != null)
                     message.supportInlineContacts = Boolean(object.supportInlineContacts);
+                if (object.supportNewsletter != null)
+                    message.supportNewsletter = Boolean(object.supportNewsletter);
                 return message;
             };
 
@@ -3874,6 +3902,11 @@ $root.CompanionReg = (function() {
                     object.supportInlineContacts = message.supportInlineContacts;
                     if (options.oneofs)
                         object._supportInlineContacts = "supportInlineContacts";
+                }
+                if (message.supportNewsletter != null && message.hasOwnProperty("supportNewsletter")) {
+                    object.supportNewsletter = message.supportNewsletter;
+                    if (options.oneofs)
+                        object._supportNewsletter = "supportNewsletter";
                 }
                 return object;
             };

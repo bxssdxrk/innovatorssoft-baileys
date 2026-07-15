@@ -18,6 +18,853 @@ $root.ServerSync = (function() {
      */
     var ServerSync = {};
 
+    ServerSync.CoexStateSync = (function() {
+
+        /**
+         * Properties of a CoexStateSync.
+         * @memberof ServerSync
+         * @interface ICoexStateSync
+         * @property {Array.<ServerSync.CoexStateSync.ICollectionMutations>|null} [collectionMutations] CoexStateSync collectionMutations
+         */
+
+        /**
+         * Constructs a new CoexStateSync.
+         * @memberof ServerSync
+         * @classdesc Represents a CoexStateSync.
+         * @implements ICoexStateSync
+         * @constructor
+         * @param {ServerSync.ICoexStateSync=} [properties] Properties to set
+         */
+        function CoexStateSync(properties) {
+            this.collectionMutations = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CoexStateSync collectionMutations.
+         * @member {Array.<ServerSync.CoexStateSync.ICollectionMutations>} collectionMutations
+         * @memberof ServerSync.CoexStateSync
+         * @instance
+         */
+        CoexStateSync.prototype.collectionMutations = $util.emptyArray;
+
+        /**
+         * Creates a new CoexStateSync instance using the specified properties.
+         * @function create
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {ServerSync.ICoexStateSync=} [properties] Properties to set
+         * @returns {ServerSync.CoexStateSync} CoexStateSync instance
+         */
+        CoexStateSync.create = function create(properties) {
+            return new CoexStateSync(properties);
+        };
+
+        /**
+         * Encodes the specified CoexStateSync message. Does not implicitly {@link ServerSync.CoexStateSync.verify|verify} messages.
+         * @function encode
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {ServerSync.ICoexStateSync} message CoexStateSync message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CoexStateSync.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.collectionMutations != null && message.collectionMutations.length)
+                for (var i = 0; i < message.collectionMutations.length; ++i)
+                    $root.ServerSync.CoexStateSync.CollectionMutations.encode(message.collectionMutations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CoexStateSync message, length delimited. Does not implicitly {@link ServerSync.CoexStateSync.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {ServerSync.ICoexStateSync} message CoexStateSync message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CoexStateSync.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CoexStateSync message from the specified reader or buffer.
+         * @function decode
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ServerSync.CoexStateSync} CoexStateSync
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CoexStateSync.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ServerSync.CoexStateSync();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                if (tag === error)
+                    break;
+                switch (tag >>> 3) {
+                case 1: {
+                        if (!(message.collectionMutations && message.collectionMutations.length))
+                            message.collectionMutations = [];
+                        message.collectionMutations.push($root.ServerSync.CoexStateSync.CollectionMutations.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CoexStateSync message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {ServerSync.CoexStateSync} CoexStateSync
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CoexStateSync.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CoexStateSync message.
+         * @function verify
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CoexStateSync.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.collectionMutations != null && message.hasOwnProperty("collectionMutations")) {
+                if (!Array.isArray(message.collectionMutations))
+                    return "collectionMutations: array expected";
+                for (var i = 0; i < message.collectionMutations.length; ++i) {
+                    var error = $root.ServerSync.CoexStateSync.CollectionMutations.verify(message.collectionMutations[i]);
+                    if (error)
+                        return "collectionMutations." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a CoexStateSync message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {ServerSync.CoexStateSync} CoexStateSync
+         */
+        CoexStateSync.fromObject = function fromObject(object) {
+            if (object instanceof $root.ServerSync.CoexStateSync)
+                return object;
+            var message = new $root.ServerSync.CoexStateSync();
+            if (object.collectionMutations) {
+                if (!Array.isArray(object.collectionMutations))
+                    throw TypeError(".ServerSync.CoexStateSync.collectionMutations: array expected");
+                message.collectionMutations = [];
+                for (var i = 0; i < object.collectionMutations.length; ++i) {
+                    if (typeof object.collectionMutations[i] !== "object")
+                        throw TypeError(".ServerSync.CoexStateSync.collectionMutations: object expected");
+                    message.collectionMutations[i] = $root.ServerSync.CoexStateSync.CollectionMutations.fromObject(object.collectionMutations[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CoexStateSync message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {ServerSync.CoexStateSync} message CoexStateSync
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CoexStateSync.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.collectionMutations = [];
+            if (message.collectionMutations && message.collectionMutations.length) {
+                object.collectionMutations = [];
+                for (var j = 0; j < message.collectionMutations.length; ++j)
+                    object.collectionMutations[j] = $root.ServerSync.CoexStateSync.CollectionMutations.toObject(message.collectionMutations[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this CoexStateSync to JSON.
+         * @function toJSON
+         * @memberof ServerSync.CoexStateSync
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CoexStateSync.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for CoexStateSync
+         * @function getTypeUrl
+         * @memberof ServerSync.CoexStateSync
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        CoexStateSync.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/ServerSync.CoexStateSync";
+        };
+
+        CoexStateSync.CollectionMutations = (function() {
+
+            /**
+             * Properties of a CollectionMutations.
+             * @memberof ServerSync.CoexStateSync
+             * @interface ICollectionMutations
+             * @property {string|null} [collection] CollectionMutations collection
+             * @property {Array.<ServerSync.CoexStateSync.IMutation>|null} [mutations] CollectionMutations mutations
+             */
+
+            /**
+             * Constructs a new CollectionMutations.
+             * @memberof ServerSync.CoexStateSync
+             * @classdesc Represents a CollectionMutations.
+             * @implements ICollectionMutations
+             * @constructor
+             * @param {ServerSync.CoexStateSync.ICollectionMutations=} [properties] Properties to set
+             */
+            function CollectionMutations(properties) {
+                this.mutations = [];
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * CollectionMutations collection.
+             * @member {string|null|undefined} collection
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @instance
+             */
+            CollectionMutations.prototype.collection = null;
+
+            /**
+             * CollectionMutations mutations.
+             * @member {Array.<ServerSync.CoexStateSync.IMutation>} mutations
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @instance
+             */
+            CollectionMutations.prototype.mutations = $util.emptyArray;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(CollectionMutations.prototype, "_collection", {
+                get: $util.oneOfGetter($oneOfFields = ["collection"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new CollectionMutations instance using the specified properties.
+             * @function create
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {ServerSync.CoexStateSync.ICollectionMutations=} [properties] Properties to set
+             * @returns {ServerSync.CoexStateSync.CollectionMutations} CollectionMutations instance
+             */
+            CollectionMutations.create = function create(properties) {
+                return new CollectionMutations(properties);
+            };
+
+            /**
+             * Encodes the specified CollectionMutations message. Does not implicitly {@link ServerSync.CoexStateSync.CollectionMutations.verify|verify} messages.
+             * @function encode
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {ServerSync.CoexStateSync.ICollectionMutations} message CollectionMutations message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CollectionMutations.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.collection != null && Object.hasOwnProperty.call(message, "collection"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.collection);
+                if (message.mutations != null && message.mutations.length)
+                    for (var i = 0; i < message.mutations.length; ++i)
+                        $root.ServerSync.CoexStateSync.Mutation.encode(message.mutations[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified CollectionMutations message, length delimited. Does not implicitly {@link ServerSync.CoexStateSync.CollectionMutations.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {ServerSync.CoexStateSync.ICollectionMutations} message CollectionMutations message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CollectionMutations.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a CollectionMutations message from the specified reader or buffer.
+             * @function decode
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {ServerSync.CoexStateSync.CollectionMutations} CollectionMutations
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CollectionMutations.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ServerSync.CoexStateSync.CollectionMutations();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.collection = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            if (!(message.mutations && message.mutations.length))
+                                message.mutations = [];
+                            message.mutations.push($root.ServerSync.CoexStateSync.Mutation.decode(reader, reader.uint32()));
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a CollectionMutations message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {ServerSync.CoexStateSync.CollectionMutations} CollectionMutations
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CollectionMutations.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a CollectionMutations message.
+             * @function verify
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CollectionMutations.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.collection != null && message.hasOwnProperty("collection")) {
+                    properties._collection = 1;
+                    if (!$util.isString(message.collection))
+                        return "collection: string expected";
+                }
+                if (message.mutations != null && message.hasOwnProperty("mutations")) {
+                    if (!Array.isArray(message.mutations))
+                        return "mutations: array expected";
+                    for (var i = 0; i < message.mutations.length; ++i) {
+                        var error = $root.ServerSync.CoexStateSync.Mutation.verify(message.mutations[i]);
+                        if (error)
+                            return "mutations." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a CollectionMutations message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {ServerSync.CoexStateSync.CollectionMutations} CollectionMutations
+             */
+            CollectionMutations.fromObject = function fromObject(object) {
+                if (object instanceof $root.ServerSync.CoexStateSync.CollectionMutations)
+                    return object;
+                var message = new $root.ServerSync.CoexStateSync.CollectionMutations();
+                if (object.collection != null)
+                    message.collection = String(object.collection);
+                if (object.mutations) {
+                    if (!Array.isArray(object.mutations))
+                        throw TypeError(".ServerSync.CoexStateSync.CollectionMutations.mutations: array expected");
+                    message.mutations = [];
+                    for (var i = 0; i < object.mutations.length; ++i) {
+                        if (typeof object.mutations[i] !== "object")
+                            throw TypeError(".ServerSync.CoexStateSync.CollectionMutations.mutations: object expected");
+                        message.mutations[i] = $root.ServerSync.CoexStateSync.Mutation.fromObject(object.mutations[i]);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a CollectionMutations message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {ServerSync.CoexStateSync.CollectionMutations} message CollectionMutations
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CollectionMutations.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.arrays || options.defaults)
+                    object.mutations = [];
+                if (message.collection != null && message.hasOwnProperty("collection")) {
+                    object.collection = message.collection;
+                    if (options.oneofs)
+                        object._collection = "collection";
+                }
+                if (message.mutations && message.mutations.length) {
+                    object.mutations = [];
+                    for (var j = 0; j < message.mutations.length; ++j)
+                        object.mutations[j] = $root.ServerSync.CoexStateSync.Mutation.toObject(message.mutations[j], options);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this CollectionMutations to JSON.
+             * @function toJSON
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CollectionMutations.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for CollectionMutations
+             * @function getTypeUrl
+             * @memberof ServerSync.CoexStateSync.CollectionMutations
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            CollectionMutations.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/ServerSync.CoexStateSync.CollectionMutations";
+            };
+
+            return CollectionMutations;
+        })();
+
+        CoexStateSync.Mutation = (function() {
+
+            /**
+             * Properties of a Mutation.
+             * @memberof ServerSync.CoexStateSync
+             * @interface IMutation
+             * @property {ServerSync.ISyncdIndex|null} [index] Mutation index
+             * @property {ServerSync.ISyncdValue|null} [value] Mutation value
+             * @property {number|Long|null} [dirtyVersion] Mutation dirtyVersion
+             * @property {ServerSync.SyncdMutation.SyncdOperation|null} [operation] Mutation operation
+             */
+
+            /**
+             * Constructs a new Mutation.
+             * @memberof ServerSync.CoexStateSync
+             * @classdesc Represents a Mutation.
+             * @implements IMutation
+             * @constructor
+             * @param {ServerSync.CoexStateSync.IMutation=} [properties] Properties to set
+             */
+            function Mutation(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Mutation index.
+             * @member {ServerSync.ISyncdIndex|null|undefined} index
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @instance
+             */
+            Mutation.prototype.index = null;
+
+            /**
+             * Mutation value.
+             * @member {ServerSync.ISyncdValue|null|undefined} value
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @instance
+             */
+            Mutation.prototype.value = null;
+
+            /**
+             * Mutation dirtyVersion.
+             * @member {number|Long|null|undefined} dirtyVersion
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @instance
+             */
+            Mutation.prototype.dirtyVersion = null;
+
+            /**
+             * Mutation operation.
+             * @member {ServerSync.SyncdMutation.SyncdOperation|null|undefined} operation
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @instance
+             */
+            Mutation.prototype.operation = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Mutation.prototype, "_index", {
+                get: $util.oneOfGetter($oneOfFields = ["index"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Mutation.prototype, "_value", {
+                get: $util.oneOfGetter($oneOfFields = ["value"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Mutation.prototype, "_dirtyVersion", {
+                get: $util.oneOfGetter($oneOfFields = ["dirtyVersion"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Mutation.prototype, "_operation", {
+                get: $util.oneOfGetter($oneOfFields = ["operation"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new Mutation instance using the specified properties.
+             * @function create
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {ServerSync.CoexStateSync.IMutation=} [properties] Properties to set
+             * @returns {ServerSync.CoexStateSync.Mutation} Mutation instance
+             */
+            Mutation.create = function create(properties) {
+                return new Mutation(properties);
+            };
+
+            /**
+             * Encodes the specified Mutation message. Does not implicitly {@link ServerSync.CoexStateSync.Mutation.verify|verify} messages.
+             * @function encode
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {ServerSync.CoexStateSync.IMutation} message Mutation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Mutation.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                    $root.ServerSync.SyncdIndex.encode(message.index, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                    $root.ServerSync.SyncdValue.encode(message.value, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                if (message.dirtyVersion != null && Object.hasOwnProperty.call(message, "dirtyVersion"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.dirtyVersion);
+                if (message.operation != null && Object.hasOwnProperty.call(message, "operation"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.operation);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Mutation message, length delimited. Does not implicitly {@link ServerSync.CoexStateSync.Mutation.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {ServerSync.CoexStateSync.IMutation} message Mutation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Mutation.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a Mutation message from the specified reader or buffer.
+             * @function decode
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {ServerSync.CoexStateSync.Mutation} Mutation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Mutation.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ServerSync.CoexStateSync.Mutation();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.index = $root.ServerSync.SyncdIndex.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 2: {
+                            message.value = $root.ServerSync.SyncdValue.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 3: {
+                            message.dirtyVersion = reader.uint64();
+                            break;
+                        }
+                    case 4: {
+                            message.operation = reader.int32();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a Mutation message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {ServerSync.CoexStateSync.Mutation} Mutation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Mutation.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a Mutation message.
+             * @function verify
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Mutation.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.index != null && message.hasOwnProperty("index")) {
+                    properties._index = 1;
+                    {
+                        var error = $root.ServerSync.SyncdIndex.verify(message.index);
+                        if (error)
+                            return "index." + error;
+                    }
+                }
+                if (message.value != null && message.hasOwnProperty("value")) {
+                    properties._value = 1;
+                    {
+                        var error = $root.ServerSync.SyncdValue.verify(message.value);
+                        if (error)
+                            return "value." + error;
+                    }
+                }
+                if (message.dirtyVersion != null && message.hasOwnProperty("dirtyVersion")) {
+                    properties._dirtyVersion = 1;
+                    if (!$util.isInteger(message.dirtyVersion) && !(message.dirtyVersion && $util.isInteger(message.dirtyVersion.low) && $util.isInteger(message.dirtyVersion.high)))
+                        return "dirtyVersion: integer|Long expected";
+                }
+                if (message.operation != null && message.hasOwnProperty("operation")) {
+                    properties._operation = 1;
+                    switch (message.operation) {
+                    default:
+                        return "operation: enum value expected";
+                    case 0:
+                    case 1:
+                        break;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a Mutation message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {ServerSync.CoexStateSync.Mutation} Mutation
+             */
+            Mutation.fromObject = function fromObject(object) {
+                if (object instanceof $root.ServerSync.CoexStateSync.Mutation)
+                    return object;
+                var message = new $root.ServerSync.CoexStateSync.Mutation();
+                if (object.index != null) {
+                    if (typeof object.index !== "object")
+                        throw TypeError(".ServerSync.CoexStateSync.Mutation.index: object expected");
+                    message.index = $root.ServerSync.SyncdIndex.fromObject(object.index);
+                }
+                if (object.value != null) {
+                    if (typeof object.value !== "object")
+                        throw TypeError(".ServerSync.CoexStateSync.Mutation.value: object expected");
+                    message.value = $root.ServerSync.SyncdValue.fromObject(object.value);
+                }
+                if (object.dirtyVersion != null)
+                    if ($util.Long)
+                        (message.dirtyVersion = $util.Long.fromValue(object.dirtyVersion)).unsigned = true;
+                    else if (typeof object.dirtyVersion === "string")
+                        message.dirtyVersion = parseInt(object.dirtyVersion, 10);
+                    else if (typeof object.dirtyVersion === "number")
+                        message.dirtyVersion = object.dirtyVersion;
+                    else if (typeof object.dirtyVersion === "object")
+                        message.dirtyVersion = new $util.LongBits(object.dirtyVersion.low >>> 0, object.dirtyVersion.high >>> 0).toNumber(true);
+                switch (object.operation) {
+                default:
+                    if (typeof object.operation === "number") {
+                        message.operation = object.operation;
+                        break;
+                    }
+                    break;
+                case "SET":
+                case 0:
+                    message.operation = 0;
+                    break;
+                case "REMOVE":
+                case 1:
+                    message.operation = 1;
+                    break;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a Mutation message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {ServerSync.CoexStateSync.Mutation} message Mutation
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Mutation.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.index != null && message.hasOwnProperty("index")) {
+                    object.index = $root.ServerSync.SyncdIndex.toObject(message.index, options);
+                    if (options.oneofs)
+                        object._index = "index";
+                }
+                if (message.value != null && message.hasOwnProperty("value")) {
+                    object.value = $root.ServerSync.SyncdValue.toObject(message.value, options);
+                    if (options.oneofs)
+                        object._value = "value";
+                }
+                if (message.dirtyVersion != null && message.hasOwnProperty("dirtyVersion")) {
+                    if (typeof message.dirtyVersion === "number")
+                        object.dirtyVersion = options.longs === String ? String(message.dirtyVersion) : message.dirtyVersion;
+                    else
+                        object.dirtyVersion = options.longs === String ? $util.Long.prototype.toString.call(message.dirtyVersion) : options.longs === Number ? new $util.LongBits(message.dirtyVersion.low >>> 0, message.dirtyVersion.high >>> 0).toNumber(true) : message.dirtyVersion;
+                    if (options.oneofs)
+                        object._dirtyVersion = "dirtyVersion";
+                }
+                if (message.operation != null && message.hasOwnProperty("operation")) {
+                    object.operation = options.enums === String ? $root.ServerSync.SyncdMutation.SyncdOperation[message.operation] === undefined ? message.operation : $root.ServerSync.SyncdMutation.SyncdOperation[message.operation] : message.operation;
+                    if (options.oneofs)
+                        object._operation = "operation";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this Mutation to JSON.
+             * @function toJSON
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Mutation.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Mutation
+             * @function getTypeUrl
+             * @memberof ServerSync.CoexStateSync.Mutation
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Mutation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/ServerSync.CoexStateSync.Mutation";
+            };
+
+            return Mutation;
+        })();
+
+        return CoexStateSync;
+    })();
+
     ServerSync.SyncdPatch = (function() {
 
         /**
