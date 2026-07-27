@@ -129,7 +129,11 @@ async function startBot() {
 
     // Listen to messages
     sock.ev.on('messages.upsert', async (update) => {
-        console.log(`[messages.upsert] Event received. Type: ${update.type}, Messages count: ${update.messages?.length || 0}`);
+        console.log(" \n")
+        console.log("Update : ", require('util').inspect(update, { depth: null, colors: true }))
+        console.log(" \n")
+
+        //        console.log(`[messages.upsert] Event received. Type: ${update.type}, Messages count: ${update.messages?.length || 0}`);
         try {
             if (!update.messages?.length) return;
 
