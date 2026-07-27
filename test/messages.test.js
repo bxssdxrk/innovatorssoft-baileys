@@ -64,3 +64,45 @@ describe('generateWAMessageContent Buttons Parsing', () => {
         expect(params.sections[0].rows[0].id).toBe('#SecretIngredient')
     })
 })
+
+describe('Interactive Carousel Biz Node', () => {
+    const { shouldIncludeBizBinaryNode } = require('../lib/Utils/messages')
+    const { getBizBinaryNode } = require('../lib/WABinary/generic-utils')
+
+    test('shouldIncludeBizBinaryNode returns true for interactive carouselMessage', () => {
+        const message = {
+            interactiveMessage: {
+                carouselMessage: {
+                    cards: [
+                        {
+                            nativeFlowMessage: {
+                                buttons: [{ name: 'quick_reply' }]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+        expect(shouldIncludeBizBinaryNode(message)).toBe(true)
+    })
+
+    test('getBizBinaryNode returns biz binary node for carouselMessage', () => {
+        const message = {
+            interactiveMessage: {
+                carouselMessage: {
+                    cards: [
+                        {
+                            nativeFlowMessage: {
+                                buttons: [{ name: 'cta_url' }]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+        const bizNode = getBizBinaryNode(message)
+        expect(bizNode).toBeDefined()
+        expect(bizNode.tag).toBe('biz')
+        expect(bizNode.content).toBeDefined()
+    })
+})
