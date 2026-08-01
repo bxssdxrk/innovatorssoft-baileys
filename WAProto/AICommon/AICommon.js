@@ -3421,6 +3421,7 @@ $root.AICommon = (function() {
                 case 54:
                 case 55:
                 case 56:
+                case 57:
                     break;
                 }
             }
@@ -3642,6 +3643,10 @@ $root.AICommon = (function() {
             case "NEW_CHAT_LIST":
             case 56:
                 message.botEntryPointOrigin = 56;
+                break;
+            case "CONTACTS_TAB":
+            case 57:
+                message.botEntryPointOrigin = 57;
                 break;
             }
             if (object.forwardScore != null)
@@ -17934,6 +17939,9 @@ $root.AICommon = (function() {
                     case 64:
                     case 65:
                     case 66:
+                    case 67:
+                    case 68:
+                    case 69:
                         break;
                     }
             }
@@ -18231,6 +18239,18 @@ $root.AICommon = (function() {
                     case 66:
                         message.capabilities[i] = 66;
                         break;
+                    case "AI_RICH_RESPONSE_ARTIFACTS_ENABLED":
+                    case 67:
+                        message.capabilities[i] = 67;
+                        break;
+                    case "AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED":
+                    case 68:
+                        message.capabilities[i] = 68;
+                        break;
+                    case "AI_RICH_RESPONSE_REMINDERS_ENABLED":
+                    case 69:
+                        message.capabilities[i] = 69;
+                        break;
                     }
             }
             return message;
@@ -18356,6 +18376,9 @@ $root.AICommon = (function() {
          * @property {number} AI_RICH_RESPONSE_MAPS_V2_ENABLED=64 AI_RICH_RESPONSE_MAPS_V2_ENABLED value
          * @property {number} AI_SUBSCRIPTION_METERING_ENABLED=65 AI_SUBSCRIPTION_METERING_ENABLED value
          * @property {number} RICH_RESPONSE_SPORTS_WIDGET_ENABLED=66 RICH_RESPONSE_SPORTS_WIDGET_ENABLED value
+         * @property {number} AI_RICH_RESPONSE_ARTIFACTS_ENABLED=67 AI_RICH_RESPONSE_ARTIFACTS_ENABLED value
+         * @property {number} AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED=68 AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED value
+         * @property {number} AI_RICH_RESPONSE_REMINDERS_ENABLED=69 AI_RICH_RESPONSE_REMINDERS_ENABLED value
          */
         BotCapabilityMetadata.BotCapabilityType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -18426,6 +18449,9 @@ $root.AICommon = (function() {
             values[valuesById[64] = "AI_RICH_RESPONSE_MAPS_V2_ENABLED"] = 64;
             values[valuesById[65] = "AI_SUBSCRIPTION_METERING_ENABLED"] = 65;
             values[valuesById[66] = "RICH_RESPONSE_SPORTS_WIDGET_ENABLED"] = 66;
+            values[valuesById[67] = "AI_RICH_RESPONSE_ARTIFACTS_ENABLED"] = 67;
+            values[valuesById[68] = "AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED"] = 68;
+            values[valuesById[69] = "AI_RICH_RESPONSE_REMINDERS_ENABLED"] = 69;
             return values;
         })();
 
@@ -22282,6 +22308,7 @@ $root.AICommon = (function() {
                 case 54:
                 case 55:
                 case 56:
+                case 57:
                     break;
                 }
             }
@@ -22513,6 +22540,10 @@ $root.AICommon = (function() {
             case "NEW_CHAT_LIST":
             case 56:
                 message.destinationEntryPoint = 56;
+                break;
+            case "CONTACTS_TAB":
+            case 57:
+                message.destinationEntryPoint = 57;
                 break;
             }
             switch (object.threadOrigin) {
@@ -26745,6 +26776,7 @@ $root.AICommon = (function() {
      * @property {number} GROUP_MEMBER=54 GROUP_MEMBER value
      * @property {number} CHATLIST_SEARCH=55 CHATLIST_SEARCH value
      * @property {number} NEW_CHAT_LIST=56 NEW_CHAT_LIST value
+     * @property {number} CONTACTS_TAB=57 CONTACTS_TAB value
      */
     AICommon.BotMetricsEntryPoint = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -26796,6 +26828,7 @@ $root.AICommon = (function() {
         values[valuesById[54] = "GROUP_MEMBER"] = 54;
         values[valuesById[55] = "CHATLIST_SEARCH"] = 55;
         values[valuesById[56] = "NEW_CHAT_LIST"] = 56;
+        values[valuesById[57] = "CONTACTS_TAB"] = 57;
         return values;
     })();
 

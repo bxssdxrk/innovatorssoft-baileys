@@ -31571,6 +31571,7 @@ $root.E2E = (function() {
              * @property {string|null} [deeplinkPayload] Call deeplinkPayload
              * @property {E2E.IMessageContextInfo|null} [messageContextInfo] Call messageContextInfo
              * @property {number|null} [callEntryPoint] Call callEntryPoint
+             * @property {string|null} [callReason] Call callReason
              */
 
             /**
@@ -31676,6 +31677,14 @@ $root.E2E = (function() {
              */
             Call.prototype.callEntryPoint = null;
 
+            /**
+             * Call callReason.
+             * @member {string|null|undefined} callReason
+             * @memberof E2E.Message.Call
+             * @instance
+             */
+            Call.prototype.callReason = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
@@ -31745,6 +31754,12 @@ $root.E2E = (function() {
                 set: $util.oneOfSetter($oneOfFields)
             });
 
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(Call.prototype, "_callReason", {
+                get: $util.oneOfGetter($oneOfFields = ["callReason"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
             /**
              * Creates a new Call instance using the specified properties.
              * @function create
@@ -31791,6 +31806,8 @@ $root.E2E = (function() {
                     $root.E2E.MessageContextInfo.encode(message.messageContextInfo, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                 if (message.callEntryPoint != null && Object.hasOwnProperty.call(message, "callEntryPoint"))
                     writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.callEntryPoint);
+                if (message.callReason != null && Object.hasOwnProperty.call(message, "callReason"))
+                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.callReason);
                 return writer;
             };
 
@@ -31869,6 +31886,10 @@ $root.E2E = (function() {
                         }
                     case 11: {
                             message.callEntryPoint = reader.uint32();
+                            break;
+                        }
+                    case 12: {
+                            message.callReason = reader.string();
                             break;
                         }
                     default:
@@ -31968,6 +31989,11 @@ $root.E2E = (function() {
                     if (!$util.isInteger(message.callEntryPoint))
                         return "callEntryPoint: integer expected";
                 }
+                if (message.callReason != null && message.hasOwnProperty("callReason")) {
+                    properties._callReason = 1;
+                    if (!$util.isString(message.callReason))
+                        return "callReason: string expected";
+                }
                 return null;
             };
 
@@ -32020,6 +32046,8 @@ $root.E2E = (function() {
                 }
                 if (object.callEntryPoint != null)
                     message.callEntryPoint = object.callEntryPoint >>> 0;
+                if (object.callReason != null)
+                    message.callReason = String(object.callReason);
                 return message;
             };
 
@@ -32090,6 +32118,11 @@ $root.E2E = (function() {
                     object.callEntryPoint = message.callEntryPoint;
                     if (options.oneofs)
                         object._callEntryPoint = "callEntryPoint";
+                }
+                if (message.callReason != null && message.hasOwnProperty("callReason")) {
+                    object.callReason = message.callReason;
+                    if (options.oneofs)
+                        object._callReason = "callReason";
                 }
                 return object;
             };
@@ -64160,6 +64193,7 @@ $root.E2E = (function() {
                     case 11:
                     case 12:
                     case 13:
+                    case 14:
                         break;
                     }
                 }
@@ -64331,6 +64365,10 @@ $root.E2E = (function() {
                 case "BUSINESS_BROADCAST_INSIGHTS_REFRESH":
                 case 13:
                     message.peerDataOperationRequestType = 13;
+                    break;
+                case "CONTACT_REFRESH_REQUEST":
+                case 14:
+                    message.peerDataOperationRequestType = 14;
                     break;
                 }
                 if (object.requestStickerReupload) {
@@ -67808,6 +67846,7 @@ $root.E2E = (function() {
                     case 11:
                     case 12:
                     case 13:
+                    case 14:
                         break;
                     }
                 }
@@ -67903,6 +67942,10 @@ $root.E2E = (function() {
                 case 13:
                     message.peerDataOperationRequestType = 13;
                     break;
+                case "CONTACT_REFRESH_REQUEST":
+                case 14:
+                    message.peerDataOperationRequestType = 14;
+                    break;
                 }
                 if (object.stanzaId != null)
                     message.stanzaId = String(object.stanzaId);
@@ -67996,6 +68039,7 @@ $root.E2E = (function() {
                  * @property {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IHistorySyncChunkRetryResponse|null} [historySyncChunkRetryResponse] PeerDataOperationResult historySyncChunkRetryResponse
                  * @property {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IFlowResponsesCsvBundle|null} [flowResponsesCsvBundle] PeerDataOperationResult flowResponsesCsvBundle
                  * @property {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IBizBroadcastInsightsContactListResponse|null} [bizBroadcastInsightsContactListResponse] PeerDataOperationResult bizBroadcastInsightsContactListResponse
+                 * @property {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse|null} [contactRefreshResponse] PeerDataOperationResult contactRefreshResponse
                  */
 
                 /**
@@ -68109,6 +68153,14 @@ $root.E2E = (function() {
                  */
                 PeerDataOperationResult.prototype.bizBroadcastInsightsContactListResponse = null;
 
+                /**
+                 * PeerDataOperationResult contactRefreshResponse.
+                 * @member {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse|null|undefined} contactRefreshResponse
+                 * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult
+                 * @instance
+                 */
+                PeerDataOperationResult.prototype.contactRefreshResponse = null;
+
                 // OneOf field names bound to virtual getters and setters
                 var $oneOfFields;
 
@@ -68184,6 +68236,12 @@ $root.E2E = (function() {
                     set: $util.oneOfSetter($oneOfFields)
                 });
 
+                // Virtual OneOf for proto3 optional field
+                Object.defineProperty(PeerDataOperationResult.prototype, "_contactRefreshResponse", {
+                    get: $util.oneOfGetter($oneOfFields = ["contactRefreshResponse"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
                 /**
                  * Creates a new PeerDataOperationResult instance using the specified properties.
                  * @function create
@@ -68232,6 +68290,8 @@ $root.E2E = (function() {
                         $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.FlowResponsesCsvBundle.encode(message.flowResponsesCsvBundle, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                     if (message.bizBroadcastInsightsContactListResponse != null && Object.hasOwnProperty.call(message, "bizBroadcastInsightsContactListResponse"))
                         $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.BizBroadcastInsightsContactListResponse.encode(message.bizBroadcastInsightsContactListResponse, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                    if (message.contactRefreshResponse != null && Object.hasOwnProperty.call(message, "contactRefreshResponse"))
+                        $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.encode(message.contactRefreshResponse, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                     return writer;
                 };
 
@@ -68314,6 +68374,10 @@ $root.E2E = (function() {
                             }
                         case 12: {
                                 message.bizBroadcastInsightsContactListResponse = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.BizBroadcastInsightsContactListResponse.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 13: {
+                                message.contactRefreshResponse = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -68452,6 +68516,14 @@ $root.E2E = (function() {
                                 return "bizBroadcastInsightsContactListResponse." + error;
                         }
                     }
+                    if (message.contactRefreshResponse != null && message.hasOwnProperty("contactRefreshResponse")) {
+                        properties._contactRefreshResponse = 1;
+                        {
+                            var error = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.verify(message.contactRefreshResponse);
+                            if (error)
+                                return "contactRefreshResponse." + error;
+                        }
+                    }
                     return null;
                 };
 
@@ -68546,6 +68618,11 @@ $root.E2E = (function() {
                             throw TypeError(".E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.bizBroadcastInsightsContactListResponse: object expected");
                         message.bizBroadcastInsightsContactListResponse = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.BizBroadcastInsightsContactListResponse.fromObject(object.bizBroadcastInsightsContactListResponse);
                     }
+                    if (object.contactRefreshResponse != null) {
+                        if (typeof object.contactRefreshResponse !== "object")
+                            throw TypeError(".E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.contactRefreshResponse: object expected");
+                        message.contactRefreshResponse = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.fromObject(object.contactRefreshResponse);
+                    }
                     return message;
                 };
 
@@ -68621,6 +68698,11 @@ $root.E2E = (function() {
                         object.bizBroadcastInsightsContactListResponse = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.BizBroadcastInsightsContactListResponse.toObject(message.bizBroadcastInsightsContactListResponse, options);
                         if (options.oneofs)
                             object._bizBroadcastInsightsContactListResponse = "bizBroadcastInsightsContactListResponse";
+                    }
+                    if (message.contactRefreshResponse != null && message.hasOwnProperty("contactRefreshResponse")) {
+                        object.contactRefreshResponse = $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.toObject(message.contactRefreshResponse, options);
+                        if (options.oneofs)
+                            object._contactRefreshResponse = "contactRefreshResponse";
                     }
                     return object;
                 };
@@ -69742,6 +69824,350 @@ $root.E2E = (function() {
                     };
 
                     return CompanionMetaNonceFetchResponse;
+                })();
+
+                PeerDataOperationResult.ContactRefreshResponse = (function() {
+
+                    /**
+                     * Properties of a ContactRefreshResponse.
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult
+                     * @interface IContactRefreshResponse
+                     * @property {Array.<string>|null} [coveredRequestIds] ContactRefreshResponse coveredRequestIds
+                     * @property {number|Long|null} [collectionVersion] ContactRefreshResponse collectionVersion
+                     * @property {number|Long|null} [primaryDurationMs] ContactRefreshResponse primaryDurationMs
+                     * @property {number|null} [uniqueContactCount] ContactRefreshResponse uniqueContactCount
+                     */
+
+                    /**
+                     * Constructs a new ContactRefreshResponse.
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult
+                     * @classdesc Represents a ContactRefreshResponse.
+                     * @implements IContactRefreshResponse
+                     * @constructor
+                     * @param {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse=} [properties] Properties to set
+                     */
+                    function ContactRefreshResponse(properties) {
+                        this.coveredRequestIds = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * ContactRefreshResponse coveredRequestIds.
+                     * @member {Array.<string>} coveredRequestIds
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @instance
+                     */
+                    ContactRefreshResponse.prototype.coveredRequestIds = $util.emptyArray;
+
+                    /**
+                     * ContactRefreshResponse collectionVersion.
+                     * @member {number|Long|null|undefined} collectionVersion
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @instance
+                     */
+                    ContactRefreshResponse.prototype.collectionVersion = null;
+
+                    /**
+                     * ContactRefreshResponse primaryDurationMs.
+                     * @member {number|Long|null|undefined} primaryDurationMs
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @instance
+                     */
+                    ContactRefreshResponse.prototype.primaryDurationMs = null;
+
+                    /**
+                     * ContactRefreshResponse uniqueContactCount.
+                     * @member {number|null|undefined} uniqueContactCount
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @instance
+                     */
+                    ContactRefreshResponse.prototype.uniqueContactCount = null;
+
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(ContactRefreshResponse.prototype, "_collectionVersion", {
+                        get: $util.oneOfGetter($oneOfFields = ["collectionVersion"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(ContactRefreshResponse.prototype, "_primaryDurationMs", {
+                        get: $util.oneOfGetter($oneOfFields = ["primaryDurationMs"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+
+                    // Virtual OneOf for proto3 optional field
+                    Object.defineProperty(ContactRefreshResponse.prototype, "_uniqueContactCount", {
+                        get: $util.oneOfGetter($oneOfFields = ["uniqueContactCount"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+
+                    /**
+                     * Creates a new ContactRefreshResponse instance using the specified properties.
+                     * @function create
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse=} [properties] Properties to set
+                     * @returns {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse} ContactRefreshResponse instance
+                     */
+                    ContactRefreshResponse.create = function create(properties) {
+                        return new ContactRefreshResponse(properties);
+                    };
+
+                    /**
+                     * Encodes the specified ContactRefreshResponse message. Does not implicitly {@link E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse} message ContactRefreshResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ContactRefreshResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.coveredRequestIds != null && message.coveredRequestIds.length)
+                            for (var i = 0; i < message.coveredRequestIds.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.coveredRequestIds[i]);
+                        if (message.collectionVersion != null && Object.hasOwnProperty.call(message, "collectionVersion"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.collectionVersion);
+                        if (message.primaryDurationMs != null && Object.hasOwnProperty.call(message, "primaryDurationMs"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int64(message.primaryDurationMs);
+                        if (message.uniqueContactCount != null && Object.hasOwnProperty.call(message, "uniqueContactCount"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.uniqueContactCount);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified ContactRefreshResponse message, length delimited. Does not implicitly {@link E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse} message ContactRefreshResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ContactRefreshResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a ContactRefreshResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse} ContactRefreshResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ContactRefreshResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.coveredRequestIds && message.coveredRequestIds.length))
+                                        message.coveredRequestIds = [];
+                                    message.coveredRequestIds.push(reader.string());
+                                    break;
+                                }
+                            case 2: {
+                                    message.collectionVersion = reader.uint64();
+                                    break;
+                                }
+                            case 3: {
+                                    message.primaryDurationMs = reader.int64();
+                                    break;
+                                }
+                            case 4: {
+                                    message.uniqueContactCount = reader.uint32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a ContactRefreshResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse} ContactRefreshResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ContactRefreshResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a ContactRefreshResponse message.
+                     * @function verify
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ContactRefreshResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.coveredRequestIds != null && message.hasOwnProperty("coveredRequestIds")) {
+                            if (!Array.isArray(message.coveredRequestIds))
+                                return "coveredRequestIds: array expected";
+                            for (var i = 0; i < message.coveredRequestIds.length; ++i)
+                                if (!$util.isString(message.coveredRequestIds[i]))
+                                    return "coveredRequestIds: string[] expected";
+                        }
+                        if (message.collectionVersion != null && message.hasOwnProperty("collectionVersion")) {
+                            properties._collectionVersion = 1;
+                            if (!$util.isInteger(message.collectionVersion) && !(message.collectionVersion && $util.isInteger(message.collectionVersion.low) && $util.isInteger(message.collectionVersion.high)))
+                                return "collectionVersion: integer|Long expected";
+                        }
+                        if (message.primaryDurationMs != null && message.hasOwnProperty("primaryDurationMs")) {
+                            properties._primaryDurationMs = 1;
+                            if (!$util.isInteger(message.primaryDurationMs) && !(message.primaryDurationMs && $util.isInteger(message.primaryDurationMs.low) && $util.isInteger(message.primaryDurationMs.high)))
+                                return "primaryDurationMs: integer|Long expected";
+                        }
+                        if (message.uniqueContactCount != null && message.hasOwnProperty("uniqueContactCount")) {
+                            properties._uniqueContactCount = 1;
+                            if (!$util.isInteger(message.uniqueContactCount))
+                                return "uniqueContactCount: integer expected";
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates a ContactRefreshResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse} ContactRefreshResponse
+                     */
+                    ContactRefreshResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse)
+                            return object;
+                        var message = new $root.E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse();
+                        if (object.coveredRequestIds) {
+                            if (!Array.isArray(object.coveredRequestIds))
+                                throw TypeError(".E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.coveredRequestIds: array expected");
+                            message.coveredRequestIds = [];
+                            for (var i = 0; i < object.coveredRequestIds.length; ++i)
+                                message.coveredRequestIds[i] = String(object.coveredRequestIds[i]);
+                        }
+                        if (object.collectionVersion != null)
+                            if ($util.Long)
+                                (message.collectionVersion = $util.Long.fromValue(object.collectionVersion)).unsigned = true;
+                            else if (typeof object.collectionVersion === "string")
+                                message.collectionVersion = parseInt(object.collectionVersion, 10);
+                            else if (typeof object.collectionVersion === "number")
+                                message.collectionVersion = object.collectionVersion;
+                            else if (typeof object.collectionVersion === "object")
+                                message.collectionVersion = new $util.LongBits(object.collectionVersion.low >>> 0, object.collectionVersion.high >>> 0).toNumber(true);
+                        if (object.primaryDurationMs != null)
+                            if ($util.Long)
+                                (message.primaryDurationMs = $util.Long.fromValue(object.primaryDurationMs)).unsigned = false;
+                            else if (typeof object.primaryDurationMs === "string")
+                                message.primaryDurationMs = parseInt(object.primaryDurationMs, 10);
+                            else if (typeof object.primaryDurationMs === "number")
+                                message.primaryDurationMs = object.primaryDurationMs;
+                            else if (typeof object.primaryDurationMs === "object")
+                                message.primaryDurationMs = new $util.LongBits(object.primaryDurationMs.low >>> 0, object.primaryDurationMs.high >>> 0).toNumber();
+                        if (object.uniqueContactCount != null)
+                            message.uniqueContactCount = object.uniqueContactCount >>> 0;
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a ContactRefreshResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse} message ContactRefreshResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ContactRefreshResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.coveredRequestIds = [];
+                        if (message.coveredRequestIds && message.coveredRequestIds.length) {
+                            object.coveredRequestIds = [];
+                            for (var j = 0; j < message.coveredRequestIds.length; ++j)
+                                object.coveredRequestIds[j] = message.coveredRequestIds[j];
+                        }
+                        if (message.collectionVersion != null && message.hasOwnProperty("collectionVersion")) {
+                            if (typeof message.collectionVersion === "number")
+                                object.collectionVersion = options.longs === String ? String(message.collectionVersion) : message.collectionVersion;
+                            else
+                                object.collectionVersion = options.longs === String ? $util.Long.prototype.toString.call(message.collectionVersion) : options.longs === Number ? new $util.LongBits(message.collectionVersion.low >>> 0, message.collectionVersion.high >>> 0).toNumber(true) : message.collectionVersion;
+                            if (options.oneofs)
+                                object._collectionVersion = "collectionVersion";
+                        }
+                        if (message.primaryDurationMs != null && message.hasOwnProperty("primaryDurationMs")) {
+                            if (typeof message.primaryDurationMs === "number")
+                                object.primaryDurationMs = options.longs === String ? String(message.primaryDurationMs) : message.primaryDurationMs;
+                            else
+                                object.primaryDurationMs = options.longs === String ? $util.Long.prototype.toString.call(message.primaryDurationMs) : options.longs === Number ? new $util.LongBits(message.primaryDurationMs.low >>> 0, message.primaryDurationMs.high >>> 0).toNumber() : message.primaryDurationMs;
+                            if (options.oneofs)
+                                object._primaryDurationMs = "primaryDurationMs";
+                        }
+                        if (message.uniqueContactCount != null && message.hasOwnProperty("uniqueContactCount")) {
+                            object.uniqueContactCount = message.uniqueContactCount;
+                            if (options.oneofs)
+                                object._uniqueContactCount = "uniqueContactCount";
+                        }
+                        return object;
+                    };
+
+                    /**
+                     * Converts this ContactRefreshResponse to JSON.
+                     * @function toJSON
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ContactRefreshResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for ContactRefreshResponse
+                     * @function getTypeUrl
+                     * @memberof E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ContactRefreshResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse";
+                    };
+
+                    return ContactRefreshResponse;
                 })();
 
                 PeerDataOperationResult.FlowResponsesCsvBundle = (function() {
@@ -73078,6 +73504,7 @@ $root.E2E = (function() {
          * @property {number} GALAXY_FLOW_ACTION=11 GALAXY_FLOW_ACTION value
          * @property {number} BUSINESS_BROADCAST_INSIGHTS_DELIVERED_TO=12 BUSINESS_BROADCAST_INSIGHTS_DELIVERED_TO value
          * @property {number} BUSINESS_BROADCAST_INSIGHTS_REFRESH=13 BUSINESS_BROADCAST_INSIGHTS_REFRESH value
+         * @property {number} CONTACT_REFRESH_REQUEST=14 CONTACT_REFRESH_REQUEST value
          */
         Message.PeerDataOperationRequestType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -73095,6 +73522,7 @@ $root.E2E = (function() {
             values[valuesById[11] = "GALAXY_FLOW_ACTION"] = 11;
             values[valuesById[12] = "BUSINESS_BROADCAST_INSIGHTS_DELIVERED_TO"] = 12;
             values[valuesById[13] = "BUSINESS_BROADCAST_INSIGHTS_REFRESH"] = 13;
+            values[valuesById[14] = "CONTACT_REFRESH_REQUEST"] = 14;
             return values;
         })();
 
@@ -77922,6 +78350,7 @@ $root.E2E = (function() {
              * @property {AICommon.IAIMetadataOperation|null} [aiMetadataOperation] ProtocolMessage aiMetadataOperation
              * @property {E2E.Message.IMarkAsVerifiedAction|null} [markAsVerifiedAction] ProtocolMessage markAsVerifiedAction
              * @property {ServerSync.ICoexStateSync|null} [coexStateSync] ProtocolMessage coexStateSync
+             * @property {E2E.Message.ISyncRequestMutationRetry|null} [syncRequestMutationRetry] ProtocolMessage syncRequestMutationRetry
              */
 
             /**
@@ -78179,6 +78608,14 @@ $root.E2E = (function() {
              */
             ProtocolMessage.prototype.coexStateSync = null;
 
+            /**
+             * ProtocolMessage syncRequestMutationRetry.
+             * @member {E2E.Message.ISyncRequestMutationRetry|null|undefined} syncRequestMutationRetry
+             * @memberof E2E.Message.ProtocolMessage
+             * @instance
+             */
+            ProtocolMessage.prototype.syncRequestMutationRetry = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
@@ -78362,6 +78799,12 @@ $root.E2E = (function() {
                 set: $util.oneOfSetter($oneOfFields)
             });
 
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(ProtocolMessage.prototype, "_syncRequestMutationRetry", {
+                get: $util.oneOfGetter($oneOfFields = ["syncRequestMutationRetry"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
             /**
              * Creates a new ProtocolMessage instance using the specified properties.
              * @function create
@@ -78446,6 +78889,8 @@ $root.E2E = (function() {
                     $root.E2E.Message.MarkAsVerifiedAction.encode(message.markAsVerifiedAction, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                 if (message.coexStateSync != null && Object.hasOwnProperty.call(message, "coexStateSync"))
                     $root.ServerSync.CoexStateSync.encode(message.coexStateSync, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                if (message.syncRequestMutationRetry != null && Object.hasOwnProperty.call(message, "syncRequestMutationRetry"))
+                    $root.E2E.Message.SyncRequestMutationRetry.encode(message.syncRequestMutationRetry, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                 return writer;
             };
 
@@ -78602,6 +79047,10 @@ $root.E2E = (function() {
                             message.coexStateSync = $root.ServerSync.CoexStateSync.decode(reader, reader.uint32());
                             break;
                         }
+                    case 34: {
+                            message.syncRequestMutationRetry = $root.E2E.Message.SyncRequestMutationRetry.decode(reader, reader.uint32());
+                            break;
+                        }
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -78683,6 +79132,7 @@ $root.E2E = (function() {
                     case 35:
                     case 36:
                     case 37:
+                    case 38:
                         break;
                     }
                 }
@@ -78892,6 +79342,14 @@ $root.E2E = (function() {
                             return "coexStateSync." + error;
                     }
                 }
+                if (message.syncRequestMutationRetry != null && message.hasOwnProperty("syncRequestMutationRetry")) {
+                    properties._syncRequestMutationRetry = 1;
+                    {
+                        var error = $root.E2E.Message.SyncRequestMutationRetry.verify(message.syncRequestMutationRetry);
+                        if (error)
+                            return "syncRequestMutationRetry." + error;
+                    }
+                }
                 return null;
             };
 
@@ -79047,6 +79505,10 @@ $root.E2E = (function() {
                 case 37:
                     message.type = 37;
                     break;
+                case "SYNC_REQUEST_MUTATION_RETRY":
+                case 38:
+                    message.type = 38;
+                    break;
                 }
                 if (object.ephemeralExpiration != null)
                     message.ephemeralExpiration = object.ephemeralExpiration >>> 0;
@@ -79186,6 +79648,11 @@ $root.E2E = (function() {
                     if (typeof object.coexStateSync !== "object")
                         throw TypeError(".E2E.Message.ProtocolMessage.coexStateSync: object expected");
                     message.coexStateSync = $root.ServerSync.CoexStateSync.fromObject(object.coexStateSync);
+                }
+                if (object.syncRequestMutationRetry != null) {
+                    if (typeof object.syncRequestMutationRetry !== "object")
+                        throw TypeError(".E2E.Message.ProtocolMessage.syncRequestMutationRetry: object expected");
+                    message.syncRequestMutationRetry = $root.E2E.Message.SyncRequestMutationRetry.fromObject(object.syncRequestMutationRetry);
                 }
                 return message;
             };
@@ -79359,6 +79826,11 @@ $root.E2E = (function() {
                     if (options.oneofs)
                         object._coexStateSync = "coexStateSync";
                 }
+                if (message.syncRequestMutationRetry != null && message.hasOwnProperty("syncRequestMutationRetry")) {
+                    object.syncRequestMutationRetry = $root.E2E.Message.SyncRequestMutationRetry.toObject(message.syncRequestMutationRetry, options);
+                    if (options.oneofs)
+                        object._syncRequestMutationRetry = "syncRequestMutationRetry";
+                }
                 return object;
             };
 
@@ -79424,6 +79896,7 @@ $root.E2E = (function() {
              * @property {number} AI_METADATA_OPERATION=35 AI_METADATA_OPERATION value
              * @property {number} MARK_AS_VERIFIED_ACTION=36 MARK_AS_VERIFIED_ACTION value
              * @property {number} COEX_STATE_SYNC=37 COEX_STATE_SYNC value
+             * @property {number} SYNC_REQUEST_MUTATION_RETRY=38 SYNC_REQUEST_MUTATION_RETRY value
              */
             ProtocolMessage.Type = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -79459,6 +79932,7 @@ $root.E2E = (function() {
                 values[valuesById[35] = "AI_METADATA_OPERATION"] = 35;
                 values[valuesById[36] = "MARK_AS_VERIFIED_ACTION"] = 36;
                 values[valuesById[37] = "COEX_STATE_SYNC"] = 37;
+                values[valuesById[38] = "SYNC_REQUEST_MUTATION_RETRY"] = 38;
                 return values;
             })();
 
@@ -87940,6 +88414,530 @@ $root.E2E = (function() {
             };
 
             return StickerSyncRMRMessage;
+        })();
+
+        Message.SyncRequestMutationRetry = (function() {
+
+            /**
+             * Properties of a SyncRequestMutationRetry.
+             * @memberof E2E.Message
+             * @interface ISyncRequestMutationRetry
+             * @property {Array.<E2E.Message.SyncRequestMutationRetry.ICollection>|null} [collections] SyncRequestMutationRetry collections
+             * @property {number|null} [count] SyncRequestMutationRetry count
+             */
+
+            /**
+             * Constructs a new SyncRequestMutationRetry.
+             * @memberof E2E.Message
+             * @classdesc Represents a SyncRequestMutationRetry.
+             * @implements ISyncRequestMutationRetry
+             * @constructor
+             * @param {E2E.Message.ISyncRequestMutationRetry=} [properties] Properties to set
+             */
+            function SyncRequestMutationRetry(properties) {
+                this.collections = [];
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * SyncRequestMutationRetry collections.
+             * @member {Array.<E2E.Message.SyncRequestMutationRetry.ICollection>} collections
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @instance
+             */
+            SyncRequestMutationRetry.prototype.collections = $util.emptyArray;
+
+            /**
+             * SyncRequestMutationRetry count.
+             * @member {number|null|undefined} count
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @instance
+             */
+            SyncRequestMutationRetry.prototype.count = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(SyncRequestMutationRetry.prototype, "_count", {
+                get: $util.oneOfGetter($oneOfFields = ["count"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new SyncRequestMutationRetry instance using the specified properties.
+             * @function create
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {E2E.Message.ISyncRequestMutationRetry=} [properties] Properties to set
+             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry instance
+             */
+            SyncRequestMutationRetry.create = function create(properties) {
+                return new SyncRequestMutationRetry(properties);
+            };
+
+            /**
+             * Encodes the specified SyncRequestMutationRetry message. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.verify|verify} messages.
+             * @function encode
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {E2E.Message.ISyncRequestMutationRetry} message SyncRequestMutationRetry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SyncRequestMutationRetry.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.collections != null && message.collections.length)
+                    for (var i = 0; i < message.collections.length; ++i)
+                        $root.E2E.Message.SyncRequestMutationRetry.Collection.encode(message.collections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.count);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified SyncRequestMutationRetry message, length delimited. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {E2E.Message.ISyncRequestMutationRetry} message SyncRequestMutationRetry message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            SyncRequestMutationRetry.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a SyncRequestMutationRetry message from the specified reader or buffer.
+             * @function decode
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SyncRequestMutationRetry.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.SyncRequestMutationRetry();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            if (!(message.collections && message.collections.length))
+                                message.collections = [];
+                            message.collections.push($root.E2E.Message.SyncRequestMutationRetry.Collection.decode(reader, reader.uint32()));
+                            break;
+                        }
+                    case 2: {
+                            message.count = reader.uint32();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a SyncRequestMutationRetry message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            SyncRequestMutationRetry.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a SyncRequestMutationRetry message.
+             * @function verify
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            SyncRequestMutationRetry.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.collections != null && message.hasOwnProperty("collections")) {
+                    if (!Array.isArray(message.collections))
+                        return "collections: array expected";
+                    for (var i = 0; i < message.collections.length; ++i) {
+                        var error = $root.E2E.Message.SyncRequestMutationRetry.Collection.verify(message.collections[i]);
+                        if (error)
+                            return "collections." + error;
+                    }
+                }
+                if (message.count != null && message.hasOwnProperty("count")) {
+                    properties._count = 1;
+                    if (!$util.isInteger(message.count))
+                        return "count: integer expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a SyncRequestMutationRetry message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry
+             */
+            SyncRequestMutationRetry.fromObject = function fromObject(object) {
+                if (object instanceof $root.E2E.Message.SyncRequestMutationRetry)
+                    return object;
+                var message = new $root.E2E.Message.SyncRequestMutationRetry();
+                if (object.collections) {
+                    if (!Array.isArray(object.collections))
+                        throw TypeError(".E2E.Message.SyncRequestMutationRetry.collections: array expected");
+                    message.collections = [];
+                    for (var i = 0; i < object.collections.length; ++i) {
+                        if (typeof object.collections[i] !== "object")
+                            throw TypeError(".E2E.Message.SyncRequestMutationRetry.collections: object expected");
+                        message.collections[i] = $root.E2E.Message.SyncRequestMutationRetry.Collection.fromObject(object.collections[i]);
+                    }
+                }
+                if (object.count != null)
+                    message.count = object.count >>> 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a SyncRequestMutationRetry message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {E2E.Message.SyncRequestMutationRetry} message SyncRequestMutationRetry
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            SyncRequestMutationRetry.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.arrays || options.defaults)
+                    object.collections = [];
+                if (message.collections && message.collections.length) {
+                    object.collections = [];
+                    for (var j = 0; j < message.collections.length; ++j)
+                        object.collections[j] = $root.E2E.Message.SyncRequestMutationRetry.Collection.toObject(message.collections[j], options);
+                }
+                if (message.count != null && message.hasOwnProperty("count")) {
+                    object.count = message.count;
+                    if (options.oneofs)
+                        object._count = "count";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this SyncRequestMutationRetry to JSON.
+             * @function toJSON
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            SyncRequestMutationRetry.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for SyncRequestMutationRetry
+             * @function getTypeUrl
+             * @memberof E2E.Message.SyncRequestMutationRetry
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            SyncRequestMutationRetry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/E2E.Message.SyncRequestMutationRetry";
+            };
+
+            SyncRequestMutationRetry.Collection = (function() {
+
+                /**
+                 * Properties of a Collection.
+                 * @memberof E2E.Message.SyncRequestMutationRetry
+                 * @interface ICollection
+                 * @property {string|null} [name] Collection name
+                 * @property {number|Long|null} [storedSyncdVersion] Collection storedSyncdVersion
+                 */
+
+                /**
+                 * Constructs a new Collection.
+                 * @memberof E2E.Message.SyncRequestMutationRetry
+                 * @classdesc Represents a Collection.
+                 * @implements ICollection
+                 * @constructor
+                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection=} [properties] Properties to set
+                 */
+                function Collection(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Collection name.
+                 * @member {string|null|undefined} name
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @instance
+                 */
+                Collection.prototype.name = null;
+
+                /**
+                 * Collection storedSyncdVersion.
+                 * @member {number|Long|null|undefined} storedSyncdVersion
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @instance
+                 */
+                Collection.prototype.storedSyncdVersion = null;
+
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+
+                // Virtual OneOf for proto3 optional field
+                Object.defineProperty(Collection.prototype, "_name", {
+                    get: $util.oneOfGetter($oneOfFields = ["name"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                // Virtual OneOf for proto3 optional field
+                Object.defineProperty(Collection.prototype, "_storedSyncdVersion", {
+                    get: $util.oneOfGetter($oneOfFields = ["storedSyncdVersion"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+
+                /**
+                 * Creates a new Collection instance using the specified properties.
+                 * @function create
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection=} [properties] Properties to set
+                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection instance
+                 */
+                Collection.create = function create(properties) {
+                    return new Collection(properties);
+                };
+
+                /**
+                 * Encodes the specified Collection message. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.Collection.verify|verify} messages.
+                 * @function encode
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection} message Collection message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Collection.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                    if (message.storedSyncdVersion != null && Object.hasOwnProperty.call(message, "storedSyncdVersion"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.storedSyncdVersion);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified Collection message, length delimited. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.Collection.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection} message Collection message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Collection.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a Collection message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Collection.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.SyncRequestMutationRetry.Collection();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.name = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.storedSyncdVersion = reader.uint64();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a Collection message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Collection.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a Collection message.
+                 * @function verify
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Collection.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.name != null && message.hasOwnProperty("name")) {
+                        properties._name = 1;
+                        if (!$util.isString(message.name))
+                            return "name: string expected";
+                    }
+                    if (message.storedSyncdVersion != null && message.hasOwnProperty("storedSyncdVersion")) {
+                        properties._storedSyncdVersion = 1;
+                        if (!$util.isInteger(message.storedSyncdVersion) && !(message.storedSyncdVersion && $util.isInteger(message.storedSyncdVersion.low) && $util.isInteger(message.storedSyncdVersion.high)))
+                            return "storedSyncdVersion: integer|Long expected";
+                    }
+                    return null;
+                };
+
+                /**
+                 * Creates a Collection message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection
+                 */
+                Collection.fromObject = function fromObject(object) {
+                    if (object instanceof $root.E2E.Message.SyncRequestMutationRetry.Collection)
+                        return object;
+                    var message = new $root.E2E.Message.SyncRequestMutationRetry.Collection();
+                    if (object.name != null)
+                        message.name = String(object.name);
+                    if (object.storedSyncdVersion != null)
+                        if ($util.Long)
+                            (message.storedSyncdVersion = $util.Long.fromValue(object.storedSyncdVersion)).unsigned = true;
+                        else if (typeof object.storedSyncdVersion === "string")
+                            message.storedSyncdVersion = parseInt(object.storedSyncdVersion, 10);
+                        else if (typeof object.storedSyncdVersion === "number")
+                            message.storedSyncdVersion = object.storedSyncdVersion;
+                        else if (typeof object.storedSyncdVersion === "object")
+                            message.storedSyncdVersion = new $util.LongBits(object.storedSyncdVersion.low >>> 0, object.storedSyncdVersion.high >>> 0).toNumber(true);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a Collection message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {E2E.Message.SyncRequestMutationRetry.Collection} message Collection
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Collection.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (message.name != null && message.hasOwnProperty("name")) {
+                        object.name = message.name;
+                        if (options.oneofs)
+                            object._name = "name";
+                    }
+                    if (message.storedSyncdVersion != null && message.hasOwnProperty("storedSyncdVersion")) {
+                        if (typeof message.storedSyncdVersion === "number")
+                            object.storedSyncdVersion = options.longs === String ? String(message.storedSyncdVersion) : message.storedSyncdVersion;
+                        else
+                            object.storedSyncdVersion = options.longs === String ? $util.Long.prototype.toString.call(message.storedSyncdVersion) : options.longs === Number ? new $util.LongBits(message.storedSyncdVersion.low >>> 0, message.storedSyncdVersion.high >>> 0).toNumber(true) : message.storedSyncdVersion;
+                        if (options.oneofs)
+                            object._storedSyncdVersion = "storedSyncdVersion";
+                    }
+                    return object;
+                };
+
+                /**
+                 * Converts this Collection to JSON.
+                 * @function toJSON
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Collection.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * Gets the default type url for Collection
+                 * @function getTypeUrl
+                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Collection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/E2E.Message.SyncRequestMutationRetry.Collection";
+                };
+
+                return Collection;
+            })();
+
+            return SyncRequestMutationRetry;
         })();
 
         Message.TemplateButtonReplyMessage = (function() {
@@ -105371,6 +106369,7 @@ $root.AICommon = (function() {
                 case 54:
                 case 55:
                 case 56:
+                case 57:
                     break;
                 }
             }
@@ -105592,6 +106591,10 @@ $root.AICommon = (function() {
             case "NEW_CHAT_LIST":
             case 56:
                 message.botEntryPointOrigin = 56;
+                break;
+            case "CONTACTS_TAB":
+            case 57:
+                message.botEntryPointOrigin = 57;
                 break;
             }
             if (object.forwardScore != null)
@@ -119884,6 +120887,9 @@ $root.AICommon = (function() {
                     case 64:
                     case 65:
                     case 66:
+                    case 67:
+                    case 68:
+                    case 69:
                         break;
                     }
             }
@@ -120181,6 +121187,18 @@ $root.AICommon = (function() {
                     case 66:
                         message.capabilities[i] = 66;
                         break;
+                    case "AI_RICH_RESPONSE_ARTIFACTS_ENABLED":
+                    case 67:
+                        message.capabilities[i] = 67;
+                        break;
+                    case "AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED":
+                    case 68:
+                        message.capabilities[i] = 68;
+                        break;
+                    case "AI_RICH_RESPONSE_REMINDERS_ENABLED":
+                    case 69:
+                        message.capabilities[i] = 69;
+                        break;
                     }
             }
             return message;
@@ -120306,6 +121324,9 @@ $root.AICommon = (function() {
          * @property {number} AI_RICH_RESPONSE_MAPS_V2_ENABLED=64 AI_RICH_RESPONSE_MAPS_V2_ENABLED value
          * @property {number} AI_SUBSCRIPTION_METERING_ENABLED=65 AI_SUBSCRIPTION_METERING_ENABLED value
          * @property {number} RICH_RESPONSE_SPORTS_WIDGET_ENABLED=66 RICH_RESPONSE_SPORTS_WIDGET_ENABLED value
+         * @property {number} AI_RICH_RESPONSE_ARTIFACTS_ENABLED=67 AI_RICH_RESPONSE_ARTIFACTS_ENABLED value
+         * @property {number} AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED=68 AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED value
+         * @property {number} AI_RICH_RESPONSE_REMINDERS_ENABLED=69 AI_RICH_RESPONSE_REMINDERS_ENABLED value
          */
         BotCapabilityMetadata.BotCapabilityType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -120376,6 +121397,9 @@ $root.AICommon = (function() {
             values[valuesById[64] = "AI_RICH_RESPONSE_MAPS_V2_ENABLED"] = 64;
             values[valuesById[65] = "AI_SUBSCRIPTION_METERING_ENABLED"] = 65;
             values[valuesById[66] = "RICH_RESPONSE_SPORTS_WIDGET_ENABLED"] = 66;
+            values[valuesById[67] = "AI_RICH_RESPONSE_ARTIFACTS_ENABLED"] = 67;
+            values[valuesById[68] = "AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED"] = 68;
+            values[valuesById[69] = "AI_RICH_RESPONSE_REMINDERS_ENABLED"] = 69;
             return values;
         })();
 
@@ -124232,6 +125256,7 @@ $root.AICommon = (function() {
                 case 54:
                 case 55:
                 case 56:
+                case 57:
                     break;
                 }
             }
@@ -124463,6 +125488,10 @@ $root.AICommon = (function() {
             case "NEW_CHAT_LIST":
             case 56:
                 message.destinationEntryPoint = 56;
+                break;
+            case "CONTACTS_TAB":
+            case 57:
+                message.destinationEntryPoint = 57;
                 break;
             }
             switch (object.threadOrigin) {
@@ -128695,6 +129724,7 @@ $root.AICommon = (function() {
      * @property {number} GROUP_MEMBER=54 GROUP_MEMBER value
      * @property {number} CHATLIST_SEARCH=55 CHATLIST_SEARCH value
      * @property {number} NEW_CHAT_LIST=56 NEW_CHAT_LIST value
+     * @property {number} CONTACTS_TAB=57 CONTACTS_TAB value
      */
     AICommon.BotMetricsEntryPoint = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -128746,6 +129776,7 @@ $root.AICommon = (function() {
         values[valuesById[54] = "GROUP_MEMBER"] = 54;
         values[valuesById[55] = "CHATLIST_SEARCH"] = 55;
         values[valuesById[56] = "NEW_CHAT_LIST"] = 56;
+        values[valuesById[57] = "CONTACTS_TAB"] = 57;
         return values;
     })();
 
@@ -131787,6 +132818,7 @@ $root.StatusAttributions = (function() {
                 case 9:
                 case 10:
                 case 11:
+                case 12:
                     break;
                 }
             }
@@ -131922,6 +132954,10 @@ $root.StatusAttributions = (function() {
             case "PAID_PARTNERSHIP":
             case 11:
                 message.type = 11;
+                break;
+            case "USERNAME_STATUS":
+            case 12:
+                message.type = 12;
                 break;
             }
             if (object.actionUrl != null)
@@ -134236,6 +135272,7 @@ $root.StatusAttributions = (function() {
          * @property {number} NEWSLETTER_STATUS=9 NEWSLETTER_STATUS value
          * @property {number} STATUS_CLOSE_SHARING=10 STATUS_CLOSE_SHARING value
          * @property {number} PAID_PARTNERSHIP=11 PAID_PARTNERSHIP value
+         * @property {number} USERNAME_STATUS=12 USERNAME_STATUS value
          */
         StatusAttribution.Type = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -134251,6 +135288,7 @@ $root.StatusAttributions = (function() {
             values[valuesById[9] = "NEWSLETTER_STATUS"] = 9;
             values[valuesById[10] = "STATUS_CLOSE_SHARING"] = 10;
             values[valuesById[11] = "PAID_PARTNERSHIP"] = 11;
+            values[valuesById[12] = "USERNAME_STATUS"] = 12;
             return values;
         })();
 

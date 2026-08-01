@@ -12624,6 +12624,9 @@ export namespace E2E {
 
             /** Call callEntryPoint */
             callEntryPoint?: (number|null);
+
+            /** Call callReason */
+            callReason?: (string|null);
         }
 
         /** Represents a Call. */
@@ -12667,6 +12670,9 @@ export namespace E2E {
 
             /** Call callEntryPoint. */
             public callEntryPoint?: (number|null);
+
+            /** Call callReason. */
+            public callReason?: (string|null);
 
             /**
              * Creates a new Call instance using the specified properties.
@@ -24563,6 +24569,9 @@ export namespace E2E {
 
                 /** PeerDataOperationResult bizBroadcastInsightsContactListResponse */
                 bizBroadcastInsightsContactListResponse?: (E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IBizBroadcastInsightsContactListResponse|null);
+
+                /** PeerDataOperationResult contactRefreshResponse */
+                contactRefreshResponse?: (E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse|null);
             }
 
             /** Represents a PeerDataOperationResult. */
@@ -24609,6 +24618,9 @@ export namespace E2E {
 
                 /** PeerDataOperationResult bizBroadcastInsightsContactListResponse. */
                 public bizBroadcastInsightsContactListResponse?: (E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IBizBroadcastInsightsContactListResponse|null);
+
+                /** PeerDataOperationResult contactRefreshResponse. */
+                public contactRefreshResponse?: (E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse|null);
 
                 /**
                  * Creates a new PeerDataOperationResult instance using the specified properties.
@@ -25102,6 +25114,121 @@ export namespace E2E {
 
                     /**
                      * Gets the default type url for CompanionMetaNonceFetchResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContactRefreshResponse. */
+                interface IContactRefreshResponse {
+
+                    /** ContactRefreshResponse coveredRequestIds */
+                    coveredRequestIds?: (string[]|null);
+
+                    /** ContactRefreshResponse collectionVersion */
+                    collectionVersion?: (number|Long|null);
+
+                    /** ContactRefreshResponse primaryDurationMs */
+                    primaryDurationMs?: (number|Long|null);
+
+                    /** ContactRefreshResponse uniqueContactCount */
+                    uniqueContactCount?: (number|null);
+                }
+
+                /** Represents a ContactRefreshResponse. */
+                class ContactRefreshResponse implements IContactRefreshResponse {
+
+                    /**
+                     * Constructs a new ContactRefreshResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse);
+
+                    /** ContactRefreshResponse coveredRequestIds. */
+                    public coveredRequestIds: string[];
+
+                    /** ContactRefreshResponse collectionVersion. */
+                    public collectionVersion?: (number|Long|null);
+
+                    /** ContactRefreshResponse primaryDurationMs. */
+                    public primaryDurationMs?: (number|Long|null);
+
+                    /** ContactRefreshResponse uniqueContactCount. */
+                    public uniqueContactCount?: (number|null);
+
+                    /**
+                     * Creates a new ContactRefreshResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContactRefreshResponse instance
+                     */
+                    public static create(properties?: E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse): E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse;
+
+                    /**
+                     * Encodes the specified ContactRefreshResponse message. Does not implicitly {@link E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.verify|verify} messages.
+                     * @param message ContactRefreshResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContactRefreshResponse message, length delimited. Does not implicitly {@link E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse.verify|verify} messages.
+                     * @param message ContactRefreshResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.IContactRefreshResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContactRefreshResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContactRefreshResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse;
+
+                    /**
+                     * Decodes a ContactRefreshResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContactRefreshResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse;
+
+                    /**
+                     * Verifies a ContactRefreshResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContactRefreshResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContactRefreshResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse;
+
+                    /**
+                     * Creates a plain object from a ContactRefreshResponse message. Also converts values to other types if specified.
+                     * @param message ContactRefreshResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: E2E.Message.PeerDataOperationRequestResponseMessage.PeerDataOperationResult.ContactRefreshResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContactRefreshResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContactRefreshResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -26221,7 +26348,8 @@ export namespace E2E {
             HISTORY_SYNC_CHUNK_RETRY = 10,
             GALAXY_FLOW_ACTION = 11,
             BUSINESS_BROADCAST_INSIGHTS_DELIVERED_TO = 12,
-            BUSINESS_BROADCAST_INSIGHTS_REFRESH = 13
+            BUSINESS_BROADCAST_INSIGHTS_REFRESH = 13,
+            CONTACT_REFRESH_REQUEST = 14
         }
 
         /** Properties of a PinInChatMessage. */
@@ -27966,6 +28094,9 @@ export namespace E2E {
 
             /** ProtocolMessage coexStateSync */
             coexStateSync?: (ServerSync.ICoexStateSync|null);
+
+            /** ProtocolMessage syncRequestMutationRetry */
+            syncRequestMutationRetry?: (E2E.Message.ISyncRequestMutationRetry|null);
         }
 
         /** Represents a ProtocolMessage. */
@@ -28066,6 +28197,9 @@ export namespace E2E {
 
             /** ProtocolMessage coexStateSync. */
             public coexStateSync?: (ServerSync.ICoexStateSync|null);
+
+            /** ProtocolMessage syncRequestMutationRetry. */
+            public syncRequestMutationRetry?: (E2E.Message.ISyncRequestMutationRetry|null);
 
             /**
              * Creates a new ProtocolMessage instance using the specified properties.
@@ -28180,7 +28314,8 @@ export namespace E2E {
                 CHAT_THEME_SETTING = 34,
                 AI_METADATA_OPERATION = 35,
                 MARK_AS_VERIFIED_ACTION = 36,
-                COEX_STATE_SYNC = 37
+                COEX_STATE_SYNC = 37,
+                SYNC_REQUEST_MUTATION_RETRY = 38
             }
         }
 
@@ -30950,6 +31085,215 @@ export namespace E2E {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a SyncRequestMutationRetry. */
+        interface ISyncRequestMutationRetry {
+
+            /** SyncRequestMutationRetry collections */
+            collections?: (E2E.Message.SyncRequestMutationRetry.ICollection[]|null);
+
+            /** SyncRequestMutationRetry count */
+            count?: (number|null);
+        }
+
+        /** Represents a SyncRequestMutationRetry. */
+        class SyncRequestMutationRetry implements ISyncRequestMutationRetry {
+
+            /**
+             * Constructs a new SyncRequestMutationRetry.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: E2E.Message.ISyncRequestMutationRetry);
+
+            /** SyncRequestMutationRetry collections. */
+            public collections: E2E.Message.SyncRequestMutationRetry.ICollection[];
+
+            /** SyncRequestMutationRetry count. */
+            public count?: (number|null);
+
+            /**
+             * Creates a new SyncRequestMutationRetry instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SyncRequestMutationRetry instance
+             */
+            public static create(properties?: E2E.Message.ISyncRequestMutationRetry): E2E.Message.SyncRequestMutationRetry;
+
+            /**
+             * Encodes the specified SyncRequestMutationRetry message. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.verify|verify} messages.
+             * @param message SyncRequestMutationRetry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: E2E.Message.ISyncRequestMutationRetry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SyncRequestMutationRetry message, length delimited. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.verify|verify} messages.
+             * @param message SyncRequestMutationRetry message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: E2E.Message.ISyncRequestMutationRetry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SyncRequestMutationRetry message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SyncRequestMutationRetry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): E2E.Message.SyncRequestMutationRetry;
+
+            /**
+             * Decodes a SyncRequestMutationRetry message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SyncRequestMutationRetry
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): E2E.Message.SyncRequestMutationRetry;
+
+            /**
+             * Verifies a SyncRequestMutationRetry message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SyncRequestMutationRetry message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SyncRequestMutationRetry
+             */
+            public static fromObject(object: { [k: string]: any }): E2E.Message.SyncRequestMutationRetry;
+
+            /**
+             * Creates a plain object from a SyncRequestMutationRetry message. Also converts values to other types if specified.
+             * @param message SyncRequestMutationRetry
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: E2E.Message.SyncRequestMutationRetry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SyncRequestMutationRetry to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SyncRequestMutationRetry
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace SyncRequestMutationRetry {
+
+            /** Properties of a Collection. */
+            interface ICollection {
+
+                /** Collection name */
+                name?: (string|null);
+
+                /** Collection storedSyncdVersion */
+                storedSyncdVersion?: (number|Long|null);
+            }
+
+            /** Represents a Collection. */
+            class Collection implements ICollection {
+
+                /**
+                 * Constructs a new Collection.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: E2E.Message.SyncRequestMutationRetry.ICollection);
+
+                /** Collection name. */
+                public name?: (string|null);
+
+                /** Collection storedSyncdVersion. */
+                public storedSyncdVersion?: (number|Long|null);
+
+                /**
+                 * Creates a new Collection instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Collection instance
+                 */
+                public static create(properties?: E2E.Message.SyncRequestMutationRetry.ICollection): E2E.Message.SyncRequestMutationRetry.Collection;
+
+                /**
+                 * Encodes the specified Collection message. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.Collection.verify|verify} messages.
+                 * @param message Collection message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: E2E.Message.SyncRequestMutationRetry.ICollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Collection message, length delimited. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.Collection.verify|verify} messages.
+                 * @param message Collection message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: E2E.Message.SyncRequestMutationRetry.ICollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Collection message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Collection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): E2E.Message.SyncRequestMutationRetry.Collection;
+
+                /**
+                 * Decodes a Collection message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Collection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): E2E.Message.SyncRequestMutationRetry.Collection;
+
+                /**
+                 * Verifies a Collection message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Collection message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Collection
+                 */
+                public static fromObject(object: { [k: string]: any }): E2E.Message.SyncRequestMutationRetry.Collection;
+
+                /**
+                 * Creates a plain object from a Collection message. Also converts values to other types if specified.
+                 * @param message Collection
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: E2E.Message.SyncRequestMutationRetry.Collection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Collection to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Collection
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a TemplateButtonReplyMessage. */
@@ -42042,7 +42386,10 @@ export namespace AICommon {
             UNIFIED_RESPONSE_MARKDOWN_LINKS_ENABLED = 63,
             AI_RICH_RESPONSE_MAPS_V2_ENABLED = 64,
             AI_SUBSCRIPTION_METERING_ENABLED = 65,
-            RICH_RESPONSE_SPORTS_WIDGET_ENABLED = 66
+            RICH_RESPONSE_SPORTS_WIDGET_ENABLED = 66,
+            AI_RICH_RESPONSE_ARTIFACTS_ENABLED = 67,
+            AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED = 68,
+            AI_RICH_RESPONSE_REMINDERS_ENABLED = 69
         }
     }
 
@@ -44918,7 +45265,8 @@ export namespace AICommon {
         WEB_NAVIGATION_BAR = 47,
         GROUP_MEMBER = 54,
         CHATLIST_SEARCH = 55,
-        NEW_CHAT_LIST = 56
+        NEW_CHAT_LIST = 56,
+        CONTACTS_TAB = 57
     }
 }
 
@@ -46828,7 +47176,8 @@ export namespace StatusAttributions {
             LAYOUTS = 8,
             NEWSLETTER_STATUS = 9,
             STATUS_CLOSE_SHARING = 10,
-            PAID_PARTNERSHIP = 11
+            PAID_PARTNERSHIP = 11,
+            USERNAME_STATUS = 12
         }
     }
 }
@@ -54758,6 +55107,9 @@ export namespace SyncAction {
 
         /** SyncActionValue bubbleLockMessageAction */
         bubbleLockMessageAction?: (SyncAction.SyncActionValue.IBubbleLockMessageAction|null);
+
+        /** SyncActionValue labelSublistAction */
+        labelSublistAction?: (SyncAction.SyncActionValue.ILabelSublistAction|null);
     }
 
     /** Represents a SyncActionValue. */
@@ -55011,6 +55363,9 @@ export namespace SyncAction {
 
         /** SyncActionValue bubbleLockMessageAction. */
         public bubbleLockMessageAction?: (SyncAction.SyncActionValue.IBubbleLockMessageAction|null);
+
+        /** SyncActionValue labelSublistAction. */
+        public labelSublistAction?: (SyncAction.SyncActionValue.ILabelSublistAction|null);
 
         /**
          * Creates a new SyncActionValue instance using the specified properties.
@@ -55826,7 +56181,8 @@ export namespace SyncAction {
                 RESPONSE_SETTINGS = 2,
                 EXAMPLE_RESPONSES = 3,
                 KNOWLEDGE = 4,
-                LEAD_GEN = 5
+                LEAD_GEN = 5,
+                HANDOFF_REMOVAL_TIMING = 6
             }
         }
 
@@ -58976,7 +59332,8 @@ export namespace SyncAction {
                 ARCHIVED = 12,
                 LOCKED = 13,
                 INVITES = 14,
-                THIRD_PARTY = 15
+                THIRD_PARTY = 15,
+                LEAD = 16
             }
         }
 
@@ -59071,6 +59428,103 @@ export namespace SyncAction {
 
             /**
              * Gets the default type url for LabelReorderingAction
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a LabelSublistAction. */
+        interface ILabelSublistAction {
+
+            /** LabelSublistAction subListId */
+            subListId?: (number|null);
+        }
+
+        /** Represents a LabelSublistAction. */
+        class LabelSublistAction implements ILabelSublistAction {
+
+            /**
+             * Constructs a new LabelSublistAction.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: SyncAction.SyncActionValue.ILabelSublistAction);
+
+            /** LabelSublistAction subListId. */
+            public subListId?: (number|null);
+
+            /**
+             * Creates a new LabelSublistAction instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns LabelSublistAction instance
+             */
+            public static create(properties?: SyncAction.SyncActionValue.ILabelSublistAction): SyncAction.SyncActionValue.LabelSublistAction;
+
+            /**
+             * Encodes the specified LabelSublistAction message. Does not implicitly {@link SyncAction.SyncActionValue.LabelSublistAction.verify|verify} messages.
+             * @param message LabelSublistAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: SyncAction.SyncActionValue.ILabelSublistAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified LabelSublistAction message, length delimited. Does not implicitly {@link SyncAction.SyncActionValue.LabelSublistAction.verify|verify} messages.
+             * @param message LabelSublistAction message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: SyncAction.SyncActionValue.ILabelSublistAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a LabelSublistAction message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns LabelSublistAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SyncAction.SyncActionValue.LabelSublistAction;
+
+            /**
+             * Decodes a LabelSublistAction message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns LabelSublistAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SyncAction.SyncActionValue.LabelSublistAction;
+
+            /**
+             * Verifies a LabelSublistAction message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a LabelSublistAction message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns LabelSublistAction
+             */
+            public static fromObject(object: { [k: string]: any }): SyncAction.SyncActionValue.LabelSublistAction;
+
+            /**
+             * Creates a plain object from a LabelSublistAction message. Also converts values to other types if specified.
+             * @param message LabelSublistAction
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: SyncAction.SyncActionValue.LabelSublistAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this LabelSublistAction to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for LabelSublistAction
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -64586,6 +65040,9 @@ export namespace SyncAction {
 
                 /** RootSecretEntry epoch */
                 epoch?: (number|Long|null);
+
+                /** RootSecretEntry status */
+                status?: (SyncAction.SyncActionValue.WASARootSecretAction.RootSecretEntry.Status|null);
             }
 
             /** Represents a RootSecretEntry. */
@@ -64605,6 +65062,9 @@ export namespace SyncAction {
 
                 /** RootSecretEntry epoch. */
                 public epoch?: (number|Long|null);
+
+                /** RootSecretEntry status. */
+                public status?: (SyncAction.SyncActionValue.WASARootSecretAction.RootSecretEntry.Status|null);
 
                 /**
                  * Creates a new RootSecretEntry instance using the specified properties.
@@ -64682,6 +65142,15 @@ export namespace SyncAction {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace RootSecretEntry {
+
+                /** Status enum. */
+                enum Status {
+                    INACTIVE = 0,
+                    ACTIVE = 1
+                }
             }
         }
 
@@ -65396,6 +65865,7 @@ export namespace SyncAction {
         COEX_V2_VERSION_ACTION = 88,
         WASA_ROOT_SECRET_ACTION = 89,
         BUBBLE_LOCK_MESSAGE_ACTION = 90,
+        LABEL_SUBLIST_ACTION = 91,
         SHARE_OWN_PN = 10001,
         BUSINESS_BROADCAST_ACTION = 10002,
         AI_THREAD_DELETE_ACTION = 10003
