@@ -3445,6 +3445,7 @@ $root.Wa6 = (function() {
                     case 35:
                     case 36:
                     case 37:
+                    case 38:
                         break;
                     }
                 }
@@ -3726,6 +3727,10 @@ $root.Wa6 = (function() {
                 case "AR_WRIST":
                 case 37:
                     message.platform = 37;
+                    break;
+                case "WAIL":
+                case 38:
+                    message.platform = 38;
                     break;
                 }
                 if (object.appVersion != null) {
@@ -4393,6 +4398,7 @@ $root.Wa6 = (function() {
              * @property {number} SMART_GLASSES=35 SMART_GLASSES value
              * @property {number} BLUE_VR=36 BLUE_VR value
              * @property {number} AR_WRIST=37 AR_WRIST value
+             * @property {number} WAIL=38 WAIL value
              */
             UserAgent.Platform = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -4434,6 +4440,7 @@ $root.Wa6 = (function() {
                 values[valuesById[35] = "SMART_GLASSES"] = 35;
                 values[valuesById[36] = "BLUE_VR"] = 36;
                 values[valuesById[37] = "AR_WRIST"] = 37;
+                values[valuesById[38] = "WAIL"] = 38;
                 return values;
             })();
 
