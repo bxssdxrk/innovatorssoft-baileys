@@ -3927,6 +3927,7 @@ const sock = makeWASocket({
 ## Acknowledgements
 
 - [Original baileys](https://github.com/WhiskeySockets/baileys)
+- [VoIP WebAssembly Call Stack by SheIITear (baileys-caller)](https://github.com/SheIITear/baileys-caller)
 - [Special thanks to](https://github.com/Itsukichann/Baileys)
 - [Follow Innovators Soft](https://facebook.com/innovatorssoft)
 
