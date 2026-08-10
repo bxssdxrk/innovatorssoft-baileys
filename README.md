@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
   <img src="https://raw.githubusercontent.com/innovatorssoft/Baileys/main/assets/media/logo.png" width="150" height="150" />
 
   # INNOVATORS SOFT
@@ -3168,23 +3168,28 @@ sock.ev.on('messages.upsert', async ({ [m] }) => {
 await sock.updateMediaMessage(msg)
 ```
 
-## 📞 Initiate Voice Call
-> [!WARNING]
-> **This Function has been depreceated**
+## 📞 Initiate Voice Call & Stream Audio
 
-- Initiates outgoing call signaling to a 1:1 or group jid
-- Supports audio (default) and video calls
-- Returns `{ callId, to, isVideo }` — use `callId` to cancel the call
-- **Note: full WebRTC/SRTP media transport is not implemented; this covers the signaling layer only**
+- Initiates an outgoing WhatsApp voice call with WebAssembly audio transport
+- Streams audio files (MP3/WAV/etc.) via FFmpeg into 16 kHz Float32 PCM WASM audio engine
+- Emits real-time call lifecycle events (`ringing`, `connected`, `audio`, `ended`, `error`)
 
 ```ts
-// Initiate a voice call
-const { callId } = await sock.initiateCall(jid)
+// Place a voice call and stream an audio file:
+const call = await sock.initiateCall(jid, {
+    audioSource: './hello.mp3', // MP3/WAV file path or "silence"
+    durationMs: 30000          // Optional duration in ms
+})
 
-// Initiate a video call
-const { callId } = await sock.initiateCall(jid, { isVideo: true })
+call.on('ringing', () => console.log('Call is ringing...'))
+call.on('connected', () => console.log('Connected & streaming audio!'))
+call.on('audio', (pcmChunk) => { /* Incoming 16 kHz Float32Array PCM */ })
+call.on('ended', (reason) => console.log('Call ended:', reason))
+call.on('error', (err) => console.error('Call error:', err))
 
-// Cancel an outgoing call
+// Or simple signaling only:
+const result = await sock.offerCall(jid, isVideo)
+// Cancel an outgoing call:
 await sock.cancelCall(callId, jid)
 ```
 

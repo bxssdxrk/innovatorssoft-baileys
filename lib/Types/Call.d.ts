@@ -18,13 +18,15 @@ export type WACallUpdateType =
 
 export type WAInitiateCallOptions = {
     isVideo?: boolean
+    audioSource?: string
+    durationMs?: number
 }
 
 export type WAInitiateCallResult = {
     callId: string
     to: string
     isVideo: boolean
-}
+} | any
 
 export type WACallParticipant = {
     jid?: string

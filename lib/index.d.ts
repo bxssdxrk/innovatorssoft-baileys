@@ -8,6 +8,7 @@ export * from './Defaults';
 export * from './WABinary';
 export * from './WAM';
 export * from './WAUSync';
+export * from './Voip';
 export type WASocket = ReturnType<typeof makeWASocket>;
 export { makeWASocket, proto };
 export default makeWASocket;

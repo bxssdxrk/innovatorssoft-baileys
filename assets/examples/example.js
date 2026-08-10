@@ -129,11 +129,13 @@ async function startBot() {
 
     // Listen to messages
     sock.ev.on('messages.upsert', async (update) => {
+        /*
         console.log(" \n")
         console.log("Update : ", require('util').inspect(update, { depth: null, colors: true }))
         console.log(" \n")
+        console.log(`[messages.upsert] Event received. Type: ${update.type}, Messages count: ${update.messages?.length || 0}`);
+        */
 
-        //        console.log(`[messages.upsert] Event received. Type: ${update.type}, Messages count: ${update.messages?.length || 0}`);
         try {
             if (!update.messages?.length) return;
 
@@ -206,6 +208,25 @@ async function startBot() {
                     await sock.sendMessage(normalizedJid, { text: 'pong! 🏓' }, { quoted: message });
                     break;
                 }
+                case '!call': {
+                    try {
+                        await sock.sendMessage(normalizedJid, { text: '📞 Initiating voice call with audio stream...' }, { quoted: message });
+
+                        // Place a voice call and stream an audio file:
+                        const call = await sock.initiateCall(normalizedJid, {
+                            audioSource: args || './audio.mp3', // MP3/WAV file path or "silence"
+                            durationMs: 30000                   // Optional duration
+                        });
+                        call.on('ringing', () => console.log('Call is ringing...'));
+                        call.on('connected', () => console.log('Connected & streaming audio!'));
+                        call.on('audio', (pcmChunk) => { /* Incoming 16 kHz Float32Array PCM */ });
+                        call.on('ended', (reason) => console.log('Call ended:', reason));
+                        call.on('error', (err) => console.error('Call error:', err));
+                    } catch (err) {
+                        await sock.sendMessage(normalizedJid, { text: `Error starting call: ${err.message}` }, { quoted: message });
+                    }
+                    break;
+                }
                 case '!table': {
                     await sock.sendTable(normalizedJid, 'Developer Team Metrics', ['Name', 'Role', 'Status', 'Tasks Completed'], [
                         ['Member 1', 'Frontend Lead', 'Active', '45'],
@@ -255,7 +276,8 @@ async function startBot() {
                         '!viewonce     - Send image as view-once V1',
                         '!viewoncev2   - Send image as view-once V2',
                         '!viewonceext  - Send image as view-once V2 Ext',
-                        '!interactivemsg - Send custom interactive buttons (text, image, or location)'
+                        '!interactivemsg - Send custom interactive buttons (text, image, or location)',
+                        '!call         - Place a voice call and stream audio'
                     ], message, {
                         headerText: 'Available commands:',
                         footer: 'Type any of these commands to test.'

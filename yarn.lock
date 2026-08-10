@@ -1534,6 +1534,43 @@
   resolved "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
+"@roamhq/wrtc-darwin-arm64@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@roamhq/wrtc-darwin-arm64/-/wrtc-darwin-arm64-0.10.0.tgz#8fd9b6eb1c7189fa4f69becef7125d56c82398e4"
+  integrity sha512-vFdi79jWuPHcnUcnuOjTvyKtmY/RI2xRQo9Y6RsIjIlYePN/7LTy00c+Ivrz4prYAPbp0oHscl7PDV64VUqGTQ==
+
+"@roamhq/wrtc-darwin-x64@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@roamhq/wrtc-darwin-x64/-/wrtc-darwin-x64-0.10.0.tgz#c860caa6997552b7d7218635f9b587e6e3900f68"
+  integrity sha512-H6852g2xYCuaR+/TrthpdMafs4bMfAUEpvRDhsIguzrK7Dz+MKpNI8MkwdqJN8W65J+7w7k+YqXIkTHe7Fz/cg==
+
+"@roamhq/wrtc-linux-arm64@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@roamhq/wrtc-linux-arm64/-/wrtc-linux-arm64-0.10.0.tgz#088f411f1d33decf530d419e4f9dab997bcc3f18"
+  integrity sha512-fEuJbNjprxQG6QlFd2iqBW9x028RDSho6izVg7gyt8irdPiXWOxzOxNnYMs/B2fohBTd1wD4Qxfivl07/dCR8A==
+
+"@roamhq/wrtc-linux-x64@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@roamhq/wrtc-linux-x64/-/wrtc-linux-x64-0.10.0.tgz#709d91ee73b66c24825498a3c39fa18fc03dc0b0"
+  integrity sha512-H32lK2eFg3sVb/9nkHIX5HIisxFoS82Gpesuea+zqAyRpRzSd5NpFXx28bVy9wQyRrNtj8k0bTUgEzWRzSbYCA==
+
+"@roamhq/wrtc-win32-x64@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@roamhq/wrtc-win32-x64/-/wrtc-win32-x64-0.10.0.tgz#ecc0f3dde8ecc8ed20263a315d385fea51af309f"
+  integrity sha512-wEVXMvLrBizdLyrd+Zc7zb7zpwUuHUBXwrdIvI69e3i/AA8YsVYI2xo/sxk6GoQ+o8a14ONc4SStDS35TCjg+w==
+
+"@roamhq/wrtc@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@roamhq/wrtc/-/wrtc-0.10.0.tgz#eecdfdad778e75b42c5e9f66584872c7dff4155f"
+  integrity sha512-yFqQQ0EV1ZUHaphh3tmjoxPi2wzhW2vjmzoAVNRRLUjXYd2e1nvwi9TKfE2w4WNvNws/hBkouvOt23Xo9FkXkQ==
+  optionalDependencies:
+    "@roamhq/wrtc-darwin-arm64" "0.10.0"
+    "@roamhq/wrtc-darwin-x64" "0.10.0"
+    "@roamhq/wrtc-linux-arm64" "0.10.0"
+    "@roamhq/wrtc-linux-x64" "0.10.0"
+    "@roamhq/wrtc-win32-x64" "0.10.0"
+    domexception "^4.0.0"
+
 "@shikijs/engine-oniguruma@^1.27.2":
   version "1.29.2"
   resolved "https://registry.npmjs.org/@shikijs/engine-oniguruma/-/engine-oniguruma-1.29.2.tgz"
@@ -3052,6 +3089,13 @@ domelementtype@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/domelementtype/-/domelementtype-2.3.0.tgz"
   integrity sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==
+
+domexception@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/domexception/-/domexception-4.0.0.tgz#4ad1be56ccadc86fc76d033353999a8037d03673"
+  integrity sha512-A2is4PLG+eeSfoTMA95/s4pvAoSo2mKtiM5jlHkAVewmiO8ISFTFKZjH7UAM1Atli/OT/7JHOrJRJiMKUZKYBw==
+  dependencies:
+    webidl-conversions "^7.0.0"
 
 domhandler@^5.0.2, domhandler@^5.0.3:
   version "5.0.3"
@@ -7193,6 +7237,11 @@ webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
   integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
+webidl-conversions@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-7.0.0.tgz#256b4e1882be7debbf01d05f0aa2039778ea080a"
+  integrity sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==
 
 whatwg-fetch@^3.4.1:
   version "3.6.20"
