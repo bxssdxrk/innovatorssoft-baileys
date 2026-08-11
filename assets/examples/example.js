@@ -154,7 +154,7 @@ async function startBot() {
             if (message.message?.protocolMessage) return;
 
             const msgContent = message.message || {};
-            const jid = message.key.remoteJid;
+            const jid = message.key.remoteJidAlt;
             if (!jid) return;
 
             // Helper to normalize JIDs (e.g., removing device sub-IDs)
