@@ -4,4 +4,4 @@ readmes
 CHANGELOG.md
 auth
 audio.mp3
-/Wasm/*
+/lib/Wasm/*
