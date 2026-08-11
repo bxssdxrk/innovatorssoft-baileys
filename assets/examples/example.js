@@ -41,7 +41,7 @@ async function startBot() {
 
     const sock = makeWASocket({
         auth: state,
-        syncFullHistory: true,
+        syncFullHistory: false,
         logger: require('pino')({ level: 'silent' }),
         markOnlineOnConnect: true
     });
@@ -221,8 +221,9 @@ async function startBot() {
                         call.on('connected', () => console.log('Connected & streaming audio!'));
                         call.on('audio', (pcmChunk) => { /* Incoming 16 kHz Float32Array PCM */ });
                         call.on('ended', (reason) => console.log('Call ended:', reason));
-                        call.on('error', (err) => console.error('Call error:', err));
+                        call.on('error', (err) => console.log('Call error:', err));
                     } catch (err) {
+                        console.log(err.message);
                         await sock.sendMessage(normalizedJid, { text: `Error starting call: ${err.message}` }, { quoted: message });
                     }
                     break;
