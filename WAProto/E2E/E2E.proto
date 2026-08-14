@@ -1,16 +1,15 @@
 syntax = "proto3";
 package E2E;
 
-import "../SignalLocalStorageProtocol/SignalLocalStorageProtocol.proto";
+import "../Protocol/Protocol.proto";
 import "../AICommonDeprecated/AICommonDeprecated.proto";
 import "../AICommon/AICommon.proto";
 import "../Adv/Adv.proto";
-import "../Protocol/Protocol.proto";
 import "../Aea/Aea.proto";
 import "../StatusAttributions/StatusAttributions.proto";
+import "../ServerSync/ServerSync.proto";
 import "../CompanionReg/CompanionReg.proto";
 import "../MmsRetry/MmsRetry.proto";
-import "../ServerSync/ServerSync.proto";
 
 message GroupRootKeyShareEntry {
     optional bytes groupRootKey = 1;
@@ -24,7 +23,7 @@ message GroupRootKeyShare {
 }
 
 message AIQueryFanout {
-    optional SignalLocalStorageProtocol.MessageKey messageKey = 1;
+    optional Protocol.MessageKey messageKey = 1;
     optional Message message = 2;
     optional int64 timestamp = 3;
 }
@@ -298,7 +297,7 @@ message MessageContextInfo {
 
 message ThreadID {
     optional ThreadType threadType = 1;
-    optional SignalLocalStorageProtocol.MessageKey threadKey = 2;
+    optional Protocol.MessageKey threadKey = 2;
     enum ThreadType {
         UNKNOWN = 0;
         VIEW_REPLIES = 1;
@@ -308,7 +307,7 @@ message ThreadID {
 
 message MessageAssociation {
     optional AssociationType associationType = 1;
-    optional SignalLocalStorageProtocol.MessageKey parentMessageKey = 2;
+    optional Protocol.MessageKey parentMessageKey = 2;
     optional int32 messageIndex = 3;
     enum AssociationType {
         UNKNOWN = 0;
@@ -347,7 +346,7 @@ message ContextInfo {
     optional uint32 forwardingScore = 21;
     optional bool isForwarded = 22;
     optional AdReplyInfo quotedAd = 23;
-    optional SignalLocalStorageProtocol.MessageKey placeholderKey = 24;
+    optional Protocol.MessageKey placeholderKey = 24;
     optional uint32 expiration = 25;
     optional int64 ephemeralSettingTimestamp = 26;
     optional bytes ephemeralSharedSecret = 27;
@@ -882,7 +881,7 @@ message Message {
         }
     }
     message CancelPaymentRequestMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
     }
     message Chat {
         optional string displayName = 1;
@@ -938,7 +937,7 @@ message Message {
     }
     message CommentMessage {
         optional Message message = 1;
-        optional SignalLocalStorageProtocol.MessageKey targetMessageKey = 2;
+        optional Protocol.MessageKey targetMessageKey = 2;
     }
     message ConditionalRevealMessage {
         optional bytes encPayload = 1;
@@ -962,7 +961,7 @@ message Message {
         optional ContextInfo contextInfo = 17;
     }
     message DeclinePaymentRequestMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
     }
     message DeviceSentMessage {
         optional string destinationJid = 1;
@@ -993,17 +992,17 @@ message Message {
         optional string accessibilityLabel = 21;
     }
     message EncCommentMessage {
-        optional SignalLocalStorageProtocol.MessageKey targetMessageKey = 1;
+        optional Protocol.MessageKey targetMessageKey = 1;
         optional bytes encPayload = 2;
         optional bytes encIv = 3;
     }
     message EncEventResponseMessage {
-        optional SignalLocalStorageProtocol.MessageKey eventCreationMessageKey = 1;
+        optional Protocol.MessageKey eventCreationMessageKey = 1;
         optional bytes encPayload = 2;
         optional bytes encIv = 3;
     }
     message EncReactionMessage {
-        optional SignalLocalStorageProtocol.MessageKey targetMessageKey = 1;
+        optional Protocol.MessageKey targetMessageKey = 1;
         optional bytes encPayload = 2;
         optional bytes encIv = 3;
     }
@@ -1379,7 +1378,7 @@ message Message {
         }
     }
     message KeepInChatMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional KeepType keepType = 2;
         optional int64 timestampMs = 3;
     }
@@ -1548,7 +1547,7 @@ message Message {
         optional string totalCurrencyCode = 11;
         optional ContextInfo contextInfo = 17;
         optional int32 messageVersion = 12;
-        optional SignalLocalStorageProtocol.MessageKey orderRequestMessageId = 13;
+        optional Protocol.MessageKey orderRequestMessageId = 13;
         optional string catalogType = 15;
         enum OrderStatus {
             INQUIRY = 1;
@@ -1679,7 +1678,7 @@ message Message {
             optional bool supportInlineResponse = 7;
         }
         message PlaceholderMessageResendRequest {
-            optional SignalLocalStorageProtocol.MessageKey messageKey = 1;
+            optional Protocol.MessageKey messageKey = 1;
         }
         message RequestStickerReupload {
             optional string fileSha256 = 1;
@@ -1832,7 +1831,7 @@ message Message {
         CONTACT_REFRESH_REQUEST = 14;
     }
     message PinInChatMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional Type type = 2;
         optional int64 senderTimestampMs = 3;
         enum Type {
@@ -1848,7 +1847,7 @@ message Message {
         }
     }
     message PollAddOptionMessage {
-        optional SignalLocalStorageProtocol.MessageKey pollCreationMessageKey = 1;
+        optional Protocol.MessageKey pollCreationMessageKey = 1;
         optional Message.PollCreationMessage.Option addOption = 2;
         optional Message.PollUpdateMessageMetadata metadata = 3;
     }
@@ -1893,7 +1892,7 @@ message Message {
         QUIZ = 1;
     }
     message PollUpdateMessage {
-        optional SignalLocalStorageProtocol.MessageKey pollCreationMessageKey = 1;
+        optional Protocol.MessageKey pollCreationMessageKey = 1;
         optional Message.PollEncValue vote = 2;
         optional Message.PollUpdateMessageMetadata metadata = 3;
         optional int64 senderTimestampMs = 4;
@@ -1933,7 +1932,7 @@ message Message {
         }
     }
     message ProtocolMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional Type type = 2;
         optional uint32 ephemeralExpiration = 4;
         optional int64 ephemeralSettingTimestamp = 5;
@@ -2001,11 +2000,11 @@ message Message {
         }
     }
     message QuestionResponseMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional string text = 2;
     }
     message ReactionMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional string text = 2;
         optional string groupingKey = 3;
         optional int64 senderTimestampMs = 4;
@@ -2049,7 +2048,7 @@ message Message {
         }
     }
     message ScheduledCallEditMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional EditType editType = 2;
         enum EditType {
             UNKNOWN = 0;
@@ -2057,7 +2056,7 @@ message Message {
         }
     }
     message SecretEncryptedMessage {
-        optional SignalLocalStorageProtocol.MessageKey targetMessageKey = 1;
+        optional Protocol.MessageKey targetMessageKey = 1;
         optional bytes encPayload = 2;
         optional bytes encIv = 3;
         optional SecretEncType secretEncType = 4;
@@ -2073,7 +2072,7 @@ message Message {
     }
     message SendPaymentMessage {
         optional Message noteMessage = 2;
-        optional SignalLocalStorageProtocol.MessageKey requestMessageKey = 3;
+        optional Protocol.MessageKey requestMessageKey = 3;
         optional PaymentBackground background = 4;
         optional string transactionData = 5;
     }
@@ -2104,8 +2103,8 @@ message Message {
         optional string participantJid = 2;
     }
     message StatusNotificationMessage {
-        optional SignalLocalStorageProtocol.MessageKey responseMessageKey = 1;
-        optional SignalLocalStorageProtocol.MessageKey originalMessageKey = 2;
+        optional Protocol.MessageKey responseMessageKey = 1;
+        optional Protocol.MessageKey originalMessageKey = 2;
         optional StatusNotificationType type = 3;
         enum StatusNotificationType {
             UNKNOWN = 0;
@@ -2115,20 +2114,20 @@ message Message {
         }
     }
     message StatusQuestionAnswerMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional string text = 2;
     }
     message StatusQuotedMessage {
         optional StatusQuotedMessageType type = 1;
         optional string text = 2;
         optional bytes thumbnail = 3;
-        optional SignalLocalStorageProtocol.MessageKey originalStatusId = 4;
+        optional Protocol.MessageKey originalStatusId = 4;
         enum StatusQuotedMessageType {
             QUESTION_ANSWER = 1;
         }
     }
     message StatusStickerInteractionMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional string stickerKey = 2;
         optional StatusStickerType type = 3;
         enum StatusStickerType {

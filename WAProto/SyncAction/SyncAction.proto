@@ -1,9 +1,9 @@
 syntax = "proto3";
 package SyncAction;
 
+import "../Protocol/Protocol.proto";
 import "../ChatLockSettings/ChatLockSettings.proto";
 import "../DeviceCapabilities/DeviceCapabilities.proto";
-import "../SignalLocalStorageProtocol/SignalLocalStorageProtocol.proto";
 
 message PatchDebugData {
     optional bytes currentLthash = 1;
@@ -646,7 +646,7 @@ message SyncActionValue {
         }
     }
     message SyncActionMessage {
-        optional SignalLocalStorageProtocol.MessageKey key = 1;
+        optional Protocol.MessageKey key = 1;
         optional int64 timestamp = 2;
     }
     message SyncActionMessageRange {
