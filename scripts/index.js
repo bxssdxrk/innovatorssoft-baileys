@@ -141,6 +141,10 @@ async function findAppModules() {
       name.endsWith('Spec') ? name.slice(0, -4) : name;
    const unnestName = (name) => name.split('$').slice(-1)[0];
    const getNesting = (name) => name.split('$').slice(0, -1).join('$');
+   const moduleToProtoName = (moduleName) =>
+      moduleName
+         .replace(/^(WAWebProtobufs|WAWebProtobuf|WAProtobufs|WA)/g, '')
+         .replace(/\.pb$/, '');
    const makeRenameFunc = () => (name) => {
       name = unspecName(name);
       return name; // .replaceAll('$', '__')
@@ -277,6 +281,26 @@ async function findAppModules() {
          return Object.values(obj).find((item) => item.alias === alias);
       };
 
+      // resolve the module a referenced type comes from, either through a
+      // previously collected alias or through an inlined `alias = require('Module')`
+      const findRefModule = (node) => {
+         if (!node) {
+            return undefined;
+         }
+         if (node.type === 'Identifier') {
+            return modInfo.crossRefs.find((r) => r.alias === node.name)
+               ?.module;
+         }
+         if (node.type === 'AssignmentExpression') {
+            return findRefModule(node.right) || findRefModule(node.left);
+         }
+         if (node.type === 'CallExpression') {
+            const arg = node.arguments?.[0];
+            return typeof arg?.value === 'string' ? arg.value : undefined;
+         }
+         return undefined;
+      };
+
       // message specifications are stored in a "internalSpec" attribute of the respective identifier alias
       walk.simple(mod, {
          AssignmentExpression(node) {
@@ -357,6 +381,7 @@ async function findAppModules() {
 
                      // determine cross reference name from alias if this member has type "message" or "enum"
 
+                     let sourceModule;
                      if (type === 'message' || type === 'enum') {
                         const currLoc = ` from member '${name}' of message ${targetIdent.name}'`;
                         if (elements[2].type === 'Identifier') {
@@ -399,10 +424,24 @@ async function findAppModules() {
                                  currLoc
                               );
                            }
+
+                           // remember which module the referenced type came from, so that
+                           // ambiguous type names (defined in several modules) stay bound to
+                           // the module they were actually referenced from
+                           const refModule = findRefModule(elements[2].object);
+                           if (
+                              type &&
+                              refModule &&
+                              refModule !== '$InternalEnum' &&
+                              !modInfo.identifiers[type] &&
+                              modulesInfo[refModule]?.identifiers?.[type]
+                           ) {
+                              sourceModule = refModule;
+                           }
                         }
                      }
 
-                     return { name, id: elements[0].value, type, flags };
+                     return { name, id: elements[0].value, type, flags, sourceModule };
                   }
                );
 
@@ -435,11 +474,11 @@ async function findAppModules() {
    }
 
    const decodedProtoMap = {};
+   // imports required because a member explicitly references a type of another module
+   const externalImportsByProto = {};
    const spaceIndent = ' '.repeat(4);
    for (const mod of modules) {
-      const protoName = mod.expression.arguments[0].value
-         .replace(/^(WAWebProtobufs|WAWebProtobuf|WAProtobufs|WA)/g, '')
-         .replace(/\.pb$/, '');
+      const protoName = moduleToProtoName(mod.expression.arguments[0].value);
       const modInfo = modulesInfo[mod.expression.arguments[0].value];
       const identifiers = Object.values(modInfo?.identifiers);
 
@@ -491,6 +530,17 @@ async function findAppModules() {
             let typeName = unnestName(info.type);
             if (indentation !== parentName && indentation) {
                typeName = `${indentation.replaceAll('$', '.')}.${typeName}`;
+            }
+
+            // qualify with the package the type was actually referenced from,
+            // instead of relying on a global (and possibly ambiguous) type name lookup
+            const sourceProto =
+               info.sourceModule && moduleToProtoName(info.sourceModule);
+            if (sourceProto && sourceProto !== protoName) {
+               typeName = `${sourceProto}.${typeName}`;
+               externalImportsByProto[protoName] =
+                  externalImportsByProto[protoName] || new Set();
+               externalImportsByProto[protoName].add(sourceProto);
             }
 
             // if(info.enumValues) {
@@ -611,6 +661,13 @@ async function findAppModules() {
                const types = Object.keys(protobuf.types.basic).filter(Boolean);
 
                if (types.includes(typeName)) continue;
+               // already qualified with its source package
+               if (
+                  typeName.includes('.') &&
+                  decodedProtoMap[typeName.split('.')[0]]
+               ) {
+                  continue;
+               }
 
                for (const otherProto in decodedProtoMap) {
                   if (otherProto === protoName) continue;
@@ -633,6 +690,10 @@ async function findAppModules() {
                }
             }
          }
+      }
+
+      for (const proto of externalImportsByProto[protoName] || []) {
+         importsNeeded.add(proto);
       }
 
       // Update the content to include proto package name for external types
