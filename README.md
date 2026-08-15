@@ -7,15 +7,15 @@
 </div>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/@innovatorssoft/baileys"><img src="https://img.shields.io/npm/v/@innovatorssoft/baileys?style=for-the-badge&logo=npm" alt="npm version" /></a>
-<a href="https://www.npmjs.com/package/@innovatorssoft/baileys"><img src="https://img.shields.io/npm/dt/@innovatorssoft/baileys?style=for-the-badge&logo=npm" alt="npm downloads" /></a>
-<a href="https://github.com/innovatorssoft/Baileys/stargazers"><img src="https://img.shields.io/github/stars/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="github stars" /></a>
-<a href="https://github.com/innovatorssoft/Baileys/network/members"><img src="https://img.shields.io/github/forks/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="github forks" /></a>
-<a href="https://github.com/innovatorssoft/Baileys/blob/main/LICENSE"><img src="https://img.shields.io/github/license/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="license" /></a>
-<a href="https://deepwiki.com/innovatorssoft/Baileys"><img src="https://deepwiki.com/badge.svg" alt="Ask Deep-Wiki"></a>
+	<a href="https://www.npmjs.com/package/@innovatorssoft/baileys"><img src="https://img.shields.io/npm/v/@innovatorssoft/baileys?style=for-the-badge&logo=npm" alt="npm version" /></a>
+	<a href="https://www.npmjs.com/package/@innovatorssoft/baileys"><img src="https://img.shields.io/npm/dt/@innovatorssoft/baileys?style=for-the-badge&logo=npm" alt="npm downloads" /></a>
+	<a href="https://github.com/innovatorssoft/Baileys/stargazers"><img src="https://img.shields.io/github/stars/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="github stars" /></a>
+	<a href="https://github.com/innovatorssoft/Baileys/network/members"><img src="https://img.shields.io/github/forks/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="github forks" /></a>
+	<a href="https://github.com/innovatorssoft/Baileys/blob/main/LICENSE"><img src="https://img.shields.io/github/license/innovatorssoft/Baileys?style=for-the-badge&logo=github" alt="license" /></a>
+	<a href="https://deepwiki.com/innovatorssoft/Baileys"><img src="https://deepwiki.com/badge.svg" alt="Ask Deep-Wiki"></a>
 </p>
----
 
+---
 ## ⚠️ Important Notice
 
 This library was originally a project for **CS-2362 at Ashoka University** and is in no way affiliated with or endorsed by WhatsApp. Use at your own discretion. Do not spam people with this. We discourage any stalkerware, bulk or automated messaging usage.
