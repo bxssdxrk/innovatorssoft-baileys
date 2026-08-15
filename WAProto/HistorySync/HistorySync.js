@@ -32299,6 +32299,9 @@ $root.E2E = (function() {
          * @property {E2E.Message.IFutureProofMessage|null} [newsletterAdminProfileStatusMessage] Message newsletterAdminProfileStatusMessage
          * @property {E2E.Message.IRootSecretDistributeMessage|null} [rootSecretDistributeMessage] Message rootSecretDistributeMessage
          * @property {E2E.Message.ISplitPaymentUpdateMessage|null} [splitPaymentUpdateMessage] Message splitPaymentUpdateMessage
+         * @property {E2E.Message.IMusicMessage|null} [musicMessage] Message musicMessage
+         * @property {E2E.Message.IStatusLinkPreviewMetadata|null} [statusLinkPreviewMetadata] Message statusLinkPreviewMetadata
+         * @property {E2E.Message.IFutureProofMessage|null} [botPlatformRegistrationSuccessMessage] Message botPlatformRegistrationSuccessMessage
          */
 
         /**
@@ -33180,6 +33183,30 @@ $root.E2E = (function() {
          */
         Message.prototype.splitPaymentUpdateMessage = null;
 
+        /**
+         * Message musicMessage.
+         * @member {E2E.Message.IMusicMessage|null|undefined} musicMessage
+         * @memberof E2E.Message
+         * @instance
+         */
+        Message.prototype.musicMessage = null;
+
+        /**
+         * Message statusLinkPreviewMetadata.
+         * @member {E2E.Message.IStatusLinkPreviewMetadata|null|undefined} statusLinkPreviewMetadata
+         * @memberof E2E.Message
+         * @instance
+         */
+        Message.prototype.statusLinkPreviewMetadata = null;
+
+        /**
+         * Message botPlatformRegistrationSuccessMessage.
+         * @member {E2E.Message.IFutureProofMessage|null|undefined} botPlatformRegistrationSuccessMessage
+         * @memberof E2E.Message
+         * @instance
+         */
+        Message.prototype.botPlatformRegistrationSuccessMessage = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
@@ -33831,6 +33858,24 @@ $root.E2E = (function() {
             set: $util.oneOfSetter($oneOfFields)
         });
 
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(Message.prototype, "_musicMessage", {
+            get: $util.oneOfGetter($oneOfFields = ["musicMessage"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(Message.prototype, "_statusLinkPreviewMetadata", {
+            get: $util.oneOfGetter($oneOfFields = ["statusLinkPreviewMetadata"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(Message.prototype, "_botPlatformRegistrationSuccessMessage", {
+            get: $util.oneOfGetter($oneOfFields = ["botPlatformRegistrationSuccessMessage"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
         /**
          * Creates a new Message instance using the specified properties.
          * @function create
@@ -34071,6 +34116,12 @@ $root.E2E = (function() {
                 $root.E2E.Message.RootSecretDistributeMessage.encode(message.rootSecretDistributeMessage, writer.uint32(/* id 127, wireType 2 =*/1018).fork()).ldelim();
             if (message.splitPaymentUpdateMessage != null && Object.hasOwnProperty.call(message, "splitPaymentUpdateMessage"))
                 $root.E2E.Message.SplitPaymentUpdateMessage.encode(message.splitPaymentUpdateMessage, writer.uint32(/* id 128, wireType 2 =*/1026).fork()).ldelim();
+            if (message.musicMessage != null && Object.hasOwnProperty.call(message, "musicMessage"))
+                $root.E2E.Message.MusicMessage.encode(message.musicMessage, writer.uint32(/* id 129, wireType 2 =*/1034).fork()).ldelim();
+            if (message.statusLinkPreviewMetadata != null && Object.hasOwnProperty.call(message, "statusLinkPreviewMetadata"))
+                $root.E2E.Message.StatusLinkPreviewMetadata.encode(message.statusLinkPreviewMetadata, writer.uint32(/* id 130, wireType 2 =*/1042).fork()).ldelim();
+            if (message.botPlatformRegistrationSuccessMessage != null && Object.hasOwnProperty.call(message, "botPlatformRegistrationSuccessMessage"))
+                $root.E2E.Message.FutureProofMessage.encode(message.botPlatformRegistrationSuccessMessage, writer.uint32(/* id 131, wireType 2 =*/1050).fork()).ldelim();
             return writer;
         };
 
@@ -34537,6 +34588,18 @@ $root.E2E = (function() {
                     }
                 case 128: {
                         message.splitPaymentUpdateMessage = $root.E2E.Message.SplitPaymentUpdateMessage.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 129: {
+                        message.musicMessage = $root.E2E.Message.MusicMessage.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 130: {
+                        message.statusLinkPreviewMetadata = $root.E2E.Message.StatusLinkPreviewMetadata.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 131: {
+                        message.botPlatformRegistrationSuccessMessage = $root.E2E.Message.FutureProofMessage.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -35436,6 +35499,30 @@ $root.E2E = (function() {
                         return "splitPaymentUpdateMessage." + error;
                 }
             }
+            if (message.musicMessage != null && message.hasOwnProperty("musicMessage")) {
+                properties._musicMessage = 1;
+                {
+                    var error = $root.E2E.Message.MusicMessage.verify(message.musicMessage);
+                    if (error)
+                        return "musicMessage." + error;
+                }
+            }
+            if (message.statusLinkPreviewMetadata != null && message.hasOwnProperty("statusLinkPreviewMetadata")) {
+                properties._statusLinkPreviewMetadata = 1;
+                {
+                    var error = $root.E2E.Message.StatusLinkPreviewMetadata.verify(message.statusLinkPreviewMetadata);
+                    if (error)
+                        return "statusLinkPreviewMetadata." + error;
+                }
+            }
+            if (message.botPlatformRegistrationSuccessMessage != null && message.hasOwnProperty("botPlatformRegistrationSuccessMessage")) {
+                properties._botPlatformRegistrationSuccessMessage = 1;
+                {
+                    var error = $root.E2E.Message.FutureProofMessage.verify(message.botPlatformRegistrationSuccessMessage);
+                    if (error)
+                        return "botPlatformRegistrationSuccessMessage." + error;
+                }
+            }
             return null;
         };
 
@@ -35987,6 +36074,21 @@ $root.E2E = (function() {
                 if (typeof object.splitPaymentUpdateMessage !== "object")
                     throw TypeError(".E2E.Message.splitPaymentUpdateMessage: object expected");
                 message.splitPaymentUpdateMessage = $root.E2E.Message.SplitPaymentUpdateMessage.fromObject(object.splitPaymentUpdateMessage);
+            }
+            if (object.musicMessage != null) {
+                if (typeof object.musicMessage !== "object")
+                    throw TypeError(".E2E.Message.musicMessage: object expected");
+                message.musicMessage = $root.E2E.Message.MusicMessage.fromObject(object.musicMessage);
+            }
+            if (object.statusLinkPreviewMetadata != null) {
+                if (typeof object.statusLinkPreviewMetadata !== "object")
+                    throw TypeError(".E2E.Message.statusLinkPreviewMetadata: object expected");
+                message.statusLinkPreviewMetadata = $root.E2E.Message.StatusLinkPreviewMetadata.fromObject(object.statusLinkPreviewMetadata);
+            }
+            if (object.botPlatformRegistrationSuccessMessage != null) {
+                if (typeof object.botPlatformRegistrationSuccessMessage !== "object")
+                    throw TypeError(".E2E.Message.botPlatformRegistrationSuccessMessage: object expected");
+                message.botPlatformRegistrationSuccessMessage = $root.E2E.Message.FutureProofMessage.fromObject(object.botPlatformRegistrationSuccessMessage);
             }
             return message;
         };
@@ -36543,6 +36645,21 @@ $root.E2E = (function() {
                 object.splitPaymentUpdateMessage = $root.E2E.Message.SplitPaymentUpdateMessage.toObject(message.splitPaymentUpdateMessage, options);
                 if (options.oneofs)
                     object._splitPaymentUpdateMessage = "splitPaymentUpdateMessage";
+            }
+            if (message.musicMessage != null && message.hasOwnProperty("musicMessage")) {
+                object.musicMessage = $root.E2E.Message.MusicMessage.toObject(message.musicMessage, options);
+                if (options.oneofs)
+                    object._musicMessage = "musicMessage";
+            }
+            if (message.statusLinkPreviewMetadata != null && message.hasOwnProperty("statusLinkPreviewMetadata")) {
+                object.statusLinkPreviewMetadata = $root.E2E.Message.StatusLinkPreviewMetadata.toObject(message.statusLinkPreviewMetadata, options);
+                if (options.oneofs)
+                    object._statusLinkPreviewMetadata = "statusLinkPreviewMetadata";
+            }
+            if (message.botPlatformRegistrationSuccessMessage != null && message.hasOwnProperty("botPlatformRegistrationSuccessMessage")) {
+                object.botPlatformRegistrationSuccessMessage = $root.E2E.Message.FutureProofMessage.toObject(message.botPlatformRegistrationSuccessMessage, options);
+                if (options.oneofs)
+                    object._botPlatformRegistrationSuccessMessage = "botPlatformRegistrationSuccessMessage";
             }
             return object;
         };
@@ -70306,6 +70423,382 @@ $root.E2E = (function() {
             return MessageHistoryNotice;
         })();
 
+        Message.MusicMessage = (function() {
+
+            /**
+             * Properties of a MusicMessage.
+             * @memberof E2E.Message
+             * @interface IMusicMessage
+             * @property {E2E.IEmbeddedMusic|null} [embeddedMusic] MusicMessage embeddedMusic
+             * @property {string|null} [songUri] MusicMessage songUri
+             * @property {string|null} [artworkUri] MusicMessage artworkUri
+             * @property {number|null} [style] MusicMessage style
+             * @property {E2E.IContextInfo|null} [contextInfo] MusicMessage contextInfo
+             */
+
+            /**
+             * Constructs a new MusicMessage.
+             * @memberof E2E.Message
+             * @classdesc Represents a MusicMessage.
+             * @implements IMusicMessage
+             * @constructor
+             * @param {E2E.Message.IMusicMessage=} [properties] Properties to set
+             */
+            function MusicMessage(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * MusicMessage embeddedMusic.
+             * @member {E2E.IEmbeddedMusic|null|undefined} embeddedMusic
+             * @memberof E2E.Message.MusicMessage
+             * @instance
+             */
+            MusicMessage.prototype.embeddedMusic = null;
+
+            /**
+             * MusicMessage songUri.
+             * @member {string|null|undefined} songUri
+             * @memberof E2E.Message.MusicMessage
+             * @instance
+             */
+            MusicMessage.prototype.songUri = null;
+
+            /**
+             * MusicMessage artworkUri.
+             * @member {string|null|undefined} artworkUri
+             * @memberof E2E.Message.MusicMessage
+             * @instance
+             */
+            MusicMessage.prototype.artworkUri = null;
+
+            /**
+             * MusicMessage style.
+             * @member {number|null|undefined} style
+             * @memberof E2E.Message.MusicMessage
+             * @instance
+             */
+            MusicMessage.prototype.style = null;
+
+            /**
+             * MusicMessage contextInfo.
+             * @member {E2E.IContextInfo|null|undefined} contextInfo
+             * @memberof E2E.Message.MusicMessage
+             * @instance
+             */
+            MusicMessage.prototype.contextInfo = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(MusicMessage.prototype, "_embeddedMusic", {
+                get: $util.oneOfGetter($oneOfFields = ["embeddedMusic"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(MusicMessage.prototype, "_songUri", {
+                get: $util.oneOfGetter($oneOfFields = ["songUri"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(MusicMessage.prototype, "_artworkUri", {
+                get: $util.oneOfGetter($oneOfFields = ["artworkUri"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(MusicMessage.prototype, "_style", {
+                get: $util.oneOfGetter($oneOfFields = ["style"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(MusicMessage.prototype, "_contextInfo", {
+                get: $util.oneOfGetter($oneOfFields = ["contextInfo"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new MusicMessage instance using the specified properties.
+             * @function create
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {E2E.Message.IMusicMessage=} [properties] Properties to set
+             * @returns {E2E.Message.MusicMessage} MusicMessage instance
+             */
+            MusicMessage.create = function create(properties) {
+                return new MusicMessage(properties);
+            };
+
+            /**
+             * Encodes the specified MusicMessage message. Does not implicitly {@link E2E.Message.MusicMessage.verify|verify} messages.
+             * @function encode
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {E2E.Message.IMusicMessage} message MusicMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MusicMessage.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.embeddedMusic != null && Object.hasOwnProperty.call(message, "embeddedMusic"))
+                    $root.E2E.EmbeddedMusic.encode(message.embeddedMusic, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.songUri != null && Object.hasOwnProperty.call(message, "songUri"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.songUri);
+                if (message.artworkUri != null && Object.hasOwnProperty.call(message, "artworkUri"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.artworkUri);
+                if (message.style != null && Object.hasOwnProperty.call(message, "style"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.style);
+                if (message.contextInfo != null && Object.hasOwnProperty.call(message, "contextInfo"))
+                    $root.E2E.ContextInfo.encode(message.contextInfo, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MusicMessage message, length delimited. Does not implicitly {@link E2E.Message.MusicMessage.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {E2E.Message.IMusicMessage} message MusicMessage message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MusicMessage.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a MusicMessage message from the specified reader or buffer.
+             * @function decode
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {E2E.Message.MusicMessage} MusicMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MusicMessage.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.MusicMessage();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.embeddedMusic = $root.E2E.EmbeddedMusic.decode(reader, reader.uint32());
+                            break;
+                        }
+                    case 2: {
+                            message.songUri = reader.string();
+                            break;
+                        }
+                    case 3: {
+                            message.artworkUri = reader.string();
+                            break;
+                        }
+                    case 4: {
+                            message.style = reader.int32();
+                            break;
+                        }
+                    case 5: {
+                            message.contextInfo = $root.E2E.ContextInfo.decode(reader, reader.uint32());
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a MusicMessage message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {E2E.Message.MusicMessage} MusicMessage
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MusicMessage.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MusicMessage message.
+             * @function verify
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MusicMessage.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.embeddedMusic != null && message.hasOwnProperty("embeddedMusic")) {
+                    properties._embeddedMusic = 1;
+                    {
+                        var error = $root.E2E.EmbeddedMusic.verify(message.embeddedMusic);
+                        if (error)
+                            return "embeddedMusic." + error;
+                    }
+                }
+                if (message.songUri != null && message.hasOwnProperty("songUri")) {
+                    properties._songUri = 1;
+                    if (!$util.isString(message.songUri))
+                        return "songUri: string expected";
+                }
+                if (message.artworkUri != null && message.hasOwnProperty("artworkUri")) {
+                    properties._artworkUri = 1;
+                    if (!$util.isString(message.artworkUri))
+                        return "artworkUri: string expected";
+                }
+                if (message.style != null && message.hasOwnProperty("style")) {
+                    properties._style = 1;
+                    if (!$util.isInteger(message.style))
+                        return "style: integer expected";
+                }
+                if (message.contextInfo != null && message.hasOwnProperty("contextInfo")) {
+                    properties._contextInfo = 1;
+                    {
+                        var error = $root.E2E.ContextInfo.verify(message.contextInfo);
+                        if (error)
+                            return "contextInfo." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a MusicMessage message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {E2E.Message.MusicMessage} MusicMessage
+             */
+            MusicMessage.fromObject = function fromObject(object) {
+                if (object instanceof $root.E2E.Message.MusicMessage)
+                    return object;
+                var message = new $root.E2E.Message.MusicMessage();
+                if (object.embeddedMusic != null) {
+                    if (typeof object.embeddedMusic !== "object")
+                        throw TypeError(".E2E.Message.MusicMessage.embeddedMusic: object expected");
+                    message.embeddedMusic = $root.E2E.EmbeddedMusic.fromObject(object.embeddedMusic);
+                }
+                if (object.songUri != null)
+                    message.songUri = String(object.songUri);
+                if (object.artworkUri != null)
+                    message.artworkUri = String(object.artworkUri);
+                if (object.style != null)
+                    message.style = object.style | 0;
+                if (object.contextInfo != null) {
+                    if (typeof object.contextInfo !== "object")
+                        throw TypeError(".E2E.Message.MusicMessage.contextInfo: object expected");
+                    message.contextInfo = $root.E2E.ContextInfo.fromObject(object.contextInfo);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MusicMessage message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {E2E.Message.MusicMessage} message MusicMessage
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MusicMessage.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.embeddedMusic != null && message.hasOwnProperty("embeddedMusic")) {
+                    object.embeddedMusic = $root.E2E.EmbeddedMusic.toObject(message.embeddedMusic, options);
+                    if (options.oneofs)
+                        object._embeddedMusic = "embeddedMusic";
+                }
+                if (message.songUri != null && message.hasOwnProperty("songUri")) {
+                    object.songUri = message.songUri;
+                    if (options.oneofs)
+                        object._songUri = "songUri";
+                }
+                if (message.artworkUri != null && message.hasOwnProperty("artworkUri")) {
+                    object.artworkUri = message.artworkUri;
+                    if (options.oneofs)
+                        object._artworkUri = "artworkUri";
+                }
+                if (message.style != null && message.hasOwnProperty("style")) {
+                    object.style = message.style;
+                    if (options.oneofs)
+                        object._style = "style";
+                }
+                if (message.contextInfo != null && message.hasOwnProperty("contextInfo")) {
+                    object.contextInfo = $root.E2E.ContextInfo.toObject(message.contextInfo, options);
+                    if (options.oneofs)
+                        object._contextInfo = "contextInfo";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this MusicMessage to JSON.
+             * @function toJSON
+             * @memberof E2E.Message.MusicMessage
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MusicMessage.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for MusicMessage
+             * @function getTypeUrl
+             * @memberof E2E.Message.MusicMessage
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            MusicMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/E2E.Message.MusicMessage";
+            };
+
+            /**
+             * MusicMessageStyle enum.
+             * @name E2E.Message.MusicMessage.MusicMessageStyle
+             * @enum {number}
+             * @property {number} UNKNOWN=0 UNKNOWN value
+             * @property {number} VINYL=1 VINYL value
+             */
+            MusicMessage.MusicMessageStyle = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "UNKNOWN"] = 0;
+                values[valuesById[1] = "VINYL"] = 1;
+                return values;
+            })();
+
+            return MusicMessage;
+        })();
+
         Message.NewsletterAdminInviteMessage = (function() {
 
             /**
@@ -72358,6 +72851,7 @@ $root.E2E = (function() {
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
                         break;
                     }
                 }
@@ -72423,6 +72917,10 @@ $root.E2E = (function() {
                 case "UPI":
                 case 3:
                     message.serviceType = 3;
+                    break;
+                case "PIX":
+                case 4:
+                    message.serviceType = 4;
                     break;
                 }
                 if (object.expiryTimestamp != null)
@@ -72549,6 +73047,7 @@ $root.E2E = (function() {
              * @property {number} FBPAY=1 FBPAY value
              * @property {number} NOVI=2 NOVI value
              * @property {number} UPI=3 UPI value
+             * @property {number} PIX=4 PIX value
              */
             PaymentInviteMessage.ServiceType = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -72556,6 +73055,7 @@ $root.E2E = (function() {
                 values[valuesById[1] = "FBPAY"] = 1;
                 values[valuesById[2] = "NOVI"] = 2;
                 values[valuesById[3] = "UPI"] = 3;
+                values[valuesById[4] = "PIX"] = 4;
                 return values;
             })();
 
@@ -88698,7 +89198,6 @@ $root.E2E = (function() {
              * @property {AICommon.IAIMetadataOperation|null} [aiMetadataOperation] ProtocolMessage aiMetadataOperation
              * @property {E2E.Message.IMarkAsVerifiedAction|null} [markAsVerifiedAction] ProtocolMessage markAsVerifiedAction
              * @property {ServerSync.ICoexStateSync|null} [coexStateSync] ProtocolMessage coexStateSync
-             * @property {E2E.Message.ISyncRequestMutationRetry|null} [syncRequestMutationRetry] ProtocolMessage syncRequestMutationRetry
              */
 
             /**
@@ -88956,14 +89455,6 @@ $root.E2E = (function() {
              */
             ProtocolMessage.prototype.coexStateSync = null;
 
-            /**
-             * ProtocolMessage syncRequestMutationRetry.
-             * @member {E2E.Message.ISyncRequestMutationRetry|null|undefined} syncRequestMutationRetry
-             * @memberof E2E.Message.ProtocolMessage
-             * @instance
-             */
-            ProtocolMessage.prototype.syncRequestMutationRetry = null;
-
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
@@ -89147,12 +89638,6 @@ $root.E2E = (function() {
                 set: $util.oneOfSetter($oneOfFields)
             });
 
-            // Virtual OneOf for proto3 optional field
-            Object.defineProperty(ProtocolMessage.prototype, "_syncRequestMutationRetry", {
-                get: $util.oneOfGetter($oneOfFields = ["syncRequestMutationRetry"]),
-                set: $util.oneOfSetter($oneOfFields)
-            });
-
             /**
              * Creates a new ProtocolMessage instance using the specified properties.
              * @function create
@@ -89237,8 +89722,6 @@ $root.E2E = (function() {
                     $root.E2E.Message.MarkAsVerifiedAction.encode(message.markAsVerifiedAction, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                 if (message.coexStateSync != null && Object.hasOwnProperty.call(message, "coexStateSync"))
                     $root.ServerSync.CoexStateSync.encode(message.coexStateSync, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
-                if (message.syncRequestMutationRetry != null && Object.hasOwnProperty.call(message, "syncRequestMutationRetry"))
-                    $root.E2E.Message.SyncRequestMutationRetry.encode(message.syncRequestMutationRetry, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
                 return writer;
             };
 
@@ -89395,10 +89878,6 @@ $root.E2E = (function() {
                             message.coexStateSync = $root.ServerSync.CoexStateSync.decode(reader, reader.uint32());
                             break;
                         }
-                    case 34: {
-                            message.syncRequestMutationRetry = $root.E2E.Message.SyncRequestMutationRetry.decode(reader, reader.uint32());
-                            break;
-                        }
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -89480,7 +89959,6 @@ $root.E2E = (function() {
                     case 35:
                     case 36:
                     case 37:
-                    case 38:
                         break;
                     }
                 }
@@ -89690,14 +90168,6 @@ $root.E2E = (function() {
                             return "coexStateSync." + error;
                     }
                 }
-                if (message.syncRequestMutationRetry != null && message.hasOwnProperty("syncRequestMutationRetry")) {
-                    properties._syncRequestMutationRetry = 1;
-                    {
-                        var error = $root.E2E.Message.SyncRequestMutationRetry.verify(message.syncRequestMutationRetry);
-                        if (error)
-                            return "syncRequestMutationRetry." + error;
-                    }
-                }
                 return null;
             };
 
@@ -89853,10 +90323,6 @@ $root.E2E = (function() {
                 case 37:
                     message.type = 37;
                     break;
-                case "SYNC_REQUEST_MUTATION_RETRY":
-                case 38:
-                    message.type = 38;
-                    break;
                 }
                 if (object.ephemeralExpiration != null)
                     message.ephemeralExpiration = object.ephemeralExpiration >>> 0;
@@ -89996,11 +90462,6 @@ $root.E2E = (function() {
                     if (typeof object.coexStateSync !== "object")
                         throw TypeError(".E2E.Message.ProtocolMessage.coexStateSync: object expected");
                     message.coexStateSync = $root.ServerSync.CoexStateSync.fromObject(object.coexStateSync);
-                }
-                if (object.syncRequestMutationRetry != null) {
-                    if (typeof object.syncRequestMutationRetry !== "object")
-                        throw TypeError(".E2E.Message.ProtocolMessage.syncRequestMutationRetry: object expected");
-                    message.syncRequestMutationRetry = $root.E2E.Message.SyncRequestMutationRetry.fromObject(object.syncRequestMutationRetry);
                 }
                 return message;
             };
@@ -90174,11 +90635,6 @@ $root.E2E = (function() {
                     if (options.oneofs)
                         object._coexStateSync = "coexStateSync";
                 }
-                if (message.syncRequestMutationRetry != null && message.hasOwnProperty("syncRequestMutationRetry")) {
-                    object.syncRequestMutationRetry = $root.E2E.Message.SyncRequestMutationRetry.toObject(message.syncRequestMutationRetry, options);
-                    if (options.oneofs)
-                        object._syncRequestMutationRetry = "syncRequestMutationRetry";
-                }
                 return object;
             };
 
@@ -90244,7 +90700,6 @@ $root.E2E = (function() {
              * @property {number} AI_METADATA_OPERATION=35 AI_METADATA_OPERATION value
              * @property {number} MARK_AS_VERIFIED_ACTION=36 MARK_AS_VERIFIED_ACTION value
              * @property {number} COEX_STATE_SYNC=37 COEX_STATE_SYNC value
-             * @property {number} SYNC_REQUEST_MUTATION_RETRY=38 SYNC_REQUEST_MUTATION_RETRY value
              */
             ProtocolMessage.Type = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -90280,7 +90735,6 @@ $root.E2E = (function() {
                 values[valuesById[35] = "AI_METADATA_OPERATION"] = 35;
                 values[valuesById[36] = "MARK_AS_VERIFIED_ACTION"] = 36;
                 values[valuesById[37] = "COEX_STATE_SYNC"] = 37;
-                values[valuesById[38] = "SYNC_REQUEST_MUTATION_RETRY"] = 38;
                 return values;
             })();
 
@@ -94789,6 +95243,271 @@ $root.E2E = (function() {
             return SplitPaymentUpdateMessage;
         })();
 
+        Message.StatusLinkPreviewMetadata = (function() {
+
+            /**
+             * Properties of a StatusLinkPreviewMetadata.
+             * @memberof E2E.Message
+             * @interface IStatusLinkPreviewMetadata
+             * @property {E2E.Message.StatusLinkPreviewMetadata.Style|null} [style] StatusLinkPreviewMetadata style
+             */
+
+            /**
+             * Constructs a new StatusLinkPreviewMetadata.
+             * @memberof E2E.Message
+             * @classdesc Represents a StatusLinkPreviewMetadata.
+             * @implements IStatusLinkPreviewMetadata
+             * @constructor
+             * @param {E2E.Message.IStatusLinkPreviewMetadata=} [properties] Properties to set
+             */
+            function StatusLinkPreviewMetadata(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * StatusLinkPreviewMetadata style.
+             * @member {E2E.Message.StatusLinkPreviewMetadata.Style|null|undefined} style
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @instance
+             */
+            StatusLinkPreviewMetadata.prototype.style = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(StatusLinkPreviewMetadata.prototype, "_style", {
+                get: $util.oneOfGetter($oneOfFields = ["style"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new StatusLinkPreviewMetadata instance using the specified properties.
+             * @function create
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {E2E.Message.IStatusLinkPreviewMetadata=} [properties] Properties to set
+             * @returns {E2E.Message.StatusLinkPreviewMetadata} StatusLinkPreviewMetadata instance
+             */
+            StatusLinkPreviewMetadata.create = function create(properties) {
+                return new StatusLinkPreviewMetadata(properties);
+            };
+
+            /**
+             * Encodes the specified StatusLinkPreviewMetadata message. Does not implicitly {@link E2E.Message.StatusLinkPreviewMetadata.verify|verify} messages.
+             * @function encode
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {E2E.Message.IStatusLinkPreviewMetadata} message StatusLinkPreviewMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            StatusLinkPreviewMetadata.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.style != null && Object.hasOwnProperty.call(message, "style"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.style);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified StatusLinkPreviewMetadata message, length delimited. Does not implicitly {@link E2E.Message.StatusLinkPreviewMetadata.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {E2E.Message.IStatusLinkPreviewMetadata} message StatusLinkPreviewMetadata message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            StatusLinkPreviewMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a StatusLinkPreviewMetadata message from the specified reader or buffer.
+             * @function decode
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {E2E.Message.StatusLinkPreviewMetadata} StatusLinkPreviewMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            StatusLinkPreviewMetadata.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.StatusLinkPreviewMetadata();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.style = reader.int32();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a StatusLinkPreviewMetadata message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {E2E.Message.StatusLinkPreviewMetadata} StatusLinkPreviewMetadata
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            StatusLinkPreviewMetadata.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a StatusLinkPreviewMetadata message.
+             * @function verify
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            StatusLinkPreviewMetadata.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.style != null && message.hasOwnProperty("style")) {
+                    properties._style = 1;
+                    switch (message.style) {
+                    default:
+                        return "style: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        break;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a StatusLinkPreviewMetadata message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {E2E.Message.StatusLinkPreviewMetadata} StatusLinkPreviewMetadata
+             */
+            StatusLinkPreviewMetadata.fromObject = function fromObject(object) {
+                if (object instanceof $root.E2E.Message.StatusLinkPreviewMetadata)
+                    return object;
+                var message = new $root.E2E.Message.StatusLinkPreviewMetadata();
+                switch (object.style) {
+                default:
+                    if (typeof object.style === "number") {
+                        message.style = object.style;
+                        break;
+                    }
+                    break;
+                case "AUTO":
+                case 0:
+                    message.style = 0;
+                    break;
+                case "COMPACT":
+                case 1:
+                    message.style = 1;
+                    break;
+                case "FULL":
+                case 2:
+                    message.style = 2;
+                    break;
+                case "IMMERSIVE":
+                case 3:
+                    message.style = 3;
+                    break;
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a StatusLinkPreviewMetadata message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {E2E.Message.StatusLinkPreviewMetadata} message StatusLinkPreviewMetadata
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            StatusLinkPreviewMetadata.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.style != null && message.hasOwnProperty("style")) {
+                    object.style = options.enums === String ? $root.E2E.Message.StatusLinkPreviewMetadata.Style[message.style] === undefined ? message.style : $root.E2E.Message.StatusLinkPreviewMetadata.Style[message.style] : message.style;
+                    if (options.oneofs)
+                        object._style = "style";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this StatusLinkPreviewMetadata to JSON.
+             * @function toJSON
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            StatusLinkPreviewMetadata.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for StatusLinkPreviewMetadata
+             * @function getTypeUrl
+             * @memberof E2E.Message.StatusLinkPreviewMetadata
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            StatusLinkPreviewMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/E2E.Message.StatusLinkPreviewMetadata";
+            };
+
+            /**
+             * Style enum.
+             * @name E2E.Message.StatusLinkPreviewMetadata.Style
+             * @enum {number}
+             * @property {number} AUTO=0 AUTO value
+             * @property {number} COMPACT=1 COMPACT value
+             * @property {number} FULL=2 FULL value
+             * @property {number} IMMERSIVE=3 IMMERSIVE value
+             */
+            StatusLinkPreviewMetadata.Style = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "AUTO"] = 0;
+                values[valuesById[1] = "COMPACT"] = 1;
+                values[valuesById[2] = "FULL"] = 2;
+                values[valuesById[3] = "IMMERSIVE"] = 3;
+                return values;
+            })();
+
+            return StatusLinkPreviewMetadata;
+        })();
+
         Message.StatusNotificationMessage = (function() {
 
             /**
@@ -94999,6 +95718,7 @@ $root.E2E = (function() {
                     case 1:
                     case 2:
                     case 3:
+                    case 4:
                         break;
                     }
                 }
@@ -95049,6 +95769,10 @@ $root.E2E = (function() {
                 case "STATUS_QUESTION_ANSWER_RESHARE":
                 case 3:
                     message.type = 3;
+                    break;
+                case "STATUS_GROUP_STATUS_REPLY":
+                case 4:
+                    message.type = 4;
                     break;
                 }
                 return message;
@@ -95119,6 +95843,7 @@ $root.E2E = (function() {
              * @property {number} STATUS_ADD_YOURS=1 STATUS_ADD_YOURS value
              * @property {number} STATUS_RESHARE=2 STATUS_RESHARE value
              * @property {number} STATUS_QUESTION_ANSWER_RESHARE=3 STATUS_QUESTION_ANSWER_RESHARE value
+             * @property {number} STATUS_GROUP_STATUS_REPLY=4 STATUS_GROUP_STATUS_REPLY value
              */
             StatusNotificationMessage.StatusNotificationType = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -95126,6 +95851,7 @@ $root.E2E = (function() {
                 values[valuesById[1] = "STATUS_ADD_YOURS"] = 1;
                 values[valuesById[2] = "STATUS_RESHARE"] = 2;
                 values[valuesById[3] = "STATUS_QUESTION_ANSWER_RESHARE"] = 3;
+                values[valuesById[4] = "STATUS_GROUP_STATUS_REPLY"] = 4;
                 return values;
             })();
 
@@ -98762,530 +99488,6 @@ $root.E2E = (function() {
             };
 
             return StickerSyncRMRMessage;
-        })();
-
-        Message.SyncRequestMutationRetry = (function() {
-
-            /**
-             * Properties of a SyncRequestMutationRetry.
-             * @memberof E2E.Message
-             * @interface ISyncRequestMutationRetry
-             * @property {Array.<E2E.Message.SyncRequestMutationRetry.ICollection>|null} [collections] SyncRequestMutationRetry collections
-             * @property {number|null} [count] SyncRequestMutationRetry count
-             */
-
-            /**
-             * Constructs a new SyncRequestMutationRetry.
-             * @memberof E2E.Message
-             * @classdesc Represents a SyncRequestMutationRetry.
-             * @implements ISyncRequestMutationRetry
-             * @constructor
-             * @param {E2E.Message.ISyncRequestMutationRetry=} [properties] Properties to set
-             */
-            function SyncRequestMutationRetry(properties) {
-                this.collections = [];
-                if (properties)
-                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                        if (properties[keys[i]] != null)
-                            this[keys[i]] = properties[keys[i]];
-            }
-
-            /**
-             * SyncRequestMutationRetry collections.
-             * @member {Array.<E2E.Message.SyncRequestMutationRetry.ICollection>} collections
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @instance
-             */
-            SyncRequestMutationRetry.prototype.collections = $util.emptyArray;
-
-            /**
-             * SyncRequestMutationRetry count.
-             * @member {number|null|undefined} count
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @instance
-             */
-            SyncRequestMutationRetry.prototype.count = null;
-
-            // OneOf field names bound to virtual getters and setters
-            var $oneOfFields;
-
-            // Virtual OneOf for proto3 optional field
-            Object.defineProperty(SyncRequestMutationRetry.prototype, "_count", {
-                get: $util.oneOfGetter($oneOfFields = ["count"]),
-                set: $util.oneOfSetter($oneOfFields)
-            });
-
-            /**
-             * Creates a new SyncRequestMutationRetry instance using the specified properties.
-             * @function create
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {E2E.Message.ISyncRequestMutationRetry=} [properties] Properties to set
-             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry instance
-             */
-            SyncRequestMutationRetry.create = function create(properties) {
-                return new SyncRequestMutationRetry(properties);
-            };
-
-            /**
-             * Encodes the specified SyncRequestMutationRetry message. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.verify|verify} messages.
-             * @function encode
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {E2E.Message.ISyncRequestMutationRetry} message SyncRequestMutationRetry message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SyncRequestMutationRetry.encode = function encode(message, writer) {
-                if (!writer)
-                    writer = $Writer.create();
-                if (message.collections != null && message.collections.length)
-                    for (var i = 0; i < message.collections.length; ++i)
-                        $root.E2E.Message.SyncRequestMutationRetry.Collection.encode(message.collections[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.count);
-                return writer;
-            };
-
-            /**
-             * Encodes the specified SyncRequestMutationRetry message, length delimited. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.verify|verify} messages.
-             * @function encodeDelimited
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {E2E.Message.ISyncRequestMutationRetry} message SyncRequestMutationRetry message or plain object to encode
-             * @param {$protobuf.Writer} [writer] Writer to encode to
-             * @returns {$protobuf.Writer} Writer
-             */
-            SyncRequestMutationRetry.encodeDelimited = function encodeDelimited(message, writer) {
-                return this.encode(message, writer).ldelim();
-            };
-
-            /**
-             * Decodes a SyncRequestMutationRetry message from the specified reader or buffer.
-             * @function decode
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @param {number} [length] Message length if known beforehand
-             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SyncRequestMutationRetry.decode = function decode(reader, length, error) {
-                if (!(reader instanceof $Reader))
-                    reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.SyncRequestMutationRetry();
-                while (reader.pos < end) {
-                    var tag = reader.uint32();
-                    if (tag === error)
-                        break;
-                    switch (tag >>> 3) {
-                    case 1: {
-                            if (!(message.collections && message.collections.length))
-                                message.collections = [];
-                            message.collections.push($root.E2E.Message.SyncRequestMutationRetry.Collection.decode(reader, reader.uint32()));
-                            break;
-                        }
-                    case 2: {
-                            message.count = reader.uint32();
-                            break;
-                        }
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
-                    }
-                }
-                return message;
-            };
-
-            /**
-             * Decodes a SyncRequestMutationRetry message from the specified reader or buffer, length delimited.
-             * @function decodeDelimited
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            SyncRequestMutationRetry.decodeDelimited = function decodeDelimited(reader) {
-                if (!(reader instanceof $Reader))
-                    reader = new $Reader(reader);
-                return this.decode(reader, reader.uint32());
-            };
-
-            /**
-             * Verifies a SyncRequestMutationRetry message.
-             * @function verify
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {Object.<string,*>} message Plain object to verify
-             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-             */
-            SyncRequestMutationRetry.verify = function verify(message) {
-                if (typeof message !== "object" || message === null)
-                    return "object expected";
-                var properties = {};
-                if (message.collections != null && message.hasOwnProperty("collections")) {
-                    if (!Array.isArray(message.collections))
-                        return "collections: array expected";
-                    for (var i = 0; i < message.collections.length; ++i) {
-                        var error = $root.E2E.Message.SyncRequestMutationRetry.Collection.verify(message.collections[i]);
-                        if (error)
-                            return "collections." + error;
-                    }
-                }
-                if (message.count != null && message.hasOwnProperty("count")) {
-                    properties._count = 1;
-                    if (!$util.isInteger(message.count))
-                        return "count: integer expected";
-                }
-                return null;
-            };
-
-            /**
-             * Creates a SyncRequestMutationRetry message from a plain object. Also converts values to their respective internal types.
-             * @function fromObject
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {Object.<string,*>} object Plain object
-             * @returns {E2E.Message.SyncRequestMutationRetry} SyncRequestMutationRetry
-             */
-            SyncRequestMutationRetry.fromObject = function fromObject(object) {
-                if (object instanceof $root.E2E.Message.SyncRequestMutationRetry)
-                    return object;
-                var message = new $root.E2E.Message.SyncRequestMutationRetry();
-                if (object.collections) {
-                    if (!Array.isArray(object.collections))
-                        throw TypeError(".E2E.Message.SyncRequestMutationRetry.collections: array expected");
-                    message.collections = [];
-                    for (var i = 0; i < object.collections.length; ++i) {
-                        if (typeof object.collections[i] !== "object")
-                            throw TypeError(".E2E.Message.SyncRequestMutationRetry.collections: object expected");
-                        message.collections[i] = $root.E2E.Message.SyncRequestMutationRetry.Collection.fromObject(object.collections[i]);
-                    }
-                }
-                if (object.count != null)
-                    message.count = object.count >>> 0;
-                return message;
-            };
-
-            /**
-             * Creates a plain object from a SyncRequestMutationRetry message. Also converts values to other types if specified.
-             * @function toObject
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {E2E.Message.SyncRequestMutationRetry} message SyncRequestMutationRetry
-             * @param {$protobuf.IConversionOptions} [options] Conversion options
-             * @returns {Object.<string,*>} Plain object
-             */
-            SyncRequestMutationRetry.toObject = function toObject(message, options) {
-                if (!options)
-                    options = {};
-                var object = {};
-                if (options.arrays || options.defaults)
-                    object.collections = [];
-                if (message.collections && message.collections.length) {
-                    object.collections = [];
-                    for (var j = 0; j < message.collections.length; ++j)
-                        object.collections[j] = $root.E2E.Message.SyncRequestMutationRetry.Collection.toObject(message.collections[j], options);
-                }
-                if (message.count != null && message.hasOwnProperty("count")) {
-                    object.count = message.count;
-                    if (options.oneofs)
-                        object._count = "count";
-                }
-                return object;
-            };
-
-            /**
-             * Converts this SyncRequestMutationRetry to JSON.
-             * @function toJSON
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @instance
-             * @returns {Object.<string,*>} JSON object
-             */
-            SyncRequestMutationRetry.prototype.toJSON = function toJSON() {
-                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-            };
-
-            /**
-             * Gets the default type url for SyncRequestMutationRetry
-             * @function getTypeUrl
-             * @memberof E2E.Message.SyncRequestMutationRetry
-             * @static
-             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns {string} The default type url
-             */
-            SyncRequestMutationRetry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                if (typeUrlPrefix === undefined) {
-                    typeUrlPrefix = "type.googleapis.com";
-                }
-                return typeUrlPrefix + "/E2E.Message.SyncRequestMutationRetry";
-            };
-
-            SyncRequestMutationRetry.Collection = (function() {
-
-                /**
-                 * Properties of a Collection.
-                 * @memberof E2E.Message.SyncRequestMutationRetry
-                 * @interface ICollection
-                 * @property {string|null} [name] Collection name
-                 * @property {number|Long|null} [storedSyncdVersion] Collection storedSyncdVersion
-                 */
-
-                /**
-                 * Constructs a new Collection.
-                 * @memberof E2E.Message.SyncRequestMutationRetry
-                 * @classdesc Represents a Collection.
-                 * @implements ICollection
-                 * @constructor
-                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection=} [properties] Properties to set
-                 */
-                function Collection(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-
-                /**
-                 * Collection name.
-                 * @member {string|null|undefined} name
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @instance
-                 */
-                Collection.prototype.name = null;
-
-                /**
-                 * Collection storedSyncdVersion.
-                 * @member {number|Long|null|undefined} storedSyncdVersion
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @instance
-                 */
-                Collection.prototype.storedSyncdVersion = null;
-
-                // OneOf field names bound to virtual getters and setters
-                var $oneOfFields;
-
-                // Virtual OneOf for proto3 optional field
-                Object.defineProperty(Collection.prototype, "_name", {
-                    get: $util.oneOfGetter($oneOfFields = ["name"]),
-                    set: $util.oneOfSetter($oneOfFields)
-                });
-
-                // Virtual OneOf for proto3 optional field
-                Object.defineProperty(Collection.prototype, "_storedSyncdVersion", {
-                    get: $util.oneOfGetter($oneOfFields = ["storedSyncdVersion"]),
-                    set: $util.oneOfSetter($oneOfFields)
-                });
-
-                /**
-                 * Creates a new Collection instance using the specified properties.
-                 * @function create
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection=} [properties] Properties to set
-                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection instance
-                 */
-                Collection.create = function create(properties) {
-                    return new Collection(properties);
-                };
-
-                /**
-                 * Encodes the specified Collection message. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.Collection.verify|verify} messages.
-                 * @function encode
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection} message Collection message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Collection.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                    if (message.storedSyncdVersion != null && Object.hasOwnProperty.call(message, "storedSyncdVersion"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).uint64(message.storedSyncdVersion);
-                    return writer;
-                };
-
-                /**
-                 * Encodes the specified Collection message, length delimited. Does not implicitly {@link E2E.Message.SyncRequestMutationRetry.Collection.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {E2E.Message.SyncRequestMutationRetry.ICollection} message Collection message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Collection.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-
-                /**
-                 * Decodes a Collection message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Collection.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.E2E.Message.SyncRequestMutationRetry.Collection();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.name = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.storedSyncdVersion = reader.uint64();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-
-                /**
-                 * Decodes a Collection message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Collection.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-
-                /**
-                 * Verifies a Collection message.
-                 * @function verify
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Collection.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    var properties = {};
-                    if (message.name != null && message.hasOwnProperty("name")) {
-                        properties._name = 1;
-                        if (!$util.isString(message.name))
-                            return "name: string expected";
-                    }
-                    if (message.storedSyncdVersion != null && message.hasOwnProperty("storedSyncdVersion")) {
-                        properties._storedSyncdVersion = 1;
-                        if (!$util.isInteger(message.storedSyncdVersion) && !(message.storedSyncdVersion && $util.isInteger(message.storedSyncdVersion.low) && $util.isInteger(message.storedSyncdVersion.high)))
-                            return "storedSyncdVersion: integer|Long expected";
-                    }
-                    return null;
-                };
-
-                /**
-                 * Creates a Collection message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {E2E.Message.SyncRequestMutationRetry.Collection} Collection
-                 */
-                Collection.fromObject = function fromObject(object) {
-                    if (object instanceof $root.E2E.Message.SyncRequestMutationRetry.Collection)
-                        return object;
-                    var message = new $root.E2E.Message.SyncRequestMutationRetry.Collection();
-                    if (object.name != null)
-                        message.name = String(object.name);
-                    if (object.storedSyncdVersion != null)
-                        if ($util.Long)
-                            (message.storedSyncdVersion = $util.Long.fromValue(object.storedSyncdVersion)).unsigned = true;
-                        else if (typeof object.storedSyncdVersion === "string")
-                            message.storedSyncdVersion = parseInt(object.storedSyncdVersion, 10);
-                        else if (typeof object.storedSyncdVersion === "number")
-                            message.storedSyncdVersion = object.storedSyncdVersion;
-                        else if (typeof object.storedSyncdVersion === "object")
-                            message.storedSyncdVersion = new $util.LongBits(object.storedSyncdVersion.low >>> 0, object.storedSyncdVersion.high >>> 0).toNumber(true);
-                    return message;
-                };
-
-                /**
-                 * Creates a plain object from a Collection message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {E2E.Message.SyncRequestMutationRetry.Collection} message Collection
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Collection.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (message.name != null && message.hasOwnProperty("name")) {
-                        object.name = message.name;
-                        if (options.oneofs)
-                            object._name = "name";
-                    }
-                    if (message.storedSyncdVersion != null && message.hasOwnProperty("storedSyncdVersion")) {
-                        if (typeof message.storedSyncdVersion === "number")
-                            object.storedSyncdVersion = options.longs === String ? String(message.storedSyncdVersion) : message.storedSyncdVersion;
-                        else
-                            object.storedSyncdVersion = options.longs === String ? $util.Long.prototype.toString.call(message.storedSyncdVersion) : options.longs === Number ? new $util.LongBits(message.storedSyncdVersion.low >>> 0, message.storedSyncdVersion.high >>> 0).toNumber(true) : message.storedSyncdVersion;
-                        if (options.oneofs)
-                            object._storedSyncdVersion = "storedSyncdVersion";
-                    }
-                    return object;
-                };
-
-                /**
-                 * Converts this Collection to JSON.
-                 * @function toJSON
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Collection.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-
-                /**
-                 * Gets the default type url for Collection
-                 * @function getTypeUrl
-                 * @memberof E2E.Message.SyncRequestMutationRetry.Collection
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Collection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/E2E.Message.SyncRequestMutationRetry.Collection";
-                };
-
-                return Collection;
-            })();
-
-            return SyncRequestMutationRetry;
         })();
 
         Message.TemplateButtonReplyMessage = (function() {
@@ -132525,6 +132727,7 @@ $root.AICommon = (function() {
          * @property {AICommon.BotSignatureVerificationUseCaseProof.BotSignatureUseCase|null} [useCase] BotSignatureVerificationUseCaseProof useCase
          * @property {Uint8Array|null} [signature] BotSignatureVerificationUseCaseProof signature
          * @property {Array.<Uint8Array>|null} [certificateChain] BotSignatureVerificationUseCaseProof certificateChain
+         * @property {Array.<AICommon.BotSignatureVerificationUseCaseProof.ICertificateSKI>|null} [certificateChainSki] BotSignatureVerificationUseCaseProof certificateChainSki
          */
 
         /**
@@ -132537,6 +132740,7 @@ $root.AICommon = (function() {
          */
         function BotSignatureVerificationUseCaseProof(properties) {
             this.certificateChain = [];
+            this.certificateChainSki = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -132574,6 +132778,14 @@ $root.AICommon = (function() {
          * @instance
          */
         BotSignatureVerificationUseCaseProof.prototype.certificateChain = $util.emptyArray;
+
+        /**
+         * BotSignatureVerificationUseCaseProof certificateChainSki.
+         * @member {Array.<AICommon.BotSignatureVerificationUseCaseProof.ICertificateSKI>} certificateChainSki
+         * @memberof AICommon.BotSignatureVerificationUseCaseProof
+         * @instance
+         */
+        BotSignatureVerificationUseCaseProof.prototype.certificateChainSki = $util.emptyArray;
 
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
@@ -132629,6 +132841,9 @@ $root.AICommon = (function() {
             if (message.certificateChain != null && message.certificateChain.length)
                 for (var i = 0; i < message.certificateChain.length; ++i)
                     writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.certificateChain[i]);
+            if (message.certificateChainSki != null && message.certificateChainSki.length)
+                for (var i = 0; i < message.certificateChainSki.length; ++i)
+                    $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.encode(message.certificateChainSki[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
 
@@ -132683,6 +132898,12 @@ $root.AICommon = (function() {
                         message.certificateChain.push(reader.bytes());
                         break;
                     }
+                case 5: {
+                        if (!(message.certificateChainSki && message.certificateChainSki.length))
+                            message.certificateChainSki = [];
+                        message.certificateChainSki.push($root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.decode(reader, reader.uint32()));
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -132733,6 +132954,8 @@ $root.AICommon = (function() {
                 case 1:
                 case 2:
                 case 3:
+                case 4:
+                case 5:
                     break;
                 }
             }
@@ -132747,6 +132970,15 @@ $root.AICommon = (function() {
                 for (var i = 0; i < message.certificateChain.length; ++i)
                     if (!(message.certificateChain[i] && typeof message.certificateChain[i].length === "number" || $util.isString(message.certificateChain[i])))
                         return "certificateChain: buffer[] expected";
+            }
+            if (message.certificateChainSki != null && message.hasOwnProperty("certificateChainSki")) {
+                if (!Array.isArray(message.certificateChainSki))
+                    return "certificateChainSki: array expected";
+                for (var i = 0; i < message.certificateChainSki.length; ++i) {
+                    var error = $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.verify(message.certificateChainSki[i]);
+                    if (error)
+                        return "certificateChainSki." + error;
+                }
             }
             return null;
         };
@@ -132788,6 +133020,14 @@ $root.AICommon = (function() {
             case 3:
                 message.useCase = 3;
                 break;
+            case "WA_WAFFLE":
+            case 4:
+                message.useCase = 4;
+                break;
+            case "WA_FEATURE_PKI":
+            case 5:
+                message.useCase = 5;
+                break;
             }
             if (object.signature != null)
                 if (typeof object.signature === "string")
@@ -132803,6 +133043,16 @@ $root.AICommon = (function() {
                         $util.base64.decode(object.certificateChain[i], message.certificateChain[i] = $util.newBuffer($util.base64.length(object.certificateChain[i])), 0);
                     else if (object.certificateChain[i].length >= 0)
                         message.certificateChain[i] = object.certificateChain[i];
+            }
+            if (object.certificateChainSki) {
+                if (!Array.isArray(object.certificateChainSki))
+                    throw TypeError(".AICommon.BotSignatureVerificationUseCaseProof.certificateChainSki: array expected");
+                message.certificateChainSki = [];
+                for (var i = 0; i < object.certificateChainSki.length; ++i) {
+                    if (typeof object.certificateChainSki[i] !== "object")
+                        throw TypeError(".AICommon.BotSignatureVerificationUseCaseProof.certificateChainSki: object expected");
+                    message.certificateChainSki[i] = $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.fromObject(object.certificateChainSki[i]);
+                }
             }
             return message;
         };
@@ -132820,8 +133070,10 @@ $root.AICommon = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.certificateChain = [];
+                object.certificateChainSki = [];
+            }
             if (message.version != null && message.hasOwnProperty("version")) {
                 object.version = message.version;
                 if (options.oneofs)
@@ -132841,6 +133093,11 @@ $root.AICommon = (function() {
                 object.certificateChain = [];
                 for (var j = 0; j < message.certificateChain.length; ++j)
                     object.certificateChain[j] = options.bytes === String ? $util.base64.encode(message.certificateChain[j], 0, message.certificateChain[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.certificateChain[j]) : message.certificateChain[j];
+            }
+            if (message.certificateChainSki && message.certificateChainSki.length) {
+                object.certificateChainSki = [];
+                for (var j = 0; j < message.certificateChainSki.length; ++j)
+                    object.certificateChainSki[j] = $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.toObject(message.certificateChainSki[j], options);
             }
             return object;
         };
@@ -132879,6 +133136,8 @@ $root.AICommon = (function() {
          * @property {number} WA_BOT_MSG=1 WA_BOT_MSG value
          * @property {number} WA_TEE_BOT_MSG=2 WA_TEE_BOT_MSG value
          * @property {number} P2P_PILLS=3 P2P_PILLS value
+         * @property {number} WA_WAFFLE=4 WA_WAFFLE value
+         * @property {number} WA_FEATURE_PKI=5 WA_FEATURE_PKI value
          */
         BotSignatureVerificationUseCaseProof.BotSignatureUseCase = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -132886,7 +133145,302 @@ $root.AICommon = (function() {
             values[valuesById[1] = "WA_BOT_MSG"] = 1;
             values[valuesById[2] = "WA_TEE_BOT_MSG"] = 2;
             values[valuesById[3] = "P2P_PILLS"] = 3;
+            values[valuesById[4] = "WA_WAFFLE"] = 4;
+            values[valuesById[5] = "WA_FEATURE_PKI"] = 5;
             return values;
+        })();
+
+        BotSignatureVerificationUseCaseProof.CertificateSKI = (function() {
+
+            /**
+             * Properties of a CertificateSKI.
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof
+             * @interface ICertificateSKI
+             * @property {AICommon.BotSignatureVerificationUseCaseProof.BotSignatureUseCase|null} [useCase] CertificateSKI useCase
+             * @property {Uint8Array|null} [ski] CertificateSKI ski
+             */
+
+            /**
+             * Constructs a new CertificateSKI.
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof
+             * @classdesc Represents a CertificateSKI.
+             * @implements ICertificateSKI
+             * @constructor
+             * @param {AICommon.BotSignatureVerificationUseCaseProof.ICertificateSKI=} [properties] Properties to set
+             */
+            function CertificateSKI(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * CertificateSKI useCase.
+             * @member {AICommon.BotSignatureVerificationUseCaseProof.BotSignatureUseCase|null|undefined} useCase
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @instance
+             */
+            CertificateSKI.prototype.useCase = null;
+
+            /**
+             * CertificateSKI ski.
+             * @member {Uint8Array|null|undefined} ski
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @instance
+             */
+            CertificateSKI.prototype.ski = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(CertificateSKI.prototype, "_useCase", {
+                get: $util.oneOfGetter($oneOfFields = ["useCase"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(CertificateSKI.prototype, "_ski", {
+                get: $util.oneOfGetter($oneOfFields = ["ski"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new CertificateSKI instance using the specified properties.
+             * @function create
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {AICommon.BotSignatureVerificationUseCaseProof.ICertificateSKI=} [properties] Properties to set
+             * @returns {AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI} CertificateSKI instance
+             */
+            CertificateSKI.create = function create(properties) {
+                return new CertificateSKI(properties);
+            };
+
+            /**
+             * Encodes the specified CertificateSKI message. Does not implicitly {@link AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.verify|verify} messages.
+             * @function encode
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {AICommon.BotSignatureVerificationUseCaseProof.ICertificateSKI} message CertificateSKI message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CertificateSKI.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.useCase != null && Object.hasOwnProperty.call(message, "useCase"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.useCase);
+                if (message.ski != null && Object.hasOwnProperty.call(message, "ski"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ski);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified CertificateSKI message, length delimited. Does not implicitly {@link AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {AICommon.BotSignatureVerificationUseCaseProof.ICertificateSKI} message CertificateSKI message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CertificateSKI.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a CertificateSKI message from the specified reader or buffer.
+             * @function decode
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI} CertificateSKI
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CertificateSKI.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.useCase = reader.int32();
+                            break;
+                        }
+                    case 2: {
+                            message.ski = reader.bytes();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a CertificateSKI message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI} CertificateSKI
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CertificateSKI.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a CertificateSKI message.
+             * @function verify
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CertificateSKI.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.useCase != null && message.hasOwnProperty("useCase")) {
+                    properties._useCase = 1;
+                    switch (message.useCase) {
+                    default:
+                        return "useCase: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        break;
+                    }
+                }
+                if (message.ski != null && message.hasOwnProperty("ski")) {
+                    properties._ski = 1;
+                    if (!(message.ski && typeof message.ski.length === "number" || $util.isString(message.ski)))
+                        return "ski: buffer expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a CertificateSKI message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI} CertificateSKI
+             */
+            CertificateSKI.fromObject = function fromObject(object) {
+                if (object instanceof $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI)
+                    return object;
+                var message = new $root.AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI();
+                switch (object.useCase) {
+                default:
+                    if (typeof object.useCase === "number") {
+                        message.useCase = object.useCase;
+                        break;
+                    }
+                    break;
+                case "UNSPECIFIED":
+                case 0:
+                    message.useCase = 0;
+                    break;
+                case "WA_BOT_MSG":
+                case 1:
+                    message.useCase = 1;
+                    break;
+                case "WA_TEE_BOT_MSG":
+                case 2:
+                    message.useCase = 2;
+                    break;
+                case "P2P_PILLS":
+                case 3:
+                    message.useCase = 3;
+                    break;
+                case "WA_WAFFLE":
+                case 4:
+                    message.useCase = 4;
+                    break;
+                case "WA_FEATURE_PKI":
+                case 5:
+                    message.useCase = 5;
+                    break;
+                }
+                if (object.ski != null)
+                    if (typeof object.ski === "string")
+                        $util.base64.decode(object.ski, message.ski = $util.newBuffer($util.base64.length(object.ski)), 0);
+                    else if (object.ski.length >= 0)
+                        message.ski = object.ski;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a CertificateSKI message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI} message CertificateSKI
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CertificateSKI.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.useCase != null && message.hasOwnProperty("useCase")) {
+                    object.useCase = options.enums === String ? $root.AICommon.BotSignatureVerificationUseCaseProof.BotSignatureUseCase[message.useCase] === undefined ? message.useCase : $root.AICommon.BotSignatureVerificationUseCaseProof.BotSignatureUseCase[message.useCase] : message.useCase;
+                    if (options.oneofs)
+                        object._useCase = "useCase";
+                }
+                if (message.ski != null && message.hasOwnProperty("ski")) {
+                    object.ski = options.bytes === String ? $util.base64.encode(message.ski, 0, message.ski.length) : options.bytes === Array ? Array.prototype.slice.call(message.ski) : message.ski;
+                    if (options.oneofs)
+                        object._ski = "ski";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this CertificateSKI to JSON.
+             * @function toJSON
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CertificateSKI.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for CertificateSKI
+             * @function getTypeUrl
+             * @memberof AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            CertificateSKI.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/AICommon.BotSignatureVerificationUseCaseProof.CertificateSKI";
+            };
+
+            return CertificateSKI;
         })();
 
         return BotSignatureVerificationUseCaseProof;
@@ -146722,6 +147276,7 @@ $root.CompanionReg = (function() {
                 case 22:
                 case 23:
                 case 24:
+                case 25:
                     break;
                 }
             }
@@ -146856,6 +147411,10 @@ $root.CompanionReg = (function() {
             case "SMARTGLASSES":
             case 24:
                 message.deviceType = 24;
+                break;
+            case "WAIL":
+            case 25:
+                message.deviceType = 25;
                 break;
             }
             if (object.ref != null)
@@ -147193,6 +147752,7 @@ $root.CompanionReg = (function() {
                 case 22:
                 case 23:
                 case 24:
+                case 25:
                     break;
                 }
             }
@@ -147337,6 +147897,10 @@ $root.CompanionReg = (function() {
             case "SMARTGLASSES":
             case 24:
                 message.platformType = 24;
+                break;
+            case "WAIL":
+            case 25:
+                message.platformType = 25;
                 break;
             }
             if (object.requireFullSync != null)
@@ -148812,6 +149376,7 @@ $root.CompanionReg = (function() {
          * @property {number} VR=22 VR value
          * @property {number} CLOUD_API=23 CLOUD_API value
          * @property {number} SMARTGLASSES=24 SMARTGLASSES value
+         * @property {number} WAIL=25 WAIL value
          */
         DeviceProps.PlatformType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -148840,6 +149405,7 @@ $root.CompanionReg = (function() {
             values[valuesById[22] = "VR"] = 22;
             values[valuesById[23] = "CLOUD_API"] = 23;
             values[valuesById[24] = "SMARTGLASSES"] = 24;
+            values[valuesById[25] = "WAIL"] = 25;
             return values;
         })();
 
@@ -167543,6 +168109,8 @@ $root.SyncAction = (function() {
          * @property {SyncAction.SyncActionValue.IWASARootSecretAction|null} [wasaRootSecretAction] SyncActionValue wasaRootSecretAction
          * @property {SyncAction.SyncActionValue.IBubbleLockMessageAction|null} [bubbleLockMessageAction] SyncActionValue bubbleLockMessageAction
          * @property {SyncAction.SyncActionValue.ILabelSublistAction|null} [labelSublistAction] SyncActionValue labelSublistAction
+         * @property {DeviceCapabilities.IDeviceCapabilities|null} [deviceCapabilitiesV2] SyncActionValue deviceCapabilitiesV2
+         * @property {SyncAction.SyncActionValue.ICtwaMessageReceivedAction|null} [ctwaMessageReceivedAction] SyncActionValue ctwaMessageReceivedAction
          */
 
         /**
@@ -168216,6 +168784,22 @@ $root.SyncAction = (function() {
          */
         SyncActionValue.prototype.labelSublistAction = null;
 
+        /**
+         * SyncActionValue deviceCapabilitiesV2.
+         * @member {DeviceCapabilities.IDeviceCapabilities|null|undefined} deviceCapabilitiesV2
+         * @memberof SyncAction.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.deviceCapabilitiesV2 = null;
+
+        /**
+         * SyncActionValue ctwaMessageReceivedAction.
+         * @member {SyncAction.SyncActionValue.ICtwaMessageReceivedAction|null|undefined} ctwaMessageReceivedAction
+         * @memberof SyncAction.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.ctwaMessageReceivedAction = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
@@ -168711,6 +169295,18 @@ $root.SyncAction = (function() {
             set: $util.oneOfSetter($oneOfFields)
         });
 
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(SyncActionValue.prototype, "_deviceCapabilitiesV2", {
+            get: $util.oneOfGetter($oneOfFields = ["deviceCapabilitiesV2"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(SyncActionValue.prototype, "_ctwaMessageReceivedAction", {
+            get: $util.oneOfGetter($oneOfFields = ["ctwaMessageReceivedAction"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
         /**
          * Creates a new SyncActionValue instance using the specified properties.
          * @function create
@@ -168899,6 +169495,10 @@ $root.SyncAction = (function() {
                 $root.SyncAction.SyncActionValue.BubbleLockMessageAction.encode(message.bubbleLockMessageAction, writer.uint32(/* id 90, wireType 2 =*/722).fork()).ldelim();
             if (message.labelSublistAction != null && Object.hasOwnProperty.call(message, "labelSublistAction"))
                 $root.SyncAction.SyncActionValue.LabelSublistAction.encode(message.labelSublistAction, writer.uint32(/* id 91, wireType 2 =*/730).fork()).ldelim();
+            if (message.deviceCapabilitiesV2 != null && Object.hasOwnProperty.call(message, "deviceCapabilitiesV2"))
+                $root.DeviceCapabilities.DeviceCapabilities.encode(message.deviceCapabilitiesV2, writer.uint32(/* id 92, wireType 2 =*/738).fork()).ldelim();
+            if (message.ctwaMessageReceivedAction != null && Object.hasOwnProperty.call(message, "ctwaMessageReceivedAction"))
+                $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction.encode(message.ctwaMessageReceivedAction, writer.uint32(/* id 93, wireType 2 =*/746).fork()).ldelim();
             return writer;
         };
 
@@ -169261,6 +169861,14 @@ $root.SyncAction = (function() {
                     }
                 case 91: {
                         message.labelSublistAction = $root.SyncAction.SyncActionValue.LabelSublistAction.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 92: {
+                        message.deviceCapabilitiesV2 = $root.DeviceCapabilities.DeviceCapabilities.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 93: {
+                        message.ctwaMessageReceivedAction = $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -169952,6 +170560,22 @@ $root.SyncAction = (function() {
                         return "labelSublistAction." + error;
                 }
             }
+            if (message.deviceCapabilitiesV2 != null && message.hasOwnProperty("deviceCapabilitiesV2")) {
+                properties._deviceCapabilitiesV2 = 1;
+                {
+                    var error = $root.DeviceCapabilities.DeviceCapabilities.verify(message.deviceCapabilitiesV2);
+                    if (error)
+                        return "deviceCapabilitiesV2." + error;
+                }
+            }
+            if (message.ctwaMessageReceivedAction != null && message.hasOwnProperty("ctwaMessageReceivedAction")) {
+                properties._ctwaMessageReceivedAction = 1;
+                {
+                    var error = $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction.verify(message.ctwaMessageReceivedAction);
+                    if (error)
+                        return "ctwaMessageReceivedAction." + error;
+                }
+            }
             return null;
         };
 
@@ -170381,6 +171005,16 @@ $root.SyncAction = (function() {
                     throw TypeError(".SyncAction.SyncActionValue.labelSublistAction: object expected");
                 message.labelSublistAction = $root.SyncAction.SyncActionValue.LabelSublistAction.fromObject(object.labelSublistAction);
             }
+            if (object.deviceCapabilitiesV2 != null) {
+                if (typeof object.deviceCapabilitiesV2 !== "object")
+                    throw TypeError(".SyncAction.SyncActionValue.deviceCapabilitiesV2: object expected");
+                message.deviceCapabilitiesV2 = $root.DeviceCapabilities.DeviceCapabilities.fromObject(object.deviceCapabilitiesV2);
+            }
+            if (object.ctwaMessageReceivedAction != null) {
+                if (typeof object.ctwaMessageReceivedAction !== "object")
+                    throw TypeError(".SyncAction.SyncActionValue.ctwaMessageReceivedAction: object expected");
+                message.ctwaMessageReceivedAction = $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction.fromObject(object.ctwaMessageReceivedAction);
+            }
             return message;
         };
 
@@ -170809,6 +171443,16 @@ $root.SyncAction = (function() {
                 object.labelSublistAction = $root.SyncAction.SyncActionValue.LabelSublistAction.toObject(message.labelSublistAction, options);
                 if (options.oneofs)
                     object._labelSublistAction = "labelSublistAction";
+            }
+            if (message.deviceCapabilitiesV2 != null && message.hasOwnProperty("deviceCapabilitiesV2")) {
+                object.deviceCapabilitiesV2 = $root.DeviceCapabilities.DeviceCapabilities.toObject(message.deviceCapabilitiesV2, options);
+                if (options.oneofs)
+                    object._deviceCapabilitiesV2 = "deviceCapabilitiesV2";
+            }
+            if (message.ctwaMessageReceivedAction != null && message.hasOwnProperty("ctwaMessageReceivedAction")) {
+                object.ctwaMessageReceivedAction = $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction.toObject(message.ctwaMessageReceivedAction, options);
+                if (options.oneofs)
+                    object._ctwaMessageReceivedAction = "ctwaMessageReceivedAction";
             }
             return object;
         };
@@ -176417,6 +177061,224 @@ $root.SyncAction = (function() {
             return ContactAction;
         })();
 
+        SyncActionValue.CtwaMessageReceivedAction = (function() {
+
+            /**
+             * Properties of a CtwaMessageReceivedAction.
+             * @memberof SyncAction.SyncActionValue
+             * @interface ICtwaMessageReceivedAction
+             * @property {boolean|null} [isCtwaMessageReceived] CtwaMessageReceivedAction isCtwaMessageReceived
+             */
+
+            /**
+             * Constructs a new CtwaMessageReceivedAction.
+             * @memberof SyncAction.SyncActionValue
+             * @classdesc Represents a CtwaMessageReceivedAction.
+             * @implements ICtwaMessageReceivedAction
+             * @constructor
+             * @param {SyncAction.SyncActionValue.ICtwaMessageReceivedAction=} [properties] Properties to set
+             */
+            function CtwaMessageReceivedAction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * CtwaMessageReceivedAction isCtwaMessageReceived.
+             * @member {boolean|null|undefined} isCtwaMessageReceived
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @instance
+             */
+            CtwaMessageReceivedAction.prototype.isCtwaMessageReceived = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(CtwaMessageReceivedAction.prototype, "_isCtwaMessageReceived", {
+                get: $util.oneOfGetter($oneOfFields = ["isCtwaMessageReceived"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new CtwaMessageReceivedAction instance using the specified properties.
+             * @function create
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {SyncAction.SyncActionValue.ICtwaMessageReceivedAction=} [properties] Properties to set
+             * @returns {SyncAction.SyncActionValue.CtwaMessageReceivedAction} CtwaMessageReceivedAction instance
+             */
+            CtwaMessageReceivedAction.create = function create(properties) {
+                return new CtwaMessageReceivedAction(properties);
+            };
+
+            /**
+             * Encodes the specified CtwaMessageReceivedAction message. Does not implicitly {@link SyncAction.SyncActionValue.CtwaMessageReceivedAction.verify|verify} messages.
+             * @function encode
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {SyncAction.SyncActionValue.ICtwaMessageReceivedAction} message CtwaMessageReceivedAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CtwaMessageReceivedAction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.isCtwaMessageReceived != null && Object.hasOwnProperty.call(message, "isCtwaMessageReceived"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.isCtwaMessageReceived);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified CtwaMessageReceivedAction message, length delimited. Does not implicitly {@link SyncAction.SyncActionValue.CtwaMessageReceivedAction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {SyncAction.SyncActionValue.ICtwaMessageReceivedAction} message CtwaMessageReceivedAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CtwaMessageReceivedAction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a CtwaMessageReceivedAction message from the specified reader or buffer.
+             * @function decode
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {SyncAction.SyncActionValue.CtwaMessageReceivedAction} CtwaMessageReceivedAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CtwaMessageReceivedAction.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.isCtwaMessageReceived = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a CtwaMessageReceivedAction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {SyncAction.SyncActionValue.CtwaMessageReceivedAction} CtwaMessageReceivedAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CtwaMessageReceivedAction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a CtwaMessageReceivedAction message.
+             * @function verify
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CtwaMessageReceivedAction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.isCtwaMessageReceived != null && message.hasOwnProperty("isCtwaMessageReceived")) {
+                    properties._isCtwaMessageReceived = 1;
+                    if (typeof message.isCtwaMessageReceived !== "boolean")
+                        return "isCtwaMessageReceived: boolean expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a CtwaMessageReceivedAction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {SyncAction.SyncActionValue.CtwaMessageReceivedAction} CtwaMessageReceivedAction
+             */
+            CtwaMessageReceivedAction.fromObject = function fromObject(object) {
+                if (object instanceof $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction)
+                    return object;
+                var message = new $root.SyncAction.SyncActionValue.CtwaMessageReceivedAction();
+                if (object.isCtwaMessageReceived != null)
+                    message.isCtwaMessageReceived = Boolean(object.isCtwaMessageReceived);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a CtwaMessageReceivedAction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {SyncAction.SyncActionValue.CtwaMessageReceivedAction} message CtwaMessageReceivedAction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CtwaMessageReceivedAction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.isCtwaMessageReceived != null && message.hasOwnProperty("isCtwaMessageReceived")) {
+                    object.isCtwaMessageReceived = message.isCtwaMessageReceived;
+                    if (options.oneofs)
+                        object._isCtwaMessageReceived = "isCtwaMessageReceived";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this CtwaMessageReceivedAction to JSON.
+             * @function toJSON
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CtwaMessageReceivedAction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for CtwaMessageReceivedAction
+             * @function getTypeUrl
+             * @memberof SyncAction.SyncActionValue.CtwaMessageReceivedAction
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            CtwaMessageReceivedAction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/SyncAction.SyncActionValue.CtwaMessageReceivedAction";
+            };
+
+            return CtwaMessageReceivedAction;
+        })();
+
         SyncActionValue.CtwaPerCustomerDataSharingAction = (function() {
 
             /**
@@ -180754,6 +181616,7 @@ $root.SyncAction = (function() {
                     case 14:
                     case 15:
                     case 16:
+                    case 17:
                         break;
                     }
                 }
@@ -180868,6 +181731,10 @@ $root.SyncAction = (function() {
                 case "LEAD":
                 case 16:
                     message.type = 16;
+                    break;
+                case "MENTIONS_AND_REPLIES":
+                case 17:
+                    message.type = 17;
                     break;
                 }
                 if (object.isImmutable != null)
@@ -180995,6 +181862,7 @@ $root.SyncAction = (function() {
              * @property {number} INVITES=14 INVITES value
              * @property {number} THIRD_PARTY=15 THIRD_PARTY value
              * @property {number} LEAD=16 LEAD value
+             * @property {number} MENTIONS_AND_REPLIES=17 MENTIONS_AND_REPLIES value
              */
             LabelEditAction.ListType = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -181015,6 +181883,7 @@ $root.SyncAction = (function() {
                 values[valuesById[14] = "INVITES"] = 14;
                 values[valuesById[15] = "THIRD_PARTY"] = 15;
                 values[valuesById[16] = "LEAD"] = 16;
+                values[valuesById[17] = "MENTIONS_AND_REPLIES"] = 17;
                 return values;
             })();
 
@@ -189376,6 +190245,7 @@ $root.SyncAction = (function() {
              * @property {boolean|null} [shouldPlaySoundForCallNotification] SettingsSyncAction shouldPlaySoundForCallNotification
              * @property {string|null} [chatThemeId] SettingsSyncAction chatThemeId
              * @property {string|null} [colorSchemeId] SettingsSyncAction colorSchemeId
+             * @property {string|null} [stockWallpaperImageId] SettingsSyncAction stockWallpaperImageId
              */
 
             /**
@@ -189657,6 +190527,14 @@ $root.SyncAction = (function() {
              */
             SettingsSyncAction.prototype.colorSchemeId = null;
 
+            /**
+             * SettingsSyncAction stockWallpaperImageId.
+             * @member {string|null|undefined} stockWallpaperImageId
+             * @memberof SyncAction.SyncActionValue.SettingsSyncAction
+             * @instance
+             */
+            SettingsSyncAction.prototype.stockWallpaperImageId = null;
+
             // OneOf field names bound to virtual getters and setters
             var $oneOfFields;
 
@@ -189858,6 +190736,12 @@ $root.SyncAction = (function() {
                 set: $util.oneOfSetter($oneOfFields)
             });
 
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(SettingsSyncAction.prototype, "_stockWallpaperImageId", {
+                get: $util.oneOfGetter($oneOfFields = ["stockWallpaperImageId"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
             /**
              * Creates a new SettingsSyncAction instance using the specified properties.
              * @function create
@@ -189948,6 +190832,8 @@ $root.SyncAction = (function() {
                     writer.uint32(/* id 32, wireType 2 =*/258).string(message.chatThemeId);
                 if (message.colorSchemeId != null && Object.hasOwnProperty.call(message, "colorSchemeId"))
                     writer.uint32(/* id 33, wireType 2 =*/266).string(message.colorSchemeId);
+                if (message.stockWallpaperImageId != null && Object.hasOwnProperty.call(message, "stockWallpaperImageId"))
+                    writer.uint32(/* id 34, wireType 2 =*/274).string(message.stockWallpaperImageId);
                 return writer;
             };
 
@@ -190114,6 +191000,10 @@ $root.SyncAction = (function() {
                         }
                     case 33: {
                             message.colorSchemeId = reader.string();
+                            break;
+                        }
+                    case 34: {
+                            message.stockWallpaperImageId = reader.string();
                             break;
                         }
                     default:
@@ -190337,6 +191227,11 @@ $root.SyncAction = (function() {
                     if (!$util.isString(message.colorSchemeId))
                         return "colorSchemeId: string expected";
                 }
+                if (message.stockWallpaperImageId != null && message.hasOwnProperty("stockWallpaperImageId")) {
+                    properties._stockWallpaperImageId = 1;
+                    if (!$util.isString(message.stockWallpaperImageId))
+                        return "stockWallpaperImageId: string expected";
+                }
                 return null;
             };
 
@@ -190480,6 +191375,8 @@ $root.SyncAction = (function() {
                     message.chatThemeId = String(object.chatThemeId);
                 if (object.colorSchemeId != null)
                     message.colorSchemeId = String(object.colorSchemeId);
+                if (object.stockWallpaperImageId != null)
+                    message.stockWallpaperImageId = String(object.stockWallpaperImageId);
                 return message;
             };
 
@@ -190661,6 +191558,11 @@ $root.SyncAction = (function() {
                     if (options.oneofs)
                         object._colorSchemeId = "colorSchemeId";
                 }
+                if (message.stockWallpaperImageId != null && message.hasOwnProperty("stockWallpaperImageId")) {
+                    object.stockWallpaperImageId = message.stockWallpaperImageId;
+                    if (options.oneofs)
+                        object._stockWallpaperImageId = "stockWallpaperImageId";
+                }
                 return object;
             };
 
@@ -190762,6 +191664,7 @@ $root.SyncAction = (function() {
              * @property {number} SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION=31 SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION value
              * @property {number} CHAT_THEME_ID=32 CHAT_THEME_ID value
              * @property {number} COLOR_SCHEME_ID=33 COLOR_SCHEME_ID value
+             * @property {number} STOCK_WALLPAPER_IMAGE_ID=34 STOCK_WALLPAPER_IMAGE_ID value
              */
             SettingsSyncAction.SettingKey = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -190799,6 +191702,7 @@ $root.SyncAction = (function() {
                 values[valuesById[31] = "SHOULD_PLAY_SOUND_FOR_CALL_NOTIFICATION"] = 31;
                 values[valuesById[32] = "CHAT_THEME_ID"] = 32;
                 values[valuesById[33] = "COLOR_SCHEME_ID"] = 33;
+                values[valuesById[34] = "STOCK_WALLPAPER_IMAGE_ID"] = 34;
                 return values;
             })();
 
@@ -198668,6 +199572,8 @@ $root.SyncAction = (function() {
      * @property {number} WASA_ROOT_SECRET_ACTION=89 WASA_ROOT_SECRET_ACTION value
      * @property {number} BUBBLE_LOCK_MESSAGE_ACTION=90 BUBBLE_LOCK_MESSAGE_ACTION value
      * @property {number} LABEL_SUBLIST_ACTION=91 LABEL_SUBLIST_ACTION value
+     * @property {number} DEVICE_CAPABILITIES_V2=92 DEVICE_CAPABILITIES_V2 value
+     * @property {number} CTWA_MESSAGE_RECEIVED_ACTION=93 CTWA_MESSAGE_RECEIVED_ACTION value
      * @property {number} SHARE_OWN_PN=10001 SHARE_OWN_PN value
      * @property {number} BUSINESS_BROADCAST_ACTION=10002 BUSINESS_BROADCAST_ACTION value
      * @property {number} AI_THREAD_DELETE_ACTION=10003 AI_THREAD_DELETE_ACTION value
@@ -198759,6 +199665,8 @@ $root.SyncAction = (function() {
         values[valuesById[89] = "WASA_ROOT_SECRET_ACTION"] = 89;
         values[valuesById[90] = "BUBBLE_LOCK_MESSAGE_ACTION"] = 90;
         values[valuesById[91] = "LABEL_SUBLIST_ACTION"] = 91;
+        values[valuesById[92] = "DEVICE_CAPABILITIES_V2"] = 92;
+        values[valuesById[93] = "CTWA_MESSAGE_RECEIVED_ACTION"] = 93;
         values[valuesById[10001] = "SHARE_OWN_PN"] = 10001;
         values[valuesById[10002] = "BUSINESS_BROADCAST_ACTION"] = 10002;
         values[valuesById[10003] = "AI_THREAD_DELETE_ACTION"] = 10003;
@@ -198812,6 +199720,8 @@ $root.DeviceCapabilities = (function() {
          * @property {DeviceCapabilities.DeviceCapabilities.MemberNameTagPrimarySupport|null} [memberNameTagPrimarySupport] DeviceCapabilities memberNameTagPrimarySupport
          * @property {DeviceCapabilities.DeviceCapabilities.IAiThread|null} [aiThread] DeviceCapabilities aiThread
          * @property {DeviceCapabilities.DeviceCapabilities.IAiFbidMigration|null} [aiFbidMigration] DeviceCapabilities aiFbidMigration
+         * @property {DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync|null} [bizAiSettingsSync] DeviceCapabilities bizAiSettingsSync
+         * @property {DeviceCapabilities.DeviceCapabilities.IContactRefresh|null} [contactRefresh] DeviceCapabilities contactRefresh
          */
 
         /**
@@ -198885,6 +199795,22 @@ $root.DeviceCapabilities = (function() {
          */
         DeviceCapabilities.prototype.aiFbidMigration = null;
 
+        /**
+         * DeviceCapabilities bizAiSettingsSync.
+         * @member {DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync|null|undefined} bizAiSettingsSync
+         * @memberof DeviceCapabilities.DeviceCapabilities
+         * @instance
+         */
+        DeviceCapabilities.prototype.bizAiSettingsSync = null;
+
+        /**
+         * DeviceCapabilities contactRefresh.
+         * @member {DeviceCapabilities.DeviceCapabilities.IContactRefresh|null|undefined} contactRefresh
+         * @memberof DeviceCapabilities.DeviceCapabilities
+         * @instance
+         */
+        DeviceCapabilities.prototype.contactRefresh = null;
+
         // OneOf field names bound to virtual getters and setters
         var $oneOfFields;
 
@@ -198930,6 +199856,18 @@ $root.DeviceCapabilities = (function() {
             set: $util.oneOfSetter($oneOfFields)
         });
 
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeviceCapabilities.prototype, "_bizAiSettingsSync", {
+            get: $util.oneOfGetter($oneOfFields = ["bizAiSettingsSync"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeviceCapabilities.prototype, "_contactRefresh", {
+            get: $util.oneOfGetter($oneOfFields = ["contactRefresh"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
         /**
          * Creates a new DeviceCapabilities instance using the specified properties.
          * @function create
@@ -198968,6 +199906,10 @@ $root.DeviceCapabilities = (function() {
                 $root.DeviceCapabilities.DeviceCapabilities.AiThread.encode(message.aiThread, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             if (message.aiFbidMigration != null && Object.hasOwnProperty.call(message, "aiFbidMigration"))
                 $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.encode(message.aiFbidMigration, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.bizAiSettingsSync != null && Object.hasOwnProperty.call(message, "bizAiSettingsSync"))
+                $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.encode(message.bizAiSettingsSync, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.contactRefresh != null && Object.hasOwnProperty.call(message, "contactRefresh"))
+                $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh.encode(message.contactRefresh, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             return writer;
         };
 
@@ -199030,6 +199972,14 @@ $root.DeviceCapabilities = (function() {
                     }
                 case 7: {
                         message.aiFbidMigration = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 8: {
+                        message.bizAiSettingsSync = $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 9: {
+                        message.contactRefresh = $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -199130,6 +200080,22 @@ $root.DeviceCapabilities = (function() {
                         return "aiFbidMigration." + error;
                 }
             }
+            if (message.bizAiSettingsSync != null && message.hasOwnProperty("bizAiSettingsSync")) {
+                properties._bizAiSettingsSync = 1;
+                {
+                    var error = $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.verify(message.bizAiSettingsSync);
+                    if (error)
+                        return "bizAiSettingsSync." + error;
+                }
+            }
+            if (message.contactRefresh != null && message.hasOwnProperty("contactRefresh")) {
+                properties._contactRefresh = 1;
+                {
+                    var error = $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh.verify(message.contactRefresh);
+                    if (error)
+                        return "contactRefresh." + error;
+                }
+            }
             return null;
         };
 
@@ -199210,6 +200176,16 @@ $root.DeviceCapabilities = (function() {
                     throw TypeError(".DeviceCapabilities.DeviceCapabilities.aiFbidMigration: object expected");
                 message.aiFbidMigration = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.fromObject(object.aiFbidMigration);
             }
+            if (object.bizAiSettingsSync != null) {
+                if (typeof object.bizAiSettingsSync !== "object")
+                    throw TypeError(".DeviceCapabilities.DeviceCapabilities.bizAiSettingsSync: object expected");
+                message.bizAiSettingsSync = $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.fromObject(object.bizAiSettingsSync);
+            }
+            if (object.contactRefresh != null) {
+                if (typeof object.contactRefresh !== "object")
+                    throw TypeError(".DeviceCapabilities.DeviceCapabilities.contactRefresh: object expected");
+                message.contactRefresh = $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh.fromObject(object.contactRefresh);
+            }
             return message;
         };
 
@@ -199260,6 +200236,16 @@ $root.DeviceCapabilities = (function() {
                 object.aiFbidMigration = $root.DeviceCapabilities.DeviceCapabilities.AiFbidMigration.toObject(message.aiFbidMigration, options);
                 if (options.oneofs)
                     object._aiFbidMigration = "aiFbidMigration";
+            }
+            if (message.bizAiSettingsSync != null && message.hasOwnProperty("bizAiSettingsSync")) {
+                object.bizAiSettingsSync = $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.toObject(message.bizAiSettingsSync, options);
+                if (options.oneofs)
+                    object._bizAiSettingsSync = "bizAiSettingsSync";
+            }
+            if (message.contactRefresh != null && message.hasOwnProperty("contactRefresh")) {
+                object.contactRefresh = $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh.toObject(message.contactRefresh, options);
+                if (options.oneofs)
+                    object._contactRefresh = "contactRefresh";
             }
             return object;
         };
@@ -199776,6 +200762,224 @@ $root.DeviceCapabilities = (function() {
             return AiThread;
         })();
 
+        DeviceCapabilities.BizAiSettingsSync = (function() {
+
+            /**
+             * Properties of a BizAiSettingsSync.
+             * @memberof DeviceCapabilities.DeviceCapabilities
+             * @interface IBizAiSettingsSync
+             * @property {boolean|null} [handoffRemovalTimingEnabled] BizAiSettingsSync handoffRemovalTimingEnabled
+             */
+
+            /**
+             * Constructs a new BizAiSettingsSync.
+             * @memberof DeviceCapabilities.DeviceCapabilities
+             * @classdesc Represents a BizAiSettingsSync.
+             * @implements IBizAiSettingsSync
+             * @constructor
+             * @param {DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync=} [properties] Properties to set
+             */
+            function BizAiSettingsSync(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * BizAiSettingsSync handoffRemovalTimingEnabled.
+             * @member {boolean|null|undefined} handoffRemovalTimingEnabled
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @instance
+             */
+            BizAiSettingsSync.prototype.handoffRemovalTimingEnabled = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(BizAiSettingsSync.prototype, "_handoffRemovalTimingEnabled", {
+                get: $util.oneOfGetter($oneOfFields = ["handoffRemovalTimingEnabled"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new BizAiSettingsSync instance using the specified properties.
+             * @function create
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync=} [properties] Properties to set
+             * @returns {DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync} BizAiSettingsSync instance
+             */
+            BizAiSettingsSync.create = function create(properties) {
+                return new BizAiSettingsSync(properties);
+            };
+
+            /**
+             * Encodes the specified BizAiSettingsSync message. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.verify|verify} messages.
+             * @function encode
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync} message BizAiSettingsSync message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BizAiSettingsSync.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.handoffRemovalTimingEnabled != null && Object.hasOwnProperty.call(message, "handoffRemovalTimingEnabled"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.handoffRemovalTimingEnabled);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified BizAiSettingsSync message, length delimited. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync} message BizAiSettingsSync message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            BizAiSettingsSync.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a BizAiSettingsSync message from the specified reader or buffer.
+             * @function decode
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync} BizAiSettingsSync
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            BizAiSettingsSync.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.handoffRemovalTimingEnabled = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a BizAiSettingsSync message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync} BizAiSettingsSync
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            BizAiSettingsSync.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a BizAiSettingsSync message.
+             * @function verify
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            BizAiSettingsSync.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.handoffRemovalTimingEnabled != null && message.hasOwnProperty("handoffRemovalTimingEnabled")) {
+                    properties._handoffRemovalTimingEnabled = 1;
+                    if (typeof message.handoffRemovalTimingEnabled !== "boolean")
+                        return "handoffRemovalTimingEnabled: boolean expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a BizAiSettingsSync message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync} BizAiSettingsSync
+             */
+            BizAiSettingsSync.fromObject = function fromObject(object) {
+                if (object instanceof $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync)
+                    return object;
+                var message = new $root.DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync();
+                if (object.handoffRemovalTimingEnabled != null)
+                    message.handoffRemovalTimingEnabled = Boolean(object.handoffRemovalTimingEnabled);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a BizAiSettingsSync message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync} message BizAiSettingsSync
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            BizAiSettingsSync.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.handoffRemovalTimingEnabled != null && message.hasOwnProperty("handoffRemovalTimingEnabled")) {
+                    object.handoffRemovalTimingEnabled = message.handoffRemovalTimingEnabled;
+                    if (options.oneofs)
+                        object._handoffRemovalTimingEnabled = "handoffRemovalTimingEnabled";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this BizAiSettingsSync to JSON.
+             * @function toJSON
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            BizAiSettingsSync.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for BizAiSettingsSync
+             * @function getTypeUrl
+             * @memberof DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            BizAiSettingsSync.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync";
+            };
+
+            return BizAiSettingsSync;
+        })();
+
         DeviceCapabilities.BusinessBroadcast = (function() {
 
             /**
@@ -200140,6 +201344,224 @@ $root.DeviceCapabilities = (function() {
             values[valuesById[1] = "MINIMAL"] = 1;
             values[valuesById[2] = "FULL"] = 2;
             return values;
+        })();
+
+        DeviceCapabilities.ContactRefresh = (function() {
+
+            /**
+             * Properties of a ContactRefresh.
+             * @memberof DeviceCapabilities.DeviceCapabilities
+             * @interface IContactRefresh
+             * @property {boolean|null} [refreshSupported] ContactRefresh refreshSupported
+             */
+
+            /**
+             * Constructs a new ContactRefresh.
+             * @memberof DeviceCapabilities.DeviceCapabilities
+             * @classdesc Represents a ContactRefresh.
+             * @implements IContactRefresh
+             * @constructor
+             * @param {DeviceCapabilities.DeviceCapabilities.IContactRefresh=} [properties] Properties to set
+             */
+            function ContactRefresh(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * ContactRefresh refreshSupported.
+             * @member {boolean|null|undefined} refreshSupported
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @instance
+             */
+            ContactRefresh.prototype.refreshSupported = null;
+
+            // OneOf field names bound to virtual getters and setters
+            var $oneOfFields;
+
+            // Virtual OneOf for proto3 optional field
+            Object.defineProperty(ContactRefresh.prototype, "_refreshSupported", {
+                get: $util.oneOfGetter($oneOfFields = ["refreshSupported"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new ContactRefresh instance using the specified properties.
+             * @function create
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IContactRefresh=} [properties] Properties to set
+             * @returns {DeviceCapabilities.DeviceCapabilities.ContactRefresh} ContactRefresh instance
+             */
+            ContactRefresh.create = function create(properties) {
+                return new ContactRefresh(properties);
+            };
+
+            /**
+             * Encodes the specified ContactRefresh message. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.ContactRefresh.verify|verify} messages.
+             * @function encode
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IContactRefresh} message ContactRefresh message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContactRefresh.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.refreshSupported != null && Object.hasOwnProperty.call(message, "refreshSupported"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.refreshSupported);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ContactRefresh message, length delimited. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.ContactRefresh.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.IContactRefresh} message ContactRefresh message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ContactRefresh.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a ContactRefresh message from the specified reader or buffer.
+             * @function decode
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {DeviceCapabilities.DeviceCapabilities.ContactRefresh} ContactRefresh
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ContactRefresh.decode = function decode(reader, length, error) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.refreshSupported = reader.bool();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a ContactRefresh message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {DeviceCapabilities.DeviceCapabilities.ContactRefresh} ContactRefresh
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ContactRefresh.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ContactRefresh message.
+             * @function verify
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ContactRefresh.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                var properties = {};
+                if (message.refreshSupported != null && message.hasOwnProperty("refreshSupported")) {
+                    properties._refreshSupported = 1;
+                    if (typeof message.refreshSupported !== "boolean")
+                        return "refreshSupported: boolean expected";
+                }
+                return null;
+            };
+
+            /**
+             * Creates a ContactRefresh message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {DeviceCapabilities.DeviceCapabilities.ContactRefresh} ContactRefresh
+             */
+            ContactRefresh.fromObject = function fromObject(object) {
+                if (object instanceof $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh)
+                    return object;
+                var message = new $root.DeviceCapabilities.DeviceCapabilities.ContactRefresh();
+                if (object.refreshSupported != null)
+                    message.refreshSupported = Boolean(object.refreshSupported);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ContactRefresh message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {DeviceCapabilities.DeviceCapabilities.ContactRefresh} message ContactRefresh
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ContactRefresh.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (message.refreshSupported != null && message.hasOwnProperty("refreshSupported")) {
+                    object.refreshSupported = message.refreshSupported;
+                    if (options.oneofs)
+                        object._refreshSupported = "refreshSupported";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this ContactRefresh to JSON.
+             * @function toJSON
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ContactRefresh.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ContactRefresh
+             * @function getTypeUrl
+             * @memberof DeviceCapabilities.DeviceCapabilities.ContactRefresh
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ContactRefresh.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/DeviceCapabilities.DeviceCapabilities.ContactRefresh";
+            };
+
+            return ContactRefresh;
         })();
 
         DeviceCapabilities.LIDMigration = (function() {

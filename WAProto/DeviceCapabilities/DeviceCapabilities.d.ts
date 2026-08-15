@@ -26,6 +26,12 @@ export namespace DeviceCapabilities {
 
         /** DeviceCapabilities aiFbidMigration */
         aiFbidMigration?: (DeviceCapabilities.DeviceCapabilities.IAiFbidMigration|null);
+
+        /** DeviceCapabilities bizAiSettingsSync */
+        bizAiSettingsSync?: (DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync|null);
+
+        /** DeviceCapabilities contactRefresh */
+        contactRefresh?: (DeviceCapabilities.DeviceCapabilities.IContactRefresh|null);
     }
 
     /** Represents a DeviceCapabilities. */
@@ -57,6 +63,12 @@ export namespace DeviceCapabilities {
 
         /** DeviceCapabilities aiFbidMigration. */
         public aiFbidMigration?: (DeviceCapabilities.DeviceCapabilities.IAiFbidMigration|null);
+
+        /** DeviceCapabilities bizAiSettingsSync. */
+        public bizAiSettingsSync?: (DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync|null);
+
+        /** DeviceCapabilities contactRefresh. */
+        public contactRefresh?: (DeviceCapabilities.DeviceCapabilities.IContactRefresh|null);
 
         /**
          * Creates a new DeviceCapabilities instance using the specified properties.
@@ -342,6 +354,103 @@ export namespace DeviceCapabilities {
             }
         }
 
+        /** Properties of a BizAiSettingsSync. */
+        interface IBizAiSettingsSync {
+
+            /** BizAiSettingsSync handoffRemovalTimingEnabled */
+            handoffRemovalTimingEnabled?: (boolean|null);
+        }
+
+        /** Represents a BizAiSettingsSync. */
+        class BizAiSettingsSync implements IBizAiSettingsSync {
+
+            /**
+             * Constructs a new BizAiSettingsSync.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync);
+
+            /** BizAiSettingsSync handoffRemovalTimingEnabled. */
+            public handoffRemovalTimingEnabled?: (boolean|null);
+
+            /**
+             * Creates a new BizAiSettingsSync instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BizAiSettingsSync instance
+             */
+            public static create(properties?: DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync): DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync;
+
+            /**
+             * Encodes the specified BizAiSettingsSync message. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.verify|verify} messages.
+             * @param message BizAiSettingsSync message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BizAiSettingsSync message, length delimited. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync.verify|verify} messages.
+             * @param message BizAiSettingsSync message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: DeviceCapabilities.DeviceCapabilities.IBizAiSettingsSync, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BizAiSettingsSync message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BizAiSettingsSync
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync;
+
+            /**
+             * Decodes a BizAiSettingsSync message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BizAiSettingsSync
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync;
+
+            /**
+             * Verifies a BizAiSettingsSync message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BizAiSettingsSync message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BizAiSettingsSync
+             */
+            public static fromObject(object: { [k: string]: any }): DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync;
+
+            /**
+             * Creates a plain object from a BizAiSettingsSync message. Also converts values to other types if specified.
+             * @param message BizAiSettingsSync
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: DeviceCapabilities.DeviceCapabilities.BizAiSettingsSync, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BizAiSettingsSync to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BizAiSettingsSync
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a BusinessBroadcast. */
         interface IBusinessBroadcast {
 
@@ -468,6 +577,103 @@ export namespace DeviceCapabilities {
             NONE = 0,
             MINIMAL = 1,
             FULL = 2
+        }
+
+        /** Properties of a ContactRefresh. */
+        interface IContactRefresh {
+
+            /** ContactRefresh refreshSupported */
+            refreshSupported?: (boolean|null);
+        }
+
+        /** Represents a ContactRefresh. */
+        class ContactRefresh implements IContactRefresh {
+
+            /**
+             * Constructs a new ContactRefresh.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: DeviceCapabilities.DeviceCapabilities.IContactRefresh);
+
+            /** ContactRefresh refreshSupported. */
+            public refreshSupported?: (boolean|null);
+
+            /**
+             * Creates a new ContactRefresh instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ContactRefresh instance
+             */
+            public static create(properties?: DeviceCapabilities.DeviceCapabilities.IContactRefresh): DeviceCapabilities.DeviceCapabilities.ContactRefresh;
+
+            /**
+             * Encodes the specified ContactRefresh message. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.ContactRefresh.verify|verify} messages.
+             * @param message ContactRefresh message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: DeviceCapabilities.DeviceCapabilities.IContactRefresh, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ContactRefresh message, length delimited. Does not implicitly {@link DeviceCapabilities.DeviceCapabilities.ContactRefresh.verify|verify} messages.
+             * @param message ContactRefresh message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: DeviceCapabilities.DeviceCapabilities.IContactRefresh, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ContactRefresh message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ContactRefresh
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): DeviceCapabilities.DeviceCapabilities.ContactRefresh;
+
+            /**
+             * Decodes a ContactRefresh message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ContactRefresh
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): DeviceCapabilities.DeviceCapabilities.ContactRefresh;
+
+            /**
+             * Verifies a ContactRefresh message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ContactRefresh message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ContactRefresh
+             */
+            public static fromObject(object: { [k: string]: any }): DeviceCapabilities.DeviceCapabilities.ContactRefresh;
+
+            /**
+             * Creates a plain object from a ContactRefresh message. Also converts values to other types if specified.
+             * @param message ContactRefresh
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: DeviceCapabilities.DeviceCapabilities.ContactRefresh, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ContactRefresh to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ContactRefresh
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a LIDMigration. */
